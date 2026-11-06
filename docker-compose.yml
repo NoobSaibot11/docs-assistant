@@ -1,0 +1,49 @@
+services:
+  db:
+    image: pgvector/pgvector:0.8.7-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: docs_assistant
+    ports:
+      # Host port is configurable in case a local Postgres already uses 5432 (keep DATABASE_URL in sync).
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d docs_assistant"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    # API keys and tuning knobs come from .env (optional so `docker compose up` works without one).
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Inside the compose network the database host is `db`, not localhost.
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/docs_assistant
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+
+volumes:
+  pgdata:
