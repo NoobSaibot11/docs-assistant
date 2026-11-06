@@ -1,0 +1,2 @@
+# Always LF in the repo and working copy (Prettier expects LF; avoids CRLF churn on Windows).
+* text=auto eol=lf

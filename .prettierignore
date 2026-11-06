@@ -1,0 +1,8 @@
+.next
+node_modules
+generated
+coverage
+pnpm-lock.yaml
+prisma/migrations
+eval/results
+SPEC.md
