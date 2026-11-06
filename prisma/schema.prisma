@@ -1,0 +1,82 @@
+// Prisma 7: the connection URL lives in prisma.config.ts (CLI) and lib/db.ts (runtime adapter).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  framework   String // "react-native" | "nextjs" | "angular" | "jest"
+  sourcePath  String // path inside that framework's docs repo
+  title       String
+  url         String // public docs URL for the citation link
+  docsVersion String // pinned tag for that framework
+  contentHash String // skip re-embedding unchanged files
+  chunks      Chunk[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([framework, sourcePath])
+}
+
+model Chunk {
+  id          String                       @id @default(cuid())
+  documentId  String
+  document    Document                     @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  framework   String // copied from Document for fast filtering
+  ordinal     Int // position within the document
+  headingPath String // "Caching > Data Cache > Revalidating"
+  anchor      String? // #revalidating, for deep links
+  content     String
+  tokenCount  Int
+  // 1024 = default output dimension of voyage-4 (must match EMBEDDING_DIMENSIONS)
+  embedding   Unsupported("vector(1024)")?
+  // GENERATED ALWAYS column created in the init migration's raw SQL. Declared here only so
+  // `prisma migrate dev` knows it exists and doesn't generate a DROP; never write to it.
+  // The default below mirrors the generation expression exactly as Postgres reports it.
+  tsv         Unsupported("tsvector")?     @default(dbgenerated("to_tsvector('english'::regconfig, ((\"headingPath\" || ' '::text) || content))"))
+
+  @@unique([documentId, ordinal])
+  @@index([framework])
+  @@index([tsv], map: "Chunk_tsv_idx", type: Gin)
+  // Really an HNSW index (vector_cosine_ops), created in raw SQL. Prisma has no HNSW index type,
+  // so it's declared as a plain index with the same name to stop migrate from dropping it.
+  @@index([embedding], map: "Chunk_embedding_hnsw_idx")
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  messages  Message[]
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String // "user" | "assistant"
+  content        String
+  citations      Json? // [{ n: 1, chunkId, url, headingPath }]
+  createdAt      DateTime     @default(now())
+}
+
+model QueryLog {
+  id              String   @id @default(cuid())
+  question        String
+  retrievalMode   String // "vector" | "keyword" | "hybrid"
+  frameworks      String[] // selected by the user or detected
+  topChunkIds     String[]
+  topScore        Float
+  answered        Boolean // false when the "not found" path was taken
+  ttftMs          Int // time to first token
+  totalMs         Int
+  inputTokens     Int
+  outputTokens    Int
+  cacheReadTokens Int
+  createdAt       DateTime @default(now())
+}

@@ -1,0 +1,78 @@
+import "server-only";
+
+import { z } from "zod";
+
+import { FRAMEWORK_IDS, RETRIEVAL_MODES, type FrameworkId } from "@/lib/frameworks";
+
+/** Treat `KEY=` (empty string in .env) the same as an unset variable. */
+const emptyToUndefined = (value: unknown) => (value === "" ? undefined : value);
+
+const optionalString = z.preprocess(emptyToUndefined, z.string().min(1).optional());
+
+const ingestFrameworks = z
+  .string()
+  .default("all")
+  .transform((value, ctx): FrameworkId[] => {
+    const trimmed = value.trim();
+    if (trimmed === "all") return [...FRAMEWORK_IDS];
+    const ids = trimmed.split(",").map((id) => id.trim());
+    const unknown = ids.filter((id) => !(FRAMEWORK_IDS as readonly string[]).includes(id));
+    if (unknown.length > 0) {
+      ctx.addIssue({
+        code: "custom",
+        message: `Unknown framework(s): ${unknown.join(", ")}. Use "all" or a comma list of: ${FRAMEWORK_IDS.join(", ")}`,
+      });
+      return z.NEVER;
+    }
+    return ids as FrameworkId[];
+  });
+
+export const envSchema = z.object({
+  NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+  DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+
+  // API keys are optional at startup so the app, health check and CI run without them.
+  // Code that calls Claude or Voyage reads them through requireKey(), which fails loudly.
+  ANTHROPIC_API_KEY: optionalString,
+  VOYAGE_API_KEY: optionalString,
+
+  CLAUDE_MODEL: z.string().min(1).default("claude-sonnet-5-5"),
+  CLAUDE_FAST_MODEL: z.string().min(1).default("claude-haiku-5-5"),
+  VOYAGE_MODEL: z.string().min(1).default("voyage-4"),
+
+  INGEST_FRAMEWORKS: ingestFrameworks,
+  RETRIEVAL_MODE: z.enum(RETRIEVAL_MODES).default("hybrid"),
+  NOT_FOUND_THRESHOLD: z.coerce.number().min(0).max(1).default(0.35),
+});
+
+export type Env = z.infer<typeof envSchema>;
+
+/** Validates a raw env object. Throws one readable error listing every bad variable. */
+export function parseEnv(source: Record<string, string | undefined>): Env {
+  const result = envSchema.safeParse(source);
+  if (!result.success) {
+    const details = result.error.issues
+      .map((issue) => `  - ${issue.path.join(".") || "(root)"}: ${issue.message}`)
+      .join("\n");
+    throw new Error(`Invalid environment variables:\n${details}`);
+  }
+  return result.data;
+}
+
+let cached: Env | undefined;
+
+/**
+ * Validated env, parsed on first use. Lazy so `next build` doesn't need runtime
+ * variables like DATABASE_URL; the first request (or the health check) validates them.
+ */
+export function getEnv(): Env {
+  cached ??= parseEnv(process.env);
+  return cached;
+}
+
+/** Returns an API key, or throws a clear error naming the missing variable. */
+export function requireKey(name: "ANTHROPIC_API_KEY" | "VOYAGE_API_KEY"): string {
+  const value = getEnv()[name];
+  if (!value) throw new Error(`${name} is not set. Add it to your .env file.`);
+  return value;
+}
