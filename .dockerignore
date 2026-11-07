@@ -11,3 +11,4 @@ playwright-report
 *.log
 Dockerfile
 docker-compose.yml
+.cache

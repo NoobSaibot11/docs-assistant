@@ -31,6 +31,8 @@ jobs:
 
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/docs_assistant
+      # Created and migrated by tests/integration/global-setup.ts.
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/docs_assistant_test
       NEXT_TELEMETRY_DISABLED: 1
 
     steps:

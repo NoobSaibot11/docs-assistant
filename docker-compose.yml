@@ -32,6 +32,10 @@ services:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/docs_assistant
     ports:
       - "${APP_PORT:-3000}:3000"
+    volumes:
+      # Downloaded docs, shared with `pnpm ingest` on the host. Pinned refs never change, so files
+      # downloaded once (by either side) are never fetched again.
+      - ./.cache:/app/.cache
     healthcheck:
       test:
         [

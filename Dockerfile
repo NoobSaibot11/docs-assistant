@@ -34,8 +34,19 @@ ENV NODE_ENV=production \
 COPY --from=prod-deps --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/.next ./.next
 COPY --from=build --chown=node:node /app/generated ./generated
-COPY --chown=node:node package.json next.config.ts prisma.config.ts ./
+COPY --chown=node:node package.json pnpm-workspace.yaml next.config.ts prisma.config.ts tsconfig.json sources.config.ts ./
 COPY --chown=node:node prisma ./prisma
+# Ingestion runs in the container too: `docker compose run --rm app pnpm ingest`.
+COPY --chown=node:node lib ./lib
+COPY --chown=node:node scripts ./scripts
+# Before every `pnpm run`, pnpm 12 fetches registry metadata for the "packageManager" version and
+# re-verifies node_modules (which, holding prod deps only, looks out of date): ~95s of network calls
+# per command. The image has a fixed pnpm and fixed deps, so turn both off here (image only).
+RUN node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));delete p.packageManager;fs.writeFileSync('package.json',JSON.stringify(p,null,2))" \
+ && printf '\nverifyDepsBeforeRun: false\n' >> pnpm-workspace.yaml
+# .cache/ is bind-mounted from the host in docker-compose.yml; when run without a mount, the
+# non-root user still needs to be able to create it.
+RUN mkdir -p /app/.cache && chown node:node /app /app/.cache
 USER node
 EXPOSE 3000
 # Apply pending migrations, then start the server. Binaries are called directly (not via pnpm):
