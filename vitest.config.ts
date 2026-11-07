@@ -13,6 +13,23 @@ export default defineConfig({
   },
   test: {
     environment: "node",
-    include: ["tests/unit/**/*.test.ts", "tests/integration/**/*.test.ts"],
+    projects: [
+      {
+        extends: true,
+        test: { name: "unit", include: ["tests/unit/**/*.test.ts"] },
+      },
+      {
+        extends: true,
+        test: {
+          name: "integration",
+          include: ["tests/integration/**/*.test.ts"],
+          // Creates the test database (if needed) and applies migrations once per run.
+          globalSetup: ["tests/integration/global-setup.ts"],
+          // Tests share one database; run files one at a time.
+          fileParallelism: false,
+          testTimeout: 30_000,
+        },
+      },
+    ],
   },
 });
