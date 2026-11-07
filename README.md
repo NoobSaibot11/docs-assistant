@@ -3,15 +3,16 @@
 Ask questions about the official **React Native, Next.js, Angular and Jest** docs and get a
 streamed, Markdown answer that cites the exact doc sections it used.
 
-> Work in progress: Phase 0 (project setup) is done. See [SPEC.md](SPEC.md) for the full plan.
+> Work in progress: Phase 1 (ingestion) is done. See [SPEC.md](SPEC.md) for the full plan.
 
 ## Run it
 
 Requirements: Docker. For local development, also Node 24+ and pnpm.
 
 ```bash
-cp .env.example .env      # add ANTHROPIC_API_KEY and VOYAGE_API_KEY (not needed yet)
+cp .env.example .env      # add VOYAGE_API_KEY (and ANTHROPIC_API_KEY, used from Phase 3)
 docker compose up --build
+docker compose run --rm app pnpm ingest
 ```
 
 The app starts on http://localhost:3000 and applies database migrations on boot. Health check:
@@ -31,6 +32,27 @@ pnpm dev
 
 Checks: `pnpm typecheck`, `pnpm lint`, `pnpm format:check`, `pnpm test`.
 
+## Ingestion
+
+`pnpm ingest` downloads each framework's docs at a pinned version, strips MDX/JSX and
+frontmatter, splits pages by heading into ~300–500-token chunks (keeping the heading path and
+anchor for citations), embeds them with Voyage (`voyage-4`, 1024 dimensions) and stores them in
+Postgres with pgvector. Re-running it skips files whose content hasn't changed.
+
+```bash
+pnpm ingest --framework nextjs --dry-run   # chunk only; prints counts and estimated tokens
+pnpm ingest --framework nextjs --framework jest
+```
+
+| Framework    | Docs source                                                        | Version |
+| ------------ | ------------------------------------------------------------------ | ------- |
+| Next.js      | `vercel/next.js` `docs/01-app`, `docs/03-architecture`             | 16.4.5  |
+| Jest         | `jestjs/jest` `website/versioned_docs/version-30.5`                | 30.5    |
+| React Native | `react/react-native-website` `website/versioned_docs/version-0.88` | 0.88    |
+| Angular      | `angular/angular` `adev/src/content`                               | 22.2.5  |
+
+React Native and Angular are configured and will be ingested in Phase 5.
+
 ## Stack
 
 Next.js (App Router) + TypeScript, PostgreSQL 16 + pgvector, Prisma 7, Claude API, Voyage AI
@@ -38,5 +60,8 @@ embeddings, Tailwind CSS, Vitest, Docker Compose, GitHub Actions.
 
 ## Attribution
 
-Documentation content belongs to its respective projects and is used under their licenses
-(details added with ingestion in Phase 1).
+Documentation content belongs to its respective projects. Next.js, Jest and Angular docs are
+MIT-licensed; React Native docs are licensed under
+[CC BY 4.0](https://github.com/react/react-native-website/blob/main/LICENSE-docs). The app's
+footer credits each source with a link to its license. Doc files are downloaded at ingest time
+and are not committed to this repository.
