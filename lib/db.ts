@@ -9,15 +9,15 @@ import { getEnv } from "@/lib/env";
 // instance is kept on globalThis to avoid opening a new pool on every edit.
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
-function createClient(): PrismaClient {
-  const adapter = new PrismaPg({ connectionString: getEnv().DATABASE_URL });
-  return new PrismaClient({ adapter });
+/** A new client for a specific database (scripts and integration tests). */
+export function createDbClient(connectionString: string): PrismaClient {
+  return new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
 }
 
 /** Lazily created Prisma client (so importing this module never needs DATABASE_URL). */
 export function getDb(): PrismaClient {
   if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = createClient();
+    globalForPrisma.prisma = createDbClient(getEnv().DATABASE_URL);
   }
   return globalForPrisma.prisma;
 }

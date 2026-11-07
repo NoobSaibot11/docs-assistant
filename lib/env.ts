@@ -40,6 +40,19 @@ export const envSchema = z.object({
   CLAUDE_FAST_MODEL: z.string().min(1).default("claude-haiku-5-5"),
   VOYAGE_MODEL: z.string().min(1).default("voyage-4"),
 
+  // Optional client-side throttle for Voyage. Without a payment method on file, Voyage allows
+  // 3 requests and 10K tokens per minute; set VOYAGE_RPM=3 and VOYAGE_TPM=10000 to stay under it.
+  VOYAGE_RPM: z.preprocess(emptyToUndefined, z.coerce.number().int().positive().optional()),
+  VOYAGE_TPM: z.preprocess(emptyToUndefined, z.coerce.number().int().positive().optional()),
+
+  // Optional: raises the GitHub API limit (60/hour unauthenticated) used to list docs files.
+  GITHUB_TOKEN: optionalString,
+  // Separate database for integration tests (they truncate tables).
+  TEST_DATABASE_URL: z.preprocess(
+    emptyToUndefined,
+    z.url({ protocol: /^postgres(ql)?$/ }).optional(),
+  ),
+
   INGEST_FRAMEWORKS: ingestFrameworks,
   RETRIEVAL_MODE: z.enum(RETRIEVAL_MODES).default("hybrid"),
   NOT_FOUND_THRESHOLD: z.coerce.number().min(0).max(1).default(0.35),

@@ -28,6 +28,15 @@ describe("parseEnv", () => {
     ]);
   });
 
+  it("parses optional Voyage rate limits", () => {
+    expect(parseEnv({ ...base, VOYAGE_RPM: "3", VOYAGE_TPM: "10000" })).toMatchObject({
+      VOYAGE_RPM: 3,
+      VOYAGE_TPM: 10000,
+    });
+    expect(parseEnv({ ...base, VOYAGE_RPM: "", VOYAGE_TPM: "" }).VOYAGE_RPM).toBeUndefined();
+    expect(() => parseEnv({ ...base, VOYAGE_RPM: "0" })).toThrow("VOYAGE_RPM");
+  });
+
   it("coerces the threshold to a number", () => {
     expect(parseEnv({ ...base, NOT_FOUND_THRESHOLD: "0.5" }).NOT_FOUND_THRESHOLD).toBe(0.5);
   });

@@ -22,3 +22,6 @@ playwright-report/
 # misc
 .DS_Store
 *.log
+
+# downloaded docs (pnpm ingest)
+.cache/
