@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { AttributionFooter } from "@/components/attribution-footer";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,8 +13,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-white text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
-        {children}
+      <body className="flex min-h-screen flex-col bg-white text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
+        <div className="flex-1">{children}</div>
+        <AttributionFooter />
       </body>
     </html>
   );
