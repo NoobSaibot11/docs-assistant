@@ -1,0 +1,70 @@
+---
+title: Revalidating data
+description: Learn how to refresh cached data on a schedule or on demand.
+related:
+  links:
+    - app/api-reference/functions/revalidatePath
+---
+
+import { Card } from '../components/card'
+
+{/* Fixture written for tests. It mimics the structure of the Next.js docs. */}
+
+Cached data can become stale. **Revalidation** refreshes it, either on a timer or when something changes.
+
+<AppOnly>
+
+This page covers the App Router.
+
+</AppOnly>
+
+<PagesOnly>
+
+Pages Router users should read the getStaticProps guide instead.
+
+</PagesOnly>
+
+## Time-based revalidation
+
+Pass `next.revalidate` to `fetch` to refresh the data at most once per interval, in seconds.
+
+```tsx filename="app/page.tsx" switcher
+export default async function Page() {
+  const res = await fetch('https://api.example.com/posts', { next: { revalidate: 60 } })
+  const posts: Post[] = await res.json()
+  return <PostList posts={posts} />
+}
+```
+
+```jsx filename="app/page.js" switcher
+export default async function Page() {
+  const res = await fetch('https://api.example.com/posts', { next: { revalidate: 60 } })
+  const posts = await res.json()
+  return <PostList posts={posts} />
+}
+```
+
+### Route segment config
+
+You can also export `revalidate` from a layout or page to set the interval for every request in that segment.
+
+| Option       | Type     | Default |
+| ------------ | -------- | ------- |
+| `revalidate` | `number` | `false` |
+
+## On-demand revalidation
+
+Call `revalidatePath` or `revalidateTag` from a Server Action or Route Handler after a mutation.
+
+<Card title="revalidatePath" href="/docs/app/api-reference/functions/revalidatePath" />
+
+```ts filename="app/actions.ts"
+'use server'
+
+import { revalidatePath } from 'next/cache'
+
+export async function createPost() {
+  // ...save the post
+  revalidatePath('/posts')
+}
+```
