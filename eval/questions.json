@@ -1,1 +1,572 @@
-[]
+[
+  {
+    "id": "q001",
+    "framework": "nextjs",
+    "question": "how do I show a loading spinner while a page's data is loading?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/03-file-conventions/loading.mdx",
+      "nextjs/01-app/02-guides/streaming.mdx"
+    ],
+    "mustMention": ["loading.js", "Suspense"],
+    "answerable": true
+  },
+  {
+    "id": "q002",
+    "framework": "nextjs",
+    "question": "How can I read the query string in a client component?",
+    "expectedSourcePaths": ["nextjs/01-app/03-api-reference/04-functions/use-search-params.mdx"],
+    "mustMention": ["useSearchParams"],
+    "answerable": true
+  },
+  {
+    "id": "q003",
+    "framework": "nextjs",
+    "question": "whats the right way to send the user to /login from a server component if they aren't signed in",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/04-functions/redirect.mdx",
+      "nextjs/01-app/02-guides/redirecting.mdx"
+    ],
+    "mustMention": ["redirect", "next/navigation"],
+    "answerable": true
+  },
+  {
+    "id": "q004",
+    "framework": "nextjs",
+    "question": "I want URLs like /blog/my-first-post. How do I make the route and read the slug?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/03-file-conventions/dynamic-routes.mdx"
+    ],
+    "mustMention": ["[slug]", "params"],
+    "answerable": true
+  },
+  {
+    "id": "q005",
+    "framework": "nextjs",
+    "question": "Can I prerender every blog post page at build time?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/04-functions/generate-static-params.mdx"
+    ],
+    "mustMention": ["generateStaticParams"],
+    "answerable": true
+  },
+  {
+    "id": "q006",
+    "framework": "nextjs",
+    "question": "How do I set a different page title and meta description for each page?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/04-functions/generate-metadata.mdx",
+      "nextjs/01-app/01-getting-started/14-metadata-and-og-images.mdx"
+    ],
+    "mustMention": ["generateMetadata", "title"],
+    "answerable": true
+  },
+  {
+    "id": "q007",
+    "framework": "nextjs",
+    "question": "How do I read a cookie inside a server component?",
+    "expectedSourcePaths": ["nextjs/01-app/03-api-reference/04-functions/cookies.mdx"],
+    "mustMention": ["cookies", "next/headers"],
+    "answerable": true
+  },
+  {
+    "id": "q008",
+    "framework": "nextjs",
+    "question": "How do I build a simple JSON API endpoint with the App Router?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/03-file-conventions/route.mdx",
+      "nextjs/01-app/01-getting-started/15-route-handlers.mdx"
+    ],
+    "mustMention": ["/route\\.(js|ts)/", "GET"],
+    "answerable": true
+  },
+  {
+    "id": "q009",
+    "framework": "nextjs",
+    "question": "How do I catch errors in one part of the app so the whole page doesn't crash?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/03-file-conventions/error.mdx",
+      "nextjs/01-app/01-getting-started/10-error-handling.mdx"
+    ],
+    "mustMention": ["error.js", "/use client/"],
+    "answerable": true
+  },
+  {
+    "id": "q010",
+    "framework": "nextjs",
+    "question": "After a server action saves a new post, how do I make the posts list show it?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/04-functions/revalidatePath.mdx",
+      "nextjs/01-app/01-getting-started/07-mutating-data.mdx"
+    ],
+    "mustMention": ["revalidatePath"],
+    "answerable": true
+  },
+  {
+    "id": "q011",
+    "framework": "nextjs",
+    "question": "what's the best way to add optimized images?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/02-components/image.mdx",
+      "nextjs/01-app/01-getting-started/12-images.mdx"
+    ],
+    "mustMention": ["next/image"],
+    "answerable": true
+  },
+  {
+    "id": "q012",
+    "framework": "nextjs",
+    "question": "How do I expose an environment variable to code running in the browser?",
+    "expectedSourcePaths": ["nextjs/01-app/02-guides/environment-variables.mdx"],
+    "mustMention": ["NEXT_PUBLIC_"],
+    "answerable": true
+  },
+  {
+    "id": "q013",
+    "framework": "nextjs",
+    "question": "Where do I put code that should run before a request completes, like auth redirects for many routes?",
+    "expectedSourcePaths": [
+      "nextjs/01-app/03-api-reference/03-file-conventions/proxy.mdx",
+      "nextjs/01-app/01-getting-started/16-proxy.mdx"
+    ],
+    "mustMention": ["/proxy\\.(js|ts)/"],
+    "answerable": true,
+    "notes": "Next.js 16 renamed middleware to proxy."
+  },
+  {
+    "id": "q014",
+    "framework": ["nextjs", "jest"],
+    "question": "How do I set up Jest in a Next.js project?",
+    "expectedSourcePaths": ["nextjs/01-app/02-guides/testing/jest.mdx"],
+    "mustMention": ["next/jest"],
+    "answerable": true
+  },
+  {
+    "id": "q015",
+    "framework": ["nextjs", "jest"],
+    "question": "Are my .env files loaded when I run Jest tests in a Next.js app?",
+    "expectedSourcePaths": ["nextjs/01-app/02-guides/testing/jest.mdx"],
+    "mustMention": [".env"],
+    "answerable": true
+  },
+  {
+    "id": "q016",
+    "framework": "jest",
+    "question": "How do I mock a function and check what arguments it was called with?",
+    "expectedSourcePaths": ["jest/MockFunctions.md", "jest/ExpectAPI.md"],
+    "mustMention": ["jest.fn", "toHaveBeenCalledWith"],
+    "answerable": true
+  },
+  {
+    "id": "q017",
+    "framework": "jest",
+    "question": "how to mock a whole module like axios in jest",
+    "expectedSourcePaths": ["jest/MockFunctions.md"],
+    "mustMention": ["jest.mock"],
+    "answerable": true
+  },
+  {
+    "id": "q018",
+    "framework": "jest",
+    "question": "What's the difference between toBe and toEqual?",
+    "expectedSourcePaths": ["jest/UsingMatchers.md", "jest/ExpectAPI.md"],
+    "mustMention": ["toEqual", "Object.is"],
+    "answerable": true
+  },
+  {
+    "id": "q019",
+    "framework": "jest",
+    "question": "How do I test an async function that returns a promise?",
+    "expectedSourcePaths": ["jest/TestingAsyncCode.md"],
+    "mustMention": ["await"],
+    "answerable": true
+  },
+  {
+    "id": "q020",
+    "framework": "jest",
+    "question": "I need to reset some state before every test in a file. How?",
+    "expectedSourcePaths": ["jest/SetupAndTeardown.md"],
+    "mustMention": ["beforeEach"],
+    "answerable": true
+  },
+  {
+    "id": "q021",
+    "framework": "jest",
+    "question": "My snapshot tests fail after an intentional UI change. How do I update the snapshots?",
+    "expectedSourcePaths": ["jest/SnapshotTesting.md"],
+    "mustMention": ["/(-u\\b|--updateSnapshot)/"],
+    "answerable": true
+  },
+  {
+    "id": "q022",
+    "framework": "jest",
+    "question": "How do I run only the tests whose name matches some text?",
+    "expectedSourcePaths": ["jest/CLI.md"],
+    "mustMention": ["/(--testNamePattern|-t\\b)/"],
+    "answerable": true
+  },
+  {
+    "id": "q023",
+    "framework": "jest",
+    "question": "how do i get a code coverage report",
+    "expectedSourcePaths": ["jest/CLI.md", "jest/Configuration.md"],
+    "mustMention": ["--coverage"],
+    "answerable": true
+  },
+  {
+    "id": "q024",
+    "framework": "jest",
+    "question": "Can I write my Jest tests in TypeScript?",
+    "expectedSourcePaths": ["jest/GettingStarted.md"],
+    "mustMention": ["/(@babel\\/preset-typescript|ts-jest)/"],
+    "answerable": true
+  },
+  {
+    "id": "q025",
+    "framework": "jest",
+    "question": "How do I watch calls to an object's method without replacing what it does?",
+    "expectedSourcePaths": ["jest/JestObjectAPI.md"],
+    "mustMention": ["jest.spyOn"],
+    "answerable": true
+  },
+  {
+    "id": "q026",
+    "framework": "jest",
+    "question": "How do I mock an ES6 class that my module imports?",
+    "expectedSourcePaths": ["jest/Es6ClassMocks.md"],
+    "mustMention": ["jest.mock"],
+    "answerable": true
+  },
+  {
+    "id": "q027",
+    "framework": "jest",
+    "question": "My tests need document and window. How do I give them a browser-like environment?",
+    "expectedSourcePaths": ["jest/Configuration.md", "jest/TestEnvironment.md"],
+    "mustMention": ["jsdom", "testEnvironment"],
+    "answerable": true
+  },
+  {
+    "id": "q028",
+    "framework": ["react-native", "jest"],
+    "question": "How do I set up Jest snapshot tests for React Native components?",
+    "expectedSourcePaths": ["jest/TutorialReactNative.md", "react-native/testing-overview.md"],
+    "mustMention": ["/preset[\"']?\\s*:\\s*[\"']react-native/"],
+    "answerable": true
+  },
+  {
+    "id": "q029",
+    "framework": "react-native",
+    "question": "How do I handle the Android back button?",
+    "expectedSourcePaths": ["react-native/backhandler.md"],
+    "mustMention": ["BackHandler", "hardwareBackPress"],
+    "answerable": true
+  },
+  {
+    "id": "q030",
+    "framework": "react-native",
+    "question": "Whats the best way to render a really long scrolling list?",
+    "expectedSourcePaths": [
+      "react-native/flatlist.md",
+      "react-native/using-a-listview.md",
+      "react-native/optimizing-flatlist-configuration.md"
+    ],
+    "mustMention": ["FlatList"],
+    "answerable": true
+  },
+  {
+    "id": "q031",
+    "framework": "react-native",
+    "question": "How can I tell if the phone is in dark mode?",
+    "expectedSourcePaths": ["react-native/usecolorscheme.md", "react-native/appearance.md"],
+    "mustMention": ["useColorScheme"],
+    "answerable": true
+  },
+  {
+    "id": "q032",
+    "framework": "react-native",
+    "question": "The keyboard covers my text input on iOS, how do I fix that?",
+    "expectedSourcePaths": ["react-native/keyboardavoidingview.md"],
+    "mustMention": ["KeyboardAvoidingView"],
+    "answerable": true
+  },
+  {
+    "id": "q033",
+    "framework": "react-native",
+    "question": "How do I run different code on iOS and Android?",
+    "expectedSourcePaths": ["react-native/platform-specific-code.md", "react-native/platform.md"],
+    "mustMention": ["Platform.OS", "Platform.select"],
+    "answerable": true
+  },
+  {
+    "id": "q034",
+    "framework": "react-native",
+    "question": "How do I make an HTTP request to my backend?",
+    "expectedSourcePaths": ["react-native/network.md"],
+    "mustMention": ["fetch"],
+    "answerable": true
+  },
+  {
+    "id": "q035",
+    "framework": "react-native",
+    "question": "How do I get the screen width so my layout updates when it rotates?",
+    "expectedSourcePaths": ["react-native/usewindowdimensions.md", "react-native/dimensions.md"],
+    "mustMention": ["useWindowDimensions"],
+    "answerable": true
+  },
+  {
+    "id": "q036",
+    "framework": "react-native",
+    "question": "How do I show a native alert with OK and Cancel buttons?",
+    "expectedSourcePaths": ["react-native/alert.md"],
+    "mustMention": ["Alert.alert"],
+    "answerable": true
+  },
+  {
+    "id": "q037",
+    "framework": "react-native",
+    "question": "How do I open a website in the phone's browser from my app?",
+    "expectedSourcePaths": ["react-native/linking.md"],
+    "mustMention": ["Linking.openURL"],
+    "answerable": true
+  },
+  {
+    "id": "q038",
+    "framework": "react-native",
+    "question": "What should I use for a button that changes style while it's pressed?",
+    "expectedSourcePaths": ["react-native/pressable.md"],
+    "mustMention": ["Pressable"],
+    "answerable": true
+  },
+  {
+    "id": "q039",
+    "framework": "react-native",
+    "question": "why do my views stack vertically by default instead of side by side?",
+    "expectedSourcePaths": ["react-native/flexbox.md"],
+    "mustMention": ["flexDirection", "column"],
+    "answerable": true
+  },
+  {
+    "id": "q040",
+    "framework": "react-native",
+    "question": "What is Hermes and do I need to enable it?",
+    "expectedSourcePaths": ["react-native/hermes.md"],
+    "mustMention": ["Hermes"],
+    "answerable": true
+  },
+  {
+    "id": "q041",
+    "framework": "react-native",
+    "question": "How do I generate a signed release build for the Google Play Store?",
+    "expectedSourcePaths": ["react-native/signed-apk-android.md"],
+    "mustMention": ["keytool"],
+    "answerable": true
+  },
+  {
+    "id": "q042",
+    "framework": "react-native",
+    "question": "How do I fade a view in with an animation?",
+    "expectedSourcePaths": ["react-native/animations.md", "react-native/animated.md"],
+    "mustMention": ["Animated.timing"],
+    "answerable": true
+  },
+  {
+    "id": "q043",
+    "framework": "react-native",
+    "question": "How do I open the debugger for my React Native app?",
+    "expectedSourcePaths": ["react-native/react-native-devtools.md", "react-native/debugging.md"],
+    "mustMention": ["React Native DevTools"],
+    "answerable": true
+  },
+  {
+    "id": "q044",
+    "framework": "angular",
+    "question": "How do I convert an RxJS observable into a signal?",
+    "expectedSourcePaths": ["angular/ecosystem/rxjs-interop/signals-interop.md"],
+    "mustMention": ["toSignal"],
+    "answerable": true
+  },
+  {
+    "id": "q045",
+    "framework": "angular",
+    "question": "How do I make a value that's derived from other signals?",
+    "expectedSourcePaths": ["angular/guide/signals/overview.md"],
+    "mustMention": ["computed"],
+    "answerable": true
+  },
+  {
+    "id": "q046",
+    "framework": "angular",
+    "question": "How do I run some code whenever a signal changes, like saving to localStorage?",
+    "expectedSourcePaths": ["angular/guide/signals/effect.md"],
+    "mustMention": ["effect"],
+    "answerable": true
+  },
+  {
+    "id": "q047",
+    "framework": "angular",
+    "question": "How do I lazy load a page component with the router?",
+    "expectedSourcePaths": [
+      "angular/guide/routing/loading-strategies.md",
+      "angular/guide/routing/define-routes.md"
+    ],
+    "mustMention": ["loadComponent"],
+    "answerable": true
+  },
+  {
+    "id": "q048",
+    "framework": "angular",
+    "question": "How can I stop users who aren't logged in from opening a route?",
+    "expectedSourcePaths": ["angular/guide/routing/route-guards.md"],
+    "mustMention": ["/canActivate/i"],
+    "answerable": true
+  },
+  {
+    "id": "q049",
+    "framework": "angular",
+    "question": "How do I attach an auth token to every HTTP request?",
+    "expectedSourcePaths": ["angular/guide/http/interceptors.md"],
+    "mustMention": ["withInterceptors"],
+    "answerable": true
+  },
+  {
+    "id": "q050",
+    "framework": "angular",
+    "question": "How do I set up HttpClient in a standalone app?",
+    "expectedSourcePaths": ["angular/guide/http/setup.md"],
+    "mustMention": ["provideHttpClient"],
+    "answerable": true
+  },
+  {
+    "id": "q051",
+    "framework": "angular",
+    "question": "How do I loop over a list in a template with the new control flow?",
+    "expectedSourcePaths": ["angular/guide/templates/control-flow.md"],
+    "mustMention": ["@for", "track"],
+    "answerable": true
+  },
+  {
+    "id": "q052",
+    "framework": "angular",
+    "question": "Can I delay loading a heavy component until it scrolls into view?",
+    "expectedSourcePaths": ["angular/guide/templates/defer.md"],
+    "mustMention": ["@defer", "on viewport"],
+    "answerable": true
+  },
+  {
+    "id": "q053",
+    "framework": "angular",
+    "question": "How do I make a component input required?",
+    "expectedSourcePaths": ["angular/guide/components/inputs.md"],
+    "mustMention": ["input.required"],
+    "answerable": true
+  },
+  {
+    "id": "q054",
+    "framework": "angular",
+    "question": "How does a child component send an event up to its parent?",
+    "expectedSourcePaths": ["angular/guide/components/outputs.md"],
+    "mustMention": ["output", "emit"],
+    "answerable": true
+  },
+  {
+    "id": "q055",
+    "framework": "angular",
+    "question": "How do I make a service a singleton available everywhere?",
+    "expectedSourcePaths": ["angular/guide/di/creating-and-using-services.md"],
+    "mustMention": ["providedIn"],
+    "answerable": true
+  },
+  {
+    "id": "q056",
+    "framework": "angular",
+    "question": "How do I mark a reactive form field as required?",
+    "expectedSourcePaths": ["angular/guide/forms/form-validation.md"],
+    "mustMention": ["Validators.required"],
+    "answerable": true
+  },
+  {
+    "id": "q057",
+    "framework": "angular",
+    "question": "How do I run my app without zone.js?",
+    "expectedSourcePaths": ["angular/guide/zoneless.md"],
+    "mustMention": ["provideZonelessChangeDetection"],
+    "answerable": true
+  },
+  {
+    "id": "q058",
+    "framework": "angular",
+    "question": "How do I enable hydration for server-side rendering?",
+    "expectedSourcePaths": ["angular/guide/hydration.md"],
+    "mustMention": ["provideClientHydration"],
+    "answerable": true
+  },
+  {
+    "id": "q059",
+    "framework": null,
+    "question": "How do I write a loader function in Remix?",
+    "answerable": false,
+    "notes": "Another framework."
+  },
+  {
+    "id": "q060",
+    "framework": null,
+    "question": "How do I define a store with Pinia in Vue 3?",
+    "answerable": false,
+    "notes": "Another framework."
+  },
+  {
+    "id": "q061",
+    "framework": null,
+    "question": "How do I create a form action in SvelteKit?",
+    "answerable": false,
+    "notes": "Another framework."
+  },
+  {
+    "id": "q062",
+    "framework": "nextjs",
+    "question": "What does the useServerCache hook in Next.js do?",
+    "answerable": false,
+    "notes": "Made-up API; caching docs are nearby, so retrieval scores can be high."
+  },
+  {
+    "id": "q063",
+    "framework": "angular",
+    "question": "How do I use Angular's @computedInput decorator?",
+    "answerable": false,
+    "notes": "Made-up API."
+  },
+  {
+    "id": "q064",
+    "framework": null,
+    "question": "How do I write a Django REST framework serializer?",
+    "answerable": false,
+    "notes": "Unrelated stack."
+  },
+  {
+    "id": "q065",
+    "framework": null,
+    "question": "How do I combine useReducer and useContext for global state in React?",
+    "answerable": false,
+    "notes": "Plain React, nothing framework-specific."
+  },
+  {
+    "id": "q066",
+    "framework": null,
+    "question": "How do I stub HTTP requests in Mocha with Sinon?",
+    "answerable": false,
+    "notes": "A different test runner."
+  },
+  {
+    "id": "q067",
+    "framework": null,
+    "question": "How do I set up hot reload for Flutter web?",
+    "answerable": false,
+    "notes": "Unrelated stack."
+  },
+  {
+    "id": "q068",
+    "framework": "jest",
+    "question": "How do I run Jest tests on a remote device farm with the jest-cloud plugin?",
+    "answerable": false,
+    "notes": "Made-up plugin."
+  }
+]

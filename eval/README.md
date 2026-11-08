@@ -1,8 +1,13 @@
 # Eval questions
 
-`questions.json` holds the hand-written questions that `pnpm eval` scores. They're the basis of
-the numbers in the main README, so write them yourself from real reading of the docs, not from
-a model.
+`questions.json` holds the questions that `pnpm eval` scores.
+
+**How this set was made:** the first 68 questions were drafted by Claude (Claude Code) at the
+project owner's request, from the pinned docs: each expected page was chosen by reading the docs,
+not from search results, so the set isn't tilted toward what retrieval already finds.
+`pnpm eval:check` confirmed every source exists and every must-mention fact appears in its
+sources. Review, edit and add to it freely; hand-written additions make the numbers more
+meaningful.
 
 ## Targets
 

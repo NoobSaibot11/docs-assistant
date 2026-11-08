@@ -152,9 +152,10 @@ curl -N -X POST localhost:3001/api/chat -H 'content-type: application/json' -d '
 
 ## Evaluation (Phase 5)
 
-- Questions are hand-written by the user (spec: "written by you, not generated"). Don't generate
-  or edit them; help with tooling, `pnpm run search` (prints each result's `framework/path`)
-  and `pnpm eval:check`. Guide: `eval/README.md`.
+- The question set was drafted by Claude at the user's request (stated in eval/README.md and the
+  README). Expected sources must come from reading the docs, never from search results, so the
+  set isn't biased toward what retrieval already finds. Validate every change with
+  `pnpm eval:check`. Guide: `eval/README.md`.
 - `lib/eval/run.ts` runs each question through the real `runChat` with the search step wrapped
   to record retrieved chunks; timings/usage come from the pipeline's QueryLog entry, which isn't
   written to the database during evals. Metrics are pure functions in `lib/eval/metrics.ts`.

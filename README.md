@@ -102,8 +102,9 @@ curl -N -X POST http://localhost:3000/api/chat   -H 'content-type: application/j
 
 ## Evaluation
 
-About 70 hand-written questions (`eval/questions.json`, 15 per framework plus 10 the docs don't
-cover) are run through the real pipeline in each retrieval mode and scored for retrieval
+68 questions (`eval/questions.json`: 15+ per framework, 5 of them cross-framework, plus 10 the
+docs don't cover; drafted by Claude from the pinned docs and machine-checked, see
+[eval/README.md](eval/README.md)) are run through the real pipeline in each retrieval mode and scored for retrieval
 (hit@5, MRR, framework accuracy), answers (must-mention facts, faithfulness graded claim by claim
 by a stronger Claude model, refusal accuracy), latency and cost. See [eval/README.md](eval/README.md).
 
