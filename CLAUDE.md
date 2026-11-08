@@ -33,6 +33,7 @@ pnpm test:unit         # unit tests only (no database)
 pnpm test:integration  # real Postgres; creates + migrates the test db automatically
 pnpm ingest            # fetch, chunk, embed, store (needs VOYAGE_API_KEY)
 pnpm ingest --framework jest --dry-run   # chunk only: counts, est. tokens, removed JSX
+pnpm run search "question" --mode hybrid --framework jest   # top chunks with scores (`run` is required: `pnpm search` is pnpm's registry search)
 pnpm db:migrate        # prisma migrate dev (create + apply a migration)
 pnpm db:deploy         # prisma migrate deploy (apply only)
 pnpm db:generate       # regenerate the Prisma client into generated/prisma
@@ -81,3 +82,20 @@ docker compose up      # db + app (app runs migrate deploy, then next start)
   the real docs) and are excluded from Prettier.
 - **Ports**: compose host ports are `DB_PORT` (default 5432) and `APP_PORT` (default 3000).
   On this dev machine they're 5434 and 3001 (5432, 5433 and 3000 are used by other projects).
+
+## Retrieval (Phase 2)
+
+- `lib/retrieval/search.ts` is the entry point: `search({db, embedder}, {question, mode, frameworks})`.
+  Modes live in `vector.ts`, `keyword.ts` and `hybrid.ts` (RRF in `rrf.ts`); constants (`topK`,
+  `candidates`, `rrfK`, `efSearch`) in `RETRIEVAL` in `lib/config.ts`.
+- Questions are embedded with Voyage input type `query` (documents use `document`).
+- Every mode returns cosine `similarity` per chunk, and `topSimilarity` is what the "not found"
+  threshold compares against. Mode scores (cosine, ts_rank, RRF sum) aren't comparable.
+- Vector queries set `hnsw.ef_search` and `hnsw.iterative_scan = relaxed_order` with
+  `set_config(..., true)` inside a transaction, so framework-filtered queries still fill the
+  limit; the outer query re-sorts by exact distance. Small filtered sets may use the framework
+  index plus an exact sort instead, which is also correct.
+- Keyword search ORs the question's lexemes (`plainto_tsquery` output with `&` → `|`), because
+  ANDing every word of a natural-language question matches almost nothing.
+- Tests use `tests/helpers/fake-embedder.ts` (hashed bag-of-words, so similar text gets similar
+  vectors) and `tests/helpers/test-db.ts` (fixture sources, test db URL).

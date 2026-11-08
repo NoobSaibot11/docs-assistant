@@ -19,6 +19,7 @@
     "test:integration": "vitest run --project integration",
     "test:watch": "vitest",
     "ingest": "tsx --conditions=react-server scripts/ingest.ts",
+    "search": "tsx --conditions=react-server scripts/search.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",

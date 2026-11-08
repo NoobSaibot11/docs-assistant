@@ -3,7 +3,7 @@
 Ask questions about the official **React Native, Next.js, Angular and Jest** docs and get a
 streamed, Markdown answer that cites the exact doc sections it used.
 
-> Work in progress: Phase 1 (ingestion) is done. See [SPEC.md](SPEC.md) for the full plan.
+> Work in progress: Phases 1–2 (ingestion, retrieval) are done. See [SPEC.md](SPEC.md) for the full plan.
 
 ## Run it
 
@@ -52,6 +52,20 @@ pnpm ingest --framework nextjs --framework jest
 | Angular      | `angular/angular` `adev/src/content`                               | 22.2.5  |
 
 React Native and Angular are configured and will be ingested in Phase 5.
+
+## Retrieval
+
+Three modes, each with an optional framework filter:
+
+- **vector**: cosine similarity on the Voyage embeddings (HNSW index).
+- **keyword**: Postgres full-text search (`ts_rank` over a generated `tsvector` column).
+- **hybrid** (default): both, fused with Reciprocal Rank Fusion (k = 60) over the top 20 of each.
+
+```bash
+pnpm run search "How do I revalidate data every 60 seconds?" --mode hybrid --framework nextjs
+```
+
+(`pnpm run search`, not `pnpm search`, which is pnpm's own registry search.)
 
 ## Stack
 
