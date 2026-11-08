@@ -25,3 +25,17 @@ export const EMBEDDING = {
   maxBatchInputs: 128,
   maxBatchTokens: 100_000,
 } as const;
+
+export const RETRIEVAL = {
+  /** Chunks returned to the caller (and numbered [1]–[n] in the prompt). */
+  topK: 5,
+  /** Candidates each mode contributes to hybrid fusion. */
+  candidates: 20,
+  /** Reciprocal Rank Fusion constant: score = Σ 1 / (rrfK + rank). 60 is the usual default. */
+  rrfK: 60,
+  /**
+   * HNSW candidate list size (pgvector default 40). With iterative scans on, filtered queries
+   * keep scanning past it, so this mainly trades recall for speed on unfiltered queries.
+   */
+  efSearch: 100,
+} as const;
