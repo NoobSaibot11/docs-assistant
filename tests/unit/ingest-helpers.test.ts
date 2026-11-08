@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { batchTexts, embeddingInput } from "@/lib/ingest/embed";
 import { createGitHubProvider, isIncludedDoc, mapWithConcurrency } from "@/lib/ingest/fetch-source";
+import { parseNavigationRoutes } from "@/lib/ingest/angular-routes";
 import { contentHash } from "@/lib/ingest/ingest";
 import { toVectorLiteral } from "@/lib/retrieval/chunk-store";
 import { getSource, type SourceConfig } from "@/sources.config";
@@ -33,6 +34,56 @@ describe("sources.config URLs", () => {
     expect(url({ id: "mock-functions", slug: "/mocks" })).toBe("https://jestjs.io/docs/mocks");
     expect(url({ id: "mock-functions" })).toBe("https://jestjs.io/docs/mock-functions");
     expect(url({})).toBe("https://jestjs.io/docs/MockFunctions");
+  });
+
+  it("keeps sub-folders in React Native URLs (Docusaurus ids include the folder)", () => {
+    const rn = getSource("react-native");
+    const url = (p: string, frontmatter: Record<string, unknown> = {}) =>
+      rn.toUrl({ path: p, frontmatter });
+    expect(url("flexbox.md", { id: "flexbox" })).toBe("https://reactnative.dev/docs/flexbox");
+    expect(url("the-new-architecture/pure-cxx-modules.md")).toBe(
+      "https://reactnative.dev/docs/the-new-architecture/pure-cxx-modules",
+    );
+    expect(url("the-new-architecture/x.md", { id: "custom" })).toBe(
+      "https://reactnative.dev/docs/the-new-architecture/custom",
+    );
+    expect(url("the-new-architecture/x.md", { slug: "/landing" })).toBe(
+      "https://reactnative.dev/docs/landing",
+    );
+  });
+
+  it("maps Angular content paths through the site's navigation routes", () => {
+    const angular = getSource("angular");
+    const url = (p: string) => angular.toUrl({ path: p, frontmatter: {} });
+    expect(url("introduction/what-is-angular.md")).toBe("https://angular.dev/overview");
+    expect(url("guide/signals/overview.md")).toBe("https://angular.dev/guide/signals");
+    expect(url("reference/errors/NG0910.md")).toBe("https://angular.dev/errors/NG0910");
+    expect(url("reference/extended-diagnostics/NG8109.md")).toBe(
+      "https://angular.dev/extended-diagnostics/NG8109",
+    );
+    expect(url("guide/not-in-navigation.md")).toBe("https://angular.dev/guide/not-in-navigation");
+  });
+});
+
+describe("parseNavigationRoutes", () => {
+  it("pairs each entry's path with its contentPath, including nested children", () => {
+    const source = `
+      export const DOCS = [
+        { label: 'What is Angular?', path: 'overview', contentPath: 'introduction/what-is-angular' },
+        {
+          label: 'Essentials',
+          children: [
+            { label: 'Overview', path: 'essentials', contentPath: 'introduction/essentials/overview' },
+            { label: "Signals", contentPath: "introduction/essentials/signals", path: "essentials/signals" },
+          ],
+        },
+        { label: 'External', path: 'https://example.com', status: 'new' },
+      ];`;
+    expect(parseNavigationRoutes(source)).toEqual({
+      "introduction/what-is-angular": "overview",
+      "introduction/essentials/overview": "essentials",
+      "introduction/essentials/signals": "essentials/signals",
+    });
   });
 });
 

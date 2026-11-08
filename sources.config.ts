@@ -1,4 +1,5 @@
 import type { FrameworkId } from "@/lib/frameworks";
+import angularRoutes from "@/sources/angular-routes.json";
 
 /** A file path relative to the source's rootPath, plus its parsed frontmatter. */
 export interface SourceFile {
@@ -31,11 +32,33 @@ export interface SourceConfig {
 const MARKDOWN_EXT = /\.mdx?$/;
 
 /** Docusaurus page id: frontmatter `slug` or `id`, else the file name. */
-function docusaurusId(file: SourceFile): string {
+export function docusaurusId(file: SourceFile): string {
   const { slug, id } = file.frontmatter;
-  if (typeof slug === "string") return slug.replace(/^\//, "");
-  if (typeof id === "string") return id;
-  return file.path.replace(MARKDOWN_EXT, "").split("/").pop() ?? file.path;
+  // Pages in sub-folders keep the folder: the-new-architecture/pure-cxx-modules.md →
+  // /docs/the-new-architecture/pure-cxx-modules. An absolute slug ("/x") replaces the path.
+  const parts = file.path.split("/");
+  const folder = parts.slice(0, -1).join("/");
+  const inFolder = (name: string) => (folder ? `${folder}/${name}` : name);
+  if (typeof slug === "string") return slug.startsWith("/") ? slug.slice(1) : inFolder(slug);
+  if (typeof id === "string") return inFolder(id);
+  return inFolder((parts.at(-1) ?? file.path).replace(MARKDOWN_EXT, ""));
+}
+
+const ANGULAR_ROUTES: Record<string, string> = angularRoutes;
+
+/**
+ * angular.dev route for a content path: from the navigation map, else error and diagnostic pages
+ * (generated from their folders, not listed in the navigation), else the path itself.
+ */
+export function angularRoute(contentPath: string): string {
+  const mapped = ANGULAR_ROUTES[contentPath];
+  if (mapped !== undefined) return mapped;
+  for (const folder of ["errors", "extended-diagnostics"]) {
+    if (contentPath.startsWith(`reference/${folder}/`)) {
+      return contentPath.slice("reference/".length);
+    }
+  }
+  return contentPath;
 }
 
 export const SOURCES: readonly SourceConfig[] = [
@@ -79,7 +102,6 @@ export const SOURCES: readonly SourceConfig[] = [
     toUrl: (file) => `https://jestjs.io/docs/${docusaurusId(file)}`,
   },
   {
-    // Ingested in Phase 5; URL mapping to be re-verified then.
     framework: "react-native",
     name: "React Native",
     repo: "react/react-native-website",
@@ -97,7 +119,6 @@ export const SOURCES: readonly SourceConfig[] = [
     toUrl: (file) => `https://reactnative.dev/docs/${docusaurusId(file)}`,
   },
   {
-    // Ingested in Phase 5; URL mapping to be re-verified then.
     framework: "angular",
     name: "Angular",
     repo: "angular/angular",
@@ -109,8 +130,9 @@ export const SOURCES: readonly SourceConfig[] = [
     syntax: "md",
     license: { name: "MIT", url: "https://github.com/angular/angular/blob/main/LICENSE" },
     siteUrl: "https://angular.dev",
-    // adev/src/content/guide/signals/overview.md -> https://angular.dev/guide/signals/overview
-    toUrl: (file) => `https://angular.dev/${file.path.replace(MARKDOWN_EXT, "")}`,
+    // Content paths aren't URLs: the site's navigation maps them to routes
+    // (introduction/what-is-angular -> /overview). See scripts/sync-angular-routes.ts.
+    toUrl: (file) => `https://angular.dev/${angularRoute(file.path.replace(MARKDOWN_EXT, ""))}`,
   },
 ];
 
