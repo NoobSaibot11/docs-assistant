@@ -60,8 +60,13 @@ export const envSchema = z.object({
   ),
 
   INGEST_FRAMEWORKS: ingestFrameworks,
-  RETRIEVAL_MODE: z.enum(RETRIEVAL_MODES).default("hybrid"),
-  NOT_FOUND_THRESHOLD: z.coerce.number().min(0).max(1).default(0.35),
+  // Vector beat hybrid on the eval set (see README "Evaluation"); hybrid stays available.
+  RETRIEVAL_MODE: z.enum(RETRIEVAL_MODES).default("vector"),
+  // Weight of keyword results in hybrid fusion (vector results weigh 1). Tuned with the eval.
+  HYBRID_KEYWORD_WEIGHT: z.coerce.number().min(0).max(1).default(0.1),
+  // A cheap pre-filter before the answer call; set just below the lowest answerable question's
+  // similarity in the eval sweep. The model's own "not found" reply handles the rest.
+  NOT_FOUND_THRESHOLD: z.coerce.number().min(0).max(1).default(0.4),
 });
 
 export type Env = z.infer<typeof envSchema>;

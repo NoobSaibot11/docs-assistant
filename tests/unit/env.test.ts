@@ -10,8 +10,9 @@ describe("parseEnv", () => {
     const env = parseEnv(base);
     expect(env.CLAUDE_MODEL).toBe("claude-sonnet-5-5");
     expect(env.ANSWER_EFFORT).toBe("low");
-    expect(env.RETRIEVAL_MODE).toBe("hybrid");
-    expect(env.NOT_FOUND_THRESHOLD).toBe(0.35);
+    expect(env.RETRIEVAL_MODE).toBe("vector");
+    expect(env.HYBRID_KEYWORD_WEIGHT).toBe(0.1);
+    expect(env.NOT_FOUND_THRESHOLD).toBe(0.4);
     expect(env.INGEST_FRAMEWORKS).toEqual([...FRAMEWORK_IDS]);
     expect(env.ANTHROPIC_API_KEY).toBeUndefined();
   });
