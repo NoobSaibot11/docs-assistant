@@ -50,3 +50,26 @@ export const CHAT = {
   answerMaxTokens: 8_192,
   rewriteMaxTokens: 1_024,
 } as const;
+
+/**
+ * Claude prices in USD per million tokens, for the eval's cost column (checked 2026-10-06 in
+ * Anthropic's model table; update when prices change). Unknown models count as $0, with a warning.
+ */
+export const MODEL_PRICES: Record<string, { input: number; output: number; cacheRead: number }> = {
+  "claude-opus-5-5": { input: 4, output: 20, cacheRead: 0.2 },
+  "claude-sonnet-5-5": { input: 2, output: 10, cacheRead: 0.2 },
+  "claude-haiku-5-5": { input: 0.1, output: 0.5, cacheRead: 0.01 },
+};
+
+export const EVAL = {
+  /** Default question file. */
+  questionsFile: "eval/questions.json",
+  resultsDir: "eval/results",
+  /** Query embeddings are cached here so reruns and the three modes embed each question once. */
+  embeddingCacheFile: ".cache/eval/embeddings.json",
+  /** Questions run in parallel per mode. */
+  concurrency: 3,
+  /** Targets from the spec, shown by `pnpm eval:check`. */
+  answerablePerFramework: 15,
+  unanswerable: 10,
+} as const;

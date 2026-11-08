@@ -54,6 +54,39 @@ export function toSources(results: readonly SearchResult[]): Source[] {
   }));
 }
 
+export interface ResolvedQuestion {
+  /** The question as searched: rewritten to stand alone when there was history. */
+  question: string;
+  frameworks: FrameworkId[];
+  frameworksSource: "user" | "detected" | "all";
+  rewriteUsage: { inputTokens: number; outputTokens: number };
+}
+
+/**
+ * Step 1 of the pipeline (also used by the eval's retrieval-only runs): the standalone question
+ * and the frameworks to search. The user's filter wins over detected frameworks. With no history
+ * and a filter set there is nothing to rewrite or detect, so the rewrite call is skipped.
+ */
+export async function resolveQuestion(
+  rewriter: QueryRewriter,
+  request: ChatRequest,
+  signal?: AbortSignal,
+): Promise<ResolvedQuestion> {
+  const userFrameworks = request.frameworks;
+  const needsRewrite = request.history.length > 0 || userFrameworks.length === 0;
+  const rewrite = needsRewrite
+    ? await rewriter.rewrite({ question: request.question, history: request.history }, signal)
+    : null;
+  const frameworks = userFrameworks.length > 0 ? userFrameworks : (rewrite?.frameworks ?? []);
+  return {
+    question: rewrite?.standaloneQuestion ?? request.question,
+    frameworks,
+    frameworksSource:
+      userFrameworks.length > 0 ? "user" : frameworks.length > 0 ? "detected" : "all",
+    rewriteUsage: rewrite?.usage ?? { inputTokens: 0, outputTokens: 0 },
+  };
+}
+
 /**
  * One chat request as an NDJSON stream: rewrite + tag → retrieve → (not found | stream answer)
  * → citations and usage → QueryLog row.
@@ -112,24 +145,15 @@ export function runChat(
 
       try {
         abort.signal.throwIfAborted();
-        // 1. Standalone question + frameworks. With no history and a user-picked filter there
-        //    is nothing to rewrite or detect, so the call is skipped.
-        const userFrameworks = request.frameworks;
-        const needsRewrite = request.history.length > 0 || userFrameworks.length === 0;
-        const rewrite = needsRewrite
-          ? await deps.rewriter.rewrite(
-              { question: request.question, history: request.history },
-              abort.signal,
-            )
-          : null;
-        const question = rewrite?.standaloneQuestion ?? request.question;
+        // 1. Standalone question + frameworks.
+        const { question, frameworks, frameworksSource, rewriteUsage } = await resolveQuestion(
+          deps.rewriter,
+          request,
+          abort.signal,
+        );
         log.question = question;
-        log.usage.rewriteInputTokens = rewrite?.usage.inputTokens ?? 0;
-        log.usage.rewriteOutputTokens = rewrite?.usage.outputTokens ?? 0;
-
-        const frameworks = userFrameworks.length > 0 ? userFrameworks : (rewrite?.frameworks ?? []);
-        const frameworksSource =
-          userFrameworks.length > 0 ? "user" : frameworks.length > 0 ? "detected" : "all";
+        log.usage.rewriteInputTokens = rewriteUsage.inputTokens;
+        log.usage.rewriteOutputTokens = rewriteUsage.outputTokens;
         log.frameworks = frameworks;
         abort.signal.throwIfAborted();
 

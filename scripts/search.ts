@@ -84,6 +84,7 @@ function printResults(
     );
     console.log(`    ${r.headingPath}`);
     console.log(`    ${r.url}`);
+    console.log(`    source: ${r.framework}/${r.sourcePath}`);
     console.log(`    ${excerpt}${r.content.length > EXCERPT_CHARS ? "…" : ""}\n`);
   }
 }

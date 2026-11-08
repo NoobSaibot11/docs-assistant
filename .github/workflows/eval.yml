@@ -1,0 +1,98 @@
+name: Eval
+
+# Manual only: it calls the Claude and Voyage APIs (a full run costs a few dollars).
+# Needs repository secrets ANTHROPIC_API_KEY and VOYAGE_API_KEY (Voyage with a payment method:
+# the free tier's 3 requests/minute can't ingest the docs within the job time limit).
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Retrieval mode
+        type: choice
+        options: [all, hybrid, vector, keyword]
+        default: all
+      retrieval_only:
+        description: Retrieval metrics only (no answers or judge; nearly free)
+        type: boolean
+        default: false
+      judge:
+        description: Grade faithfulness with the judge model
+        type: boolean
+        default: true
+
+concurrency:
+  group: eval
+  cancel-in-progress: false
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.7-pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: docs_assistant
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d docs_assistant"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/docs_assistant
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+      GITHUB_TOKEN: ${{ github.token }}
+      NEXT_TELEMETRY_DISABLED: 1
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply migrations
+        run: pnpm db:deploy
+
+      # Docs are downloaded at pinned refs, so the cache never goes stale for the same config.
+      - name: Cache downloaded docs
+        uses: actions/cache@v6
+        with:
+          path: .cache/docs
+          key: docs-${{ hashFiles('sources.config.ts', 'sources/angular-routes.json') }}
+
+      - name: Ingest docs
+        run: pnpm ingest
+
+      - name: Check questions
+        run: pnpm eval:check
+
+      - name: Run eval
+        run: >-
+          pnpm eval --mode ${{ inputs.mode }} --label ci
+          ${{ inputs.retrieval_only && '--retrieval-only' || '' }}
+          ${{ !inputs.judge && '--no-judge' || '' }}
+
+      - name: Results table
+        if: ${{ !inputs.retrieval_only }}
+        run: pnpm eval:report --print
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: eval-results-${{ github.run_number }}
+          path: eval/results/*.json
+          if-no-files-found: ignore

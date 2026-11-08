@@ -3,6 +3,8 @@ import "server-only";
 import { VoyageAIClient } from "voyageai";
 
 import { EMBEDDING } from "@/lib/config";
+import { createRateLimiter, type RateLimit } from "@/lib/ingest/rate-limit";
+import { estimateTokens } from "@/lib/ingest/tokens";
 
 /** Embeds a search question. An interface so tests can use a deterministic fake. */
 export interface QueryEmbedder {
@@ -16,10 +18,19 @@ export interface QueryEmbedder {
 export function createVoyageQueryEmbedder(options: {
   apiKey: string;
   model: string;
+  /** Client-side throttle for batch use (the eval) on Voyage's no-payment-method tier. */
+  rateLimit?: RateLimit;
+  log?: (message: string) => void;
 }): QueryEmbedder {
   const client = new VoyageAIClient({ apiKey: options.apiKey });
+  const limiter = options.rateLimit
+    ? createRateLimiter(options.rateLimit, {
+        onWait: (ms) => options.log?.(`Voyage rate limit: waiting ${Math.ceil(ms / 1000)}s`),
+      })
+    : undefined;
   return {
     async embedQuery(text) {
+      await limiter?.acquire(estimateTokens(text));
       const response = await client.embed(
         {
           input: [text],
