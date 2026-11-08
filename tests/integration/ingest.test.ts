@@ -1,6 +1,5 @@
 import "dotenv/config";
 
-import { createHash } from "node:crypto";
 import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -8,49 +7,20 @@ import path from "node:path";
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
 import type { PrismaClient } from "@/generated/prisma/client";
-import { EMBEDDING } from "@/lib/config";
 import { createDbClient } from "@/lib/db";
-import { parseEnv } from "@/lib/env";
 import type { Embedder } from "@/lib/ingest/embed";
 import { createLocalProvider } from "@/lib/ingest/fetch-source";
 import { ingestSource } from "@/lib/ingest/ingest";
+import { createFakeEmbedder } from "@/tests/helpers/fake-embedder";
 import { getSource } from "@/sources.config";
-
-/** Deterministic unit vectors derived from the text, so tests never call Voyage. */
-function createFakeEmbedder() {
-  const calls: string[][] = [];
-  const embedder: Embedder = {
-    async embedDocuments(texts) {
-      calls.push(texts);
-      const embeddings = texts.map((text) => {
-        const seed = createHash("sha256").update(text).digest();
-        const vector = Array.from(
-          { length: EMBEDDING.dimensions },
-          (_, i) => ((seed[i % seed.length] ?? 0) - 127.5) / 127.5,
-        );
-        const norm = Math.hypot(...vector);
-        return vector.map((v) => v / norm);
-      });
-      return { embeddings, totalTokens: texts.join("").length };
-    },
-  };
-  return { embedder, calls };
-}
-
-const SOURCES = [getSource("nextjs"), getSource("jest"), getSource("angular")];
-const FIXTURES = path.resolve("tests/fixtures");
+import { FIXTURES, FIXTURE_SOURCES as SOURCES, testDatabaseUrl } from "@/tests/helpers/test-db";
 
 describe("ingestSource (real Postgres, fake embedder)", () => {
   let db: PrismaClient;
   let fixturesDir: string;
 
-  beforeAll(async () => {
-    const url = parseEnv({
-      ...process.env,
-      DATABASE_URL: process.env["DATABASE_URL"] ?? "postgresql://unused/db",
-    }).TEST_DATABASE_URL;
-    if (!url) throw new Error("TEST_DATABASE_URL is not set");
-    db = createDbClient(url);
+  beforeAll(() => {
+    db = createDbClient(testDatabaseUrl());
   });
 
   afterAll(async () => {
@@ -80,9 +50,10 @@ describe("ingestSource (real Postgres, fake embedder)", () => {
     expect(stats.map((s) => [s.framework, s.files, s.embedded])).toEqual([
       ["nextjs", 2, 2],
       ["jest", 2, 2],
-      ["angular", 1, 1],
+      ["angular", 2, 2],
+      ["react-native", 2, 2],
     ]);
-    expect(await db.document.count()).toBe(5);
+    expect(await db.document.count()).toBe(8);
 
     const chunkCount = await db.chunk.count();
     expect(chunkCount).toBe(stats.reduce((sum, s) => sum + s.chunks, 0));
@@ -130,7 +101,8 @@ describe("ingestSource (real Postgres, fake embedder)", () => {
     expect(stats.map((s) => [s.unchanged, s.embedded, s.deleted])).toEqual([
       [2, 0, 0],
       [2, 0, 0],
-      [1, 0, 0],
+      [2, 0, 0],
+      [2, 0, 0],
     ]);
     expect(calls).toHaveLength(0);
     // Same chunk rows: nothing was rewritten.
@@ -151,7 +123,7 @@ describe("ingestSource (real Postgres, fake embedder)", () => {
     const { embedder, calls } = createFakeEmbedder();
     const stats = await ingestAll(embedder);
 
-    expect(stats.map((s) => s.embedded)).toEqual([0, 1, 0]);
+    expect(stats.map((s) => s.embedded)).toEqual([0, 1, 0, 0]);
     expect(calls.flat().some((text) => text.includes("Clear all timers"))).toBe(true);
     expect(calls.flat().every((text) => text.startsWith("Timer Mocks"))).toBe(true);
 
