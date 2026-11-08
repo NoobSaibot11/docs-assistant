@@ -108,7 +108,8 @@ async function main(): Promise<void> {
       model: env.CLAUDE_FAST_MODEL,
       onError: (e) => console.warn("rewrite failed:", e),
     }),
-    search: (request) => search({ db, embedder }, request),
+    search: (request) =>
+      search({ db, embedder }, { ...request, keywordWeight: env.HYBRID_KEYWORD_WEIGHT }),
     answerModel: createClaudeAnswerModel({
       client: anthropic,
       model: env.CLAUDE_MODEL,
@@ -157,6 +158,7 @@ async function main(): Promise<void> {
         results,
         summary,
         durationMs: Date.now() - started,
+        keywordWeight: env.HYBRID_KEYWORD_WEIGHT,
       });
       summaries.push({ mode, summary, file });
       printMisses(mode, results);
@@ -183,6 +185,7 @@ async function writeResults(input: {
   results: QuestionResult[];
   summary: Summary;
   durationMs: number;
+  keywordWeight: number;
 }): Promise<string> {
   const date = new Date().toISOString().slice(0, 10);
   const name = [date, input.mode, input.retrievalOnly ? "retrieval" : null, input.label]
@@ -199,6 +202,7 @@ async function writeResults(input: {
       retrievalOnly: input.retrievalOnly,
       threshold: input.threshold,
       topK: RETRIEVAL.topK,
+      keywordWeight: input.keywordWeight,
       chunkerVersion: CHUNKER_VERSION,
       models: input.models,
       effort: input.effort,

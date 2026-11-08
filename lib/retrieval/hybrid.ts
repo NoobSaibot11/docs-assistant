@@ -29,7 +29,10 @@ export async function hybridSearch(
     keywordSearch(db, question, { ...candidates, embedding }),
   ]);
 
-  return reciprocalRankFusion([vector, keyword], (r) => r.chunkId, RETRIEVAL.rrfK)
+  return reciprocalRankFusion([vector, keyword], (r) => r.chunkId, RETRIEVAL.rrfK, [
+    1,
+    options.keywordWeight ?? 1,
+  ])
     .slice(0, limit)
     .map(({ item, score }, i) => ({ ...item, rank: i + 1, score }));
 }

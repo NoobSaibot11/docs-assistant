@@ -31,7 +31,11 @@ function getDeps(): ChatDeps {
       model: env.CLAUDE_FAST_MODEL,
       onError,
     }),
-    search: (request) => search({ db, embedder: queryEmbedder }, request),
+    search: (request) =>
+      search(
+        { db, embedder: queryEmbedder },
+        { ...request, keywordWeight: env.HYBRID_KEYWORD_WEIGHT },
+      ),
     answerModel: createClaudeAnswerModel({
       client: anthropic,
       model: env.CLAUDE_MODEL,

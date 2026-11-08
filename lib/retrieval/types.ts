@@ -30,6 +30,8 @@ export interface SearchOptions {
   frameworks?: readonly FrameworkId[];
   /** Maximum results (defaults to RETRIEVAL.topK). */
   limit?: number;
+  /** Hybrid only: weight of the keyword list in RRF (vector is 1). Defaults to 1. */
+  keywordWeight?: number;
 }
 
 export interface SearchResponse {

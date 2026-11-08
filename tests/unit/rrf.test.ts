@@ -69,6 +69,36 @@ describe("reciprocalRankFusion", () => {
     expect(fuse(lists, 0).map(([item]) => item)).toEqual(["a", "c", "b"]);
   });
 
+  it("weights each list's contribution", () => {
+    const lists = [
+      ["v1", "v2", "v3"],
+      ["k1", "v3", "v2"],
+    ];
+    // Equal weights: v3 and v2 (in both lists) beat v1 (top of one list).
+    expect(
+      fuse(lists)
+        .map(([item]) => item)
+        .slice(0, 2),
+    ).toEqual(["v2", "v3"]);
+    // Keyword at 0.2: agreement still helps a little, but the keyword-only k1 (1st in its list,
+    // 0.2/61) falls below every vector result instead of tying with v1 (1/61).
+    const weighted = reciprocalRankFusion(lists, id, 60, [1, 0.2]).map((f) => f.item);
+    expect(weighted).toEqual(["v2", "v3", "v1", "k1"]);
+    // Weight 0 reproduces the vector ranking exactly.
+    expect(
+      reciprocalRankFusion(lists, id, 60, [1, 0])
+        .map((f) => f.item)
+        .slice(0, 3),
+    ).toEqual(lists[0]);
+  });
+
+  it("rejects missing or negative weights", () => {
+    expect(() => reciprocalRankFusion([["a"], ["b"]], id, 60, [1])).toThrow(
+      "one non-negative weight",
+    );
+    expect(() => reciprocalRankFusion([["a"]], id, 60, [-1])).toThrow("one non-negative weight");
+  });
+
   it("rejects a negative k", () => {
     expect(() => reciprocalRankFusion([["a"]], id, -1)).toThrow("k must be");
   });

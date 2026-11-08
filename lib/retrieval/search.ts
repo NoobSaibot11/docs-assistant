@@ -13,6 +13,8 @@ export interface SearchRequest {
   mode: RetrievalMode;
   frameworks?: readonly FrameworkId[];
   limit?: number;
+  /** Hybrid only: keyword list weight in RRF (HYBRID_KEYWORD_WEIGHT). */
+  keywordWeight?: number;
 }
 
 /**
@@ -28,7 +30,11 @@ export async function search(
   if (question === "") throw new Error("Search question is empty");
 
   const { db } = deps;
-  const options = { frameworks: request.frameworks, limit: request.limit };
+  const options = {
+    frameworks: request.frameworks,
+    limit: request.limit,
+    keywordWeight: request.keywordWeight,
+  };
   const embedding = await deps.embedder.embedQuery(question);
 
   const results =

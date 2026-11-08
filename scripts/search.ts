@@ -58,7 +58,10 @@ async function main(): Promise<void> {
 
   try {
     const started = Date.now();
-    const response = await search({ db, embedder }, { question, mode, frameworks, limit });
+    const response = await search(
+      { db, embedder },
+      { question, mode, frameworks, limit, keywordWeight: env.HYBRID_KEYWORD_WEIGHT },
+    );
     printResults(response.results, mode, frameworks);
     const verdict = response.topSimilarity >= env.NOT_FOUND_THRESHOLD ? "above" : "BELOW";
     console.log(
