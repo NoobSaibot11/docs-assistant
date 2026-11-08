@@ -11,7 +11,13 @@ const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 /** A new client for a specific database (scripts and integration tests). */
 export function createDbClient(connectionString: string): PrismaClient {
-  return new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+  return new PrismaClient({
+    adapter: new PrismaPg({ connectionString }),
+    // Prisma gives a transaction 2 s to get a connection by default. Opening one can take longer
+    // on a cold pool (Docker Desktop on Windows, a serverless Postgres waking up), and vector
+    // search runs in a transaction for its SET LOCAL settings.
+    transactionOptions: { maxWait: 10_000, timeout: 15_000 },
+  });
 }
 
 /** Lazily created Prisma client (so importing this module never needs DATABASE_URL). */
