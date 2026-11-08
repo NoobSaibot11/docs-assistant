@@ -118,7 +118,9 @@ describe("runChat", () => {
       ],
       usage: { ...USAGE, rewriteInputTokens: 40, rewriteOutputTokens: 12 },
       topSimilarity: 0.62,
+      queryId: t.logs[0]!.id,
     });
+    expect(t.logs[0]!.id).toMatch(/^[0-9a-f-]{36}$/);
   });
 
   it("builds the prompt from the numbered chunks and searches the detected frameworks", async () => {
@@ -141,6 +143,8 @@ describe("runChat", () => {
 
     expect(t.logs).toEqual([
       {
+        id: expect.any(String) as string,
+        clientHash: null,
         question: "How do I revalidate?",
         retrievalMode: "hybrid",
         frameworks: ["nextjs"],
@@ -278,6 +282,29 @@ describe("runChat", () => {
     expect(t.logs[0]).toMatchObject({ outcome: "error", ttftMs: null, topChunkIds: [] });
   });
 
+  it("records the client hash for rate limiting", async () => {
+    const t = setup();
+    await readEvents(
+      runChat(t.deps, request({ question: "Q?" }), undefined, { clientHash: "abc" }),
+    );
+    expect(t.logs[0]?.clientHash).toBe("abc");
+  });
+
+  it("sends done only after the QueryLog row is written", async () => {
+    const order: string[] = [];
+    const t = setup({
+      logQuery: async () => {
+        await new Promise((r) => setTimeout(r, 20));
+        order.push("logged");
+      },
+    });
+    const events = eventReader(runChat(t.deps, request({ question: "Q?" })));
+    for (let e = await events.next(); e; e = await events.next()) {
+      if (e.type === "done") order.push("done");
+    }
+    expect(order).toEqual(["logged", "done"]);
+  });
+
   it("still finishes the response when writing the log fails", async () => {
     const t = setup({
       logQuery: async () => {
@@ -285,7 +312,8 @@ describe("runChat", () => {
       },
     });
     const events = await readEvents(runChat(t.deps, request({ question: "Q?" })));
-    expect(events.at(-1)).toMatchObject({ type: "done", answered: true });
+    // No row was written, so there's nothing to attach feedback to.
+    expect(events.at(-1)).toMatchObject({ type: "done", answered: true, queryId: null });
     expect(String(t.errors[0])).toContain("db down");
   });
 

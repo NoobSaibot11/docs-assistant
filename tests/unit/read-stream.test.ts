@@ -110,6 +110,7 @@ describe("citedSources", () => {
       ],
       usage,
       topSimilarity: 0.6,
+      queryId: null,
     };
     expect(citedSources(turn({ meta, done })).map((s) => s.n)).toEqual([3, 1]);
   });

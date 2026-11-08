@@ -93,12 +93,17 @@ export async function resolveQuestion(
  *
  * `signal` is the HTTP request's abort signal; cancelling the returned stream has the same
  * effect. Either one aborts the in-flight Claude call and logs the request as "aborted".
+ *
+ * The final "done" event is sent after the QueryLog row is written, so the `queryId` it carries
+ * (used for feedback) always refers to an existing row.
  */
 export function runChat(
   deps: ChatDeps,
   request: ChatRequest,
   signal?: AbortSignal,
+  context: { clientHash?: string } = {},
 ): ReadableStream<Uint8Array> {
+  const queryId = crypto.randomUUID();
   const now = deps.now ?? (() => performance.now());
   const encoder = new TextEncoder();
   const abort = new AbortController();
@@ -135,6 +140,7 @@ export function runChat(
       };
       let outcome: Outcome = "error";
       let text = "";
+      let done: Omit<Extract<ChatEvent, { type: "done" }>, "queryId"> | null = null;
 
       const sendText = (chunk: string) => {
         if (chunk === "") return;
@@ -199,14 +205,14 @@ export function runChat(
           outcome = isNotFoundAnswer(text) ? "not_found" : "answered";
         }
 
-        send({
+        done = {
           type: "done",
           answered: outcome === "answered",
           outcome,
           citations: outcome === "answered" ? buildCitations(text, sources) : [],
           usage: log.usage,
           topSimilarity,
-        });
+        };
       } catch (error) {
         if (abort.signal.aborted) {
           outcome = "aborted";
@@ -217,8 +223,11 @@ export function runChat(
         }
       } finally {
         signal?.removeEventListener("abort", onAbort);
+        let logged = false;
         try {
           await deps.logQuery({
+            id: queryId,
+            clientHash: context.clientHash ?? null,
             question: log.question,
             retrievalMode: deps.mode,
             frameworks: log.frameworks,
@@ -229,9 +238,11 @@ export function runChat(
             totalMs: Math.round(now() - started),
             ...log.usage,
           });
+          logged = true;
         } catch (error) {
           deps.onError?.(error); // logging must never break the response
         }
+        if (done) send({ ...done, queryId: logged ? queryId : null });
         if (open) {
           open = false;
           try {

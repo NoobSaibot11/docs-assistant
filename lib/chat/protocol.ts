@@ -83,6 +83,8 @@ export const ChatEventSchema = z.discriminatedUnion("type", [
     citations: z.array(CitationSchema),
     usage: UsageSchema,
     topSimilarity: z.number(),
+    /** For feedback (POST /api/feedback); null if the request couldn't be logged. */
+    queryId: z.string().nullable(),
   }),
   z.object({ type: z.literal("error"), message: z.string() }),
 ]);

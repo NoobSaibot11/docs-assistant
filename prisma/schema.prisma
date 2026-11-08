@@ -66,20 +66,38 @@ model Message {
 }
 
 model QueryLog {
-  id                  String   @id @default(cuid())
+  id                  String    @id @default(cuid())
   question            String
   retrievalMode       String // "vector" | "keyword" | "hybrid"
   frameworks          String[] // selected by the user or detected
   topChunkIds         String[]
   topScore            Float
   answered            Boolean // false when the "not found" path was taken
-  outcome             String   @default("answered") // "answered" | "not_found" | "aborted" | "error"
+  outcome             String    @default("answered") // "answered" | "not_found" | "aborted" | "error"
   ttftMs              Int? // time to first token; null when no text was sent (abort or error first)
   totalMs             Int
   inputTokens         Int // answer model (CLAUDE_MODEL)
   outputTokens        Int
   cacheReadTokens     Int
-  rewriteInputTokens  Int      @default(0) // rewrite/tagging model (CLAUDE_FAST_MODEL)
-  rewriteOutputTokens Int      @default(0)
-  createdAt           DateTime @default(now())
+  rewriteInputTokens  Int       @default(0) // rewrite/tagging model (CLAUDE_FAST_MODEL)
+  rewriteOutputTokens Int       @default(0)
+  // sha256(salt + client IP), for rate limiting; the raw IP is never stored.
+  clientHash          String?
+  feedback            Feedback?
+  createdAt           DateTime  @default(now())
+
+  @@index([createdAt])
+  @@index([clientHash, createdAt])
+}
+
+/**
+ * Thumbs up/down on an answer, one per query (changing your mind updates it).
+ */
+model Feedback {
+  id         String   @id @default(cuid())
+  queryLogId String   @unique
+  queryLog   QueryLog @relation(fields: [queryLogId], references: [id], onDelete: Cascade)
+  rating     Int // 1 = helpful, -1 = not helpful
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
