@@ -18,7 +18,48 @@ function scrollToEnd() {
   window.scrollTo({ top: document.documentElement.scrollHeight });
 }
 
-function Answer({ turn, isLast, onRetry }: { turn: Turn; isLast: boolean; onRetry: () => void }) {
+type Rate = (turnId: string, rating: "up" | "down") => void;
+
+function FeedbackButtons({ turn, onRate }: { turn: Turn; onRate: Rate }) {
+  const button = (rating: "up" | "down", label: string, icon: string) => {
+    const selected = turn.feedback === rating;
+    return (
+      <button
+        type="button"
+        aria-label={label}
+        aria-pressed={selected}
+        title={label}
+        onClick={() => onRate(turn.id, rating)}
+        className={`rounded-md px-1.5 py-0.5 text-base leading-none transition-colors focus-visible:outline-2 focus-visible:outline-blue-500 ${
+          selected
+            ? "bg-zinc-200 dark:bg-zinc-700"
+            : "opacity-60 hover:bg-zinc-100 hover:opacity-100 dark:hover:bg-zinc-800"
+        }`}
+      >
+        <span aria-hidden>{icon}</span>
+      </button>
+    );
+  };
+  return (
+    <div className="mt-3 flex items-center gap-1 text-xs text-zinc-500">
+      {button("up", "Helpful", "👍")}
+      {button("down", "Not helpful", "👎")}
+      {turn.feedback && <span className="ml-1">Thanks for the feedback.</span>}
+    </div>
+  );
+}
+
+function Answer({
+  turn,
+  isLast,
+  onRetry,
+  onRate,
+}: {
+  turn: Turn;
+  isLast: boolean;
+  onRetry: () => void;
+  onRate: Rate;
+}) {
   const sources = turn.meta?.sources ?? [];
   const notFound = turn.done?.answered === false;
   const detected = turn.meta?.frameworksSource === "detected" ? turn.meta.frameworks : [];
@@ -52,6 +93,9 @@ function Answer({ turn, isLast, onRetry }: { turn: Turn; isLast: boolean; onRetr
       )}
 
       {turn.status === "done" && <SourcesList sources={citedSources(turn)} />}
+      {turn.status === "done" && turn.done?.queryId && (
+        <FeedbackButtons turn={turn} onRate={onRate} />
+      )}
 
       {(turn.status === "error" || turn.status === "stopped") && (
         <div
@@ -78,7 +122,15 @@ function Answer({ turn, isLast, onRetry }: { turn: Turn; isLast: boolean; onRetr
   );
 }
 
-export function MessageList({ turns, onRetry }: { turns: Turn[]; onRetry: () => void }) {
+export function MessageList({
+  turns,
+  onRetry,
+  onRate,
+}: {
+  turns: Turn[];
+  onRetry: () => void;
+  onRate: Rate;
+}) {
   const pinnedRef = useRef(true);
 
   // Track whether the reader is near the bottom; only then follow new content.
@@ -115,7 +167,7 @@ export function MessageList({ turns, onRetry }: { turns: Turn[]; onRetry: () => 
                 {turn.question}
               </p>
             </div>
-            <Answer turn={turn} isLast={i === turns.length - 1} onRetry={onRetry} />
+            <Answer turn={turn} isLast={i === turns.length - 1} onRetry={onRetry} onRate={onRate} />
           </li>
         ))}
       </ol>

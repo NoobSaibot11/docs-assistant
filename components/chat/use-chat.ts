@@ -25,6 +25,8 @@ export interface Turn {
   meta?: MetaEvent;
   done?: DoneEvent;
   error?: string;
+  /** The user's thumbs up/down, once sent. */
+  feedback?: "up" | "down";
 }
 
 const NETWORK_ERROR = "Couldn't reach the server. Check your connection and try again.";
@@ -186,6 +188,29 @@ export function useChat() {
 
   const stop = useCallback(() => controllerRef.current?.abort(), []);
 
+  /** Sends thumbs up/down for an answer; the UI updates immediately and reverts on failure. */
+  const rate = useCallback(
+    async (id: string, rating: "up" | "down") => {
+      const turn = turnsRef.current.find((t) => t.id === id);
+      const queryId = turn?.done?.queryId;
+      if (!turn || !queryId) return;
+      const previous = turn.feedback;
+      update(id, () => ({ feedback: rating }));
+      try {
+        const response = await fetch("/api/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ queryId, rating }),
+        });
+        if (!response.ok) throw new Error(`feedback failed: ${response.status}`);
+      } catch (error) {
+        console.error(error);
+        update(id, () => ({ feedback: previous }));
+      }
+    },
+    [update],
+  );
+
   const clear = useCallback(() => {
     controllerRef.current?.abort();
     controllerRef.current = null;
@@ -195,5 +220,5 @@ export function useChat() {
   const last = turns.at(-1);
   const busy = last?.status === "searching" || last?.status === "streaming";
 
-  return { turns, busy, ask, retry, stop, clear };
+  return { turns, busy, ask, retry, stop, clear, rate };
 }
