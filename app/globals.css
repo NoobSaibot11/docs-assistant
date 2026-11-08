@@ -3,3 +3,218 @@
 :root {
   color-scheme: light dark;
 }
+
+/* Answer Markdown. Hand-written instead of @tailwindcss/typography to keep dependencies down. */
+.markdown {
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.markdown > :first-child {
+  margin-top: 0;
+}
+.markdown > :last-child {
+  margin-bottom: 0;
+}
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  margin: 0.75em 0;
+}
+.markdown ul {
+  list-style: disc;
+  padding-left: 1.4em;
+}
+.markdown ol {
+  list-style: decimal;
+  padding-left: 1.4em;
+}
+.markdown li + li {
+  margin-top: 0.25em;
+}
+.markdown li > p {
+  margin: 0.25em 0;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  margin: 1.2em 0 0.5em;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.markdown h1 {
+  font-size: 1.3em;
+}
+.markdown h2 {
+  font-size: 1.15em;
+}
+.markdown h3,
+.markdown h4 {
+  font-size: 1em;
+}
+.markdown a {
+  color: var(--color-blue-700);
+  text-underline-offset: 2px;
+  text-decoration: underline;
+}
+.markdown blockquote {
+  border-left: 3px solid var(--color-zinc-300);
+  padding-left: 0.9em;
+  color: var(--color-zinc-600);
+}
+.markdown :not(pre) > code {
+  border-radius: 0.3em;
+  background: var(--color-zinc-100);
+  padding: 0.1em 0.35em;
+  font-size: 0.88em;
+}
+.markdown pre code {
+  font-family: var(--font-mono);
+}
+.markdown table {
+  border-collapse: collapse;
+  font-size: 0.92em;
+}
+.markdown th,
+.markdown td {
+  border: 1px solid var(--color-zinc-200);
+  padding: 0.35em 0.7em;
+  text-align: left;
+  vertical-align: top;
+}
+.markdown th {
+  background: var(--color-zinc-50);
+  font-weight: 600;
+}
+.markdown hr {
+  margin: 1.2em 0;
+  border-color: var(--color-zinc-200);
+}
+/* A blinking caret while the answer streams. */
+.markdown[data-streaming] > :last-child::after {
+  content: "▍";
+  margin-left: 2px;
+  animation: caret 1s steps(1) infinite;
+  color: var(--color-zinc-400);
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* highlight.js tokens (GitHub-like palette), light and dark. */
+.hljs-comment,
+.hljs-quote {
+  color: #6e7781;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-meta .hljs-keyword,
+.hljs-doctag {
+  color: #cf222e;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-meta .hljs-string {
+  color: #0a3069;
+}
+.hljs-number,
+.hljs-literal,
+.hljs-variable.language_,
+.hljs-attr,
+.hljs-attribute {
+  color: #0550ae;
+}
+.hljs-title,
+.hljs-title.function_,
+.hljs-title.class_ {
+  color: #8250df;
+}
+.hljs-built_in,
+.hljs-type,
+.hljs-params {
+  color: #953800;
+}
+.hljs-name,
+.hljs-tag,
+.hljs-selector-class {
+  color: #116329;
+}
+.hljs-addition {
+  background: #dafbe1;
+  color: #116329;
+}
+.hljs-deletion {
+  background: #ffebe9;
+  color: #82071e;
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown a {
+    color: var(--color-blue-400);
+  }
+  .markdown blockquote {
+    border-color: var(--color-zinc-700);
+    color: var(--color-zinc-400);
+  }
+  .markdown :not(pre) > code {
+    background: var(--color-zinc-800);
+  }
+  .markdown th,
+  .markdown td,
+  .markdown hr {
+    border-color: var(--color-zinc-800);
+  }
+  .markdown th {
+    background: var(--color-zinc-900);
+  }
+  .hljs-comment,
+  .hljs-quote {
+    color: #8b949e;
+  }
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-meta .hljs-keyword,
+  .hljs-doctag {
+    color: #ff7b72;
+  }
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-meta .hljs-string {
+    color: #a5d6ff;
+  }
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable.language_,
+  .hljs-attr,
+  .hljs-attribute {
+    color: #79c0ff;
+  }
+  .hljs-title,
+  .hljs-title.function_,
+  .hljs-title.class_ {
+    color: #d2a8ff;
+  }
+  .hljs-built_in,
+  .hljs-type,
+  .hljs-params {
+    color: #ffa657;
+  }
+  .hljs-name,
+  .hljs-tag,
+  .hljs-selector-class {
+    color: #7ee787;
+  }
+  .hljs-addition {
+    background: #033a16;
+    color: #aff5b4;
+  }
+  .hljs-deletion {
+    background: #67060c;
+    color: #ffdcd7;
+  }
+}
