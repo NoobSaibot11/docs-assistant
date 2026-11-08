@@ -110,9 +110,39 @@ by a stronger Claude model, refusal accuracy), latency and cost. See [eval/READM
 
 <!-- eval-results:start -->
 
-_No eval run yet._
+Latest run: 2026-11-08 (commit `7378a95`), 68 questions, top-5, not-found threshold 0.4. Answers: `claude-sonnet-5-5` (effort low); judge: `claude-opus-5-5`; embeddings: `voyage-4`.
+
+| Mode    | Hit@5 | MRR   | Framework acc. | Must-mention | Faithfulness | Refusal acc. | TTFT p50 | TTFT p95 | Cost / question |
+| ------- | ----- | ----- | -------------- | ------------ | ------------ | ------------ | -------- | -------- | --------------- |
+| vector  | 91.4% | 0.754 | 93.1%          | 95.7%        | 99.6%        | 100.0%       | 2.0 s    | 3.1 s    | $0.0093         |
+| keyword | 67.2% | 0.427 | 88.6%          | 71.6%        | —            | 91.2%        | 1.9 s    | 3.6 s    | $0.0077         |
+| hybrid  | 91.4% | 0.736 | 92.4%          | 93.1%        | —            | 100.0%       | 1.9 s    | 3.1 s    | $0.0092         |
+
+Hit@5 by framework:
+
+| Mode    | React Native | Next.js | Angular | Jest   |
+| ------- | ------------ | ------- | ------- | ------ |
+| vector  | 87.5%        | 93.3%   | 93.3%   | 93.3%  |
+| keyword | 75.0%        | 73.3%   | 46.7%   | 80.0%  |
+| hybrid  | 81.3%        | 93.3%   | 93.3%   | 100.0% |
 
 <!-- eval-results:end -->
+
+What the eval changed (retrieval-only runs and a threshold sweep, then the full run above):
+
+- **Vector is the default mode, not hybrid.** With plain Reciprocal Rank Fusion (equal weights),
+  hybrid found the right page for 84.5% of questions against vector's 93.1%: keyword search is
+  weak on everyday phrasing, and chunks that both lists half-agreed on pushed vector's best hits
+  out of the top 5. Weighting keyword results down (`HYBRID_KEYWORD_WEIGHT`: 0.5 → 86.2%,
+  0.25 → 86.2%, 0.1 → 89.7%) closes most of the gap; at 0.1 hybrid ties vector on hit@5 but
+  still trails on MRR and must-mention.
+- **The not-found threshold is a pre-filter, not the refusal mechanism.** With the threshold at
+  0, Claude alone answered all 58 answerable questions and refused all 10 off-topic ones.
+  Similarity can't separate the two groups (off-topic questions scored 0.35–0.67, answerable ones
+  0.44–0.80), so the threshold is set to 0.40, just under the lowest answerable score: obvious
+  off-topic questions skip the answer call, and no answerable one is lost.
+- Faithfulness (99.6%) was graded by `claude-opus-5-5` on the default mode only, to keep the run
+  cheap. A full tuning pass (retrieval sweeps, threshold sweep, final three-mode run) cost about $4.
 
 ## Stack
 

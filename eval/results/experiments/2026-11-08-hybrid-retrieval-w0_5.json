@@ -1,0 +1,5552 @@
+{
+  "meta": {
+    "createdAt": "2026-11-08T09:26:44.536Z",
+    "commit": "7378a95",
+    "mode": "hybrid",
+    "retrievalOnly": true,
+    "threshold": 0.35,
+    "topK": 5,
+    "keywordWeight": 0.5,
+    "chunkerVersion": 1,
+    "models": {
+      "answer": null,
+      "rewrite": "claude-haiku-5-5",
+      "judge": null,
+      "embedding": "voyage-4"
+    },
+    "effort": "low",
+    "questionsFile": "eval/questions.json",
+    "questions": 68,
+    "durationMs": 25964,
+    "costUsd": {
+      "pipeline": 0.006,
+      "judge": 0
+    }
+  },
+  "summary": {
+    "questions": 68,
+    "answerable": 58,
+    "hitRateAt5": 0.8620689655172413,
+    "mrr": 0.6727011494252874,
+    "frameworkAccuracy": 0.906896551724138,
+    "mustMentionRate": null,
+    "faithfulness": null,
+    "refusalAccuracy": null,
+    "ttftP50Ms": null,
+    "ttftP95Ms": null,
+    "totalP50Ms": null,
+    "costPerQuestionUsd": null,
+    "errors": 0
+  },
+  "byFramework": {
+    "nextjs": {
+      "questions": 16,
+      "answerable": 15,
+      "hitRateAt5": 0.9333333333333333,
+      "mrr": 0.6799999999999999,
+      "frameworkAccuracy": 0.9333333333333333,
+      "mustMentionRate": null,
+      "faithfulness": null,
+      "refusalAccuracy": null,
+      "ttftP50Ms": null,
+      "ttftP95Ms": null,
+      "totalP50Ms": null,
+      "costPerQuestionUsd": null,
+      "errors": 0
+    },
+    "jest": {
+      "questions": 16,
+      "answerable": 15,
+      "hitRateAt5": 0.8,
+      "mrr": 0.5577777777777778,
+      "frameworkAccuracy": 0.9333333333333333,
+      "mustMentionRate": null,
+      "faithfulness": null,
+      "refusalAccuracy": null,
+      "ttftP50Ms": null,
+      "ttftP95Ms": null,
+      "totalP50Ms": null,
+      "costPerQuestionUsd": null,
+      "errors": 0
+    },
+    "react-native": {
+      "questions": 16,
+      "answerable": 16,
+      "hitRateAt5": 0.875,
+      "mrr": 0.7833333333333333,
+      "frameworkAccuracy": 0.9125,
+      "mustMentionRate": null,
+      "faithfulness": null,
+      "refusalAccuracy": null,
+      "ttftP50Ms": null,
+      "ttftP95Ms": null,
+      "totalP50Ms": null,
+      "costPerQuestionUsd": null,
+      "errors": 0
+    },
+    "angular": {
+      "questions": 16,
+      "answerable": 15,
+      "hitRateAt5": 0.8666666666666667,
+      "mrr": 0.6611111111111112,
+      "frameworkAccuracy": 0.8666666666666667,
+      "mustMentionRate": null,
+      "faithfulness": null,
+      "refusalAccuracy": null,
+      "ttftP50Ms": null,
+      "ttftP95Ms": null,
+      "totalP50Ms": null,
+      "costPerQuestionUsd": null,
+      "errors": 0
+    }
+  },
+  "questions": [
+    {
+      "id": "q001",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "how do I show a loading spinner while a page's data is loading?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/03-file-conventions/loading.mdx",
+        "nextjs/01-app/02-guides/streaming.mdx"
+      ],
+      "searchedQuestion": "how do I show a loading spinner while a page's data is loading?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/streaming.mdx",
+          "framework": "nextjs",
+          "headingPath": "Streaming > Page-level streaming with loading.js",
+          "score": 0.02445795875198308,
+          "similarity": 0.5772243394121932
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/01-getting-started/06-fetching-data.mdx",
+          "framework": "nextjs",
+          "headingPath": "Fetching Data > Fetching data > Streaming",
+          "score": 0.022202129797066504,
+          "similarity": 0.5722583957833552
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/loading.mdx",
+          "framework": "nextjs",
+          "headingPath": "loading.js > Behavior > Instant Loading States",
+          "score": 0.022000830220008302,
+          "similarity": 0.5439645271364709
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/interactive-apps.mdx",
+          "framework": "nextjs",
+          "headingPath": "Building interactive apps > Example > Step 1: Stream slow data with Suspense",
+          "score": 0.020510835913312694,
+          "similarity": 0.5058216897898429
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/01-getting-started/06-fetching-data.mdx",
+          "framework": "nextjs",
+          "headingPath": "Fetching Data > Fetching data > Streaming",
+          "score": 0.02036529680365297,
+          "similarity": 0.513038276071754
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5772243394121932,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 624,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.00008340000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q002",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "How can I read the query string in a client component?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/04-functions/use-search-params.mdx"
+      ],
+      "searchedQuestion": "How can I read the query string in a client component in Next.js?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/04-functions/use-search-params.mdx",
+          "framework": "nextjs",
+          "headingPath": "useSearchParams",
+          "score": 0.024329950559458757,
+          "similarity": 0.7247678689451104
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/page.mdx",
+          "framework": "nextjs",
+          "headingPath": "page.js > Examples > Reading searchParams and params in Client Components",
+          "score": 0.024325753569539928,
+          "similarity": 0.6486795335221024
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/03-api-reference/04-functions/use-params.mdx",
+          "framework": "nextjs",
+          "headingPath": "useParams",
+          "score": 0.02212301587301587,
+          "similarity": 0.6116463906554227
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/layout.mdx",
+          "framework": "nextjs",
+          "headingPath": "layout.js > Examples > Reading params in Client Components",
+          "score": 0.02143744821872411,
+          "similarity": 0.5678583383560221
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/05-config/01-next-config-js/skipProxyUrlNormalize.mdx",
+          "framework": "nextjs",
+          "headingPath": "skipProxyUrlNormalize > Examples > Reading the URL as the client sent it",
+          "score": 0.020092460881934567,
+          "similarity": 0.556042949445776
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.7247678689451104,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 617,
+        "rewriteOutputTokens": 182
+      },
+      "costUsd": 0.0001527,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q003",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "whats the right way to send the user to /login from a server component if they aren't signed in",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/04-functions/redirect.mdx",
+        "nextjs/01-app/02-guides/redirecting.mdx"
+      ],
+      "searchedQuestion": "What is the right way to redirect the user to /login from a Next.js server component if they aren't signed in?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/04-functions/redirect.mdx",
+          "framework": "nextjs",
+          "headingPath": "redirect > Example > Client Component",
+          "score": 0.02273787313432836,
+          "similarity": 0.5678535022910235
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/authentication-with-cache-components.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement authentication with Cache Components > Step 1: Read the current user",
+          "score": 0.02222222222222222,
+          "similarity": 0.5440250797279264
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/authentication.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement authentication in Next.js > Authorization > Server Components",
+          "score": 0.02214902317128578,
+          "similarity": 0.5408208692563184
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/authentication.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement authentication in Next.js > Authorization > Optimistic checks with Proxy (Optional)",
+          "score": 0.021645021645021648,
+          "similarity": 0.5683444318155481
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/04-functions/unauthorized.mdx",
+          "framework": "nextjs",
+          "headingPath": "unauthorized",
+          "score": 0.020903010033444816,
+          "similarity": 0.5522692634979132
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5683444318155481,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 629,
+        "rewriteOutputTokens": 61
+      },
+      "costUsd": 0.00009340000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q004",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "I want URLs like /blog/my-first-post. How do I make the route and read the slug?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/03-file-conventions/dynamic-routes.mdx"
+      ],
+      "searchedQuestion": "In Next.js, how do I create a dynamic route so URLs like /blog/my-first-post work, and how do I read the slug parameter?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/dynamic-routes.mdx",
+          "framework": "nextjs",
+          "headingPath": "Dynamic Route Segments > Convention",
+          "score": 0.024065540194572452,
+          "similarity": 0.6145551297864097
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/01-getting-started/03-layouts-and-pages.mdx",
+          "framework": "nextjs",
+          "headingPath": "Layouts and Pages > Creating a nested route",
+          "score": 0.02239819004524887,
+          "similarity": 0.570259579694911
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/04-glossary.mdx",
+          "framework": "nextjs",
+          "headingPath": "Next.js Glossary > D > Dynamic route segments",
+          "score": 0.02235023041474654,
+          "similarity": 0.562385048724121
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/route.mdx",
+          "framework": "nextjs",
+          "headingPath": "route.js > Examples > Dynamic Route Segments",
+          "score": 0.019583333333333335,
+          "similarity": 0.5516510441407371
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/page.mdx",
+          "framework": "nextjs",
+          "headingPath": "page.js > Examples > Displaying content based on params",
+          "score": 0.01639344262295082,
+          "similarity": 0.6167543575089323
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6167543575089323,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 633,
+        "rewriteOutputTokens": 72
+      },
+      "costUsd": 0.00009930000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q005",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "Can I prerender every blog post page at build time?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/04-functions/generate-static-params.mdx"
+      ],
+      "searchedQuestion": "Can I prerender every blog post page at build time?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/incremental-static-regeneration-cache-components.mdx",
+          "framework": "nextjs",
+          "headingPath": "Incremental Static Regeneration with Cache Components > Choosing what to prerender",
+          "score": 0.024069737184491284,
+          "similarity": 0.5171966861007632
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/incremental-static-regeneration.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement Incremental Static Regeneration (ISR)",
+          "score": 0.02297794117647059,
+          "similarity": 0.5118433237075806
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/dynamic-routes.mdx",
+          "framework": "nextjs",
+          "headingPath": "Dynamic Route Segments > Examples > With generateStaticParams",
+          "score": 0.02296037296037296,
+          "similarity": 0.507820188999176
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/dynamic-routes.mdx",
+          "framework": "nextjs",
+          "headingPath": "Dynamic Route Segments > Behavior > With Cache Components",
+          "score": 0.022642390289449112,
+          "similarity": 0.49974784253524884
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/04-functions/generate-static-params.mdx",
+          "framework": "nextjs",
+          "headingPath": "generateStaticParams",
+          "score": 0.022095959595959596,
+          "similarity": 0.5029381217323623
+        }
+      ],
+      "hitRank": 5,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5171966861007632,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.0000835,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q006",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "How do I set a different page title and meta description for each page?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/04-functions/generate-metadata.mdx",
+        "nextjs/01-app/01-getting-started/14-metadata-and-og-images.mdx"
+      ],
+      "searchedQuestion": "How do I set a different page title and meta description for each page?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/04-functions/generate-metadata.mdx",
+          "framework": "nextjs",
+          "headingPath": "generateMetadata > Behavior > Merging",
+          "score": 0.022727272727272728,
+          "similarity": 0.5789410377811148
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/routing/define-routes.md",
+          "framework": "angular",
+          "headingPath": "Define routes > Page titles",
+          "score": 0.022642390289449112,
+          "similarity": 0.5720462628589217
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/migrating/app-router-migration.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to migrate from Pages to the App Router > Migrating from pages to app > Step 3: Migrating next/head",
+          "score": 0.022305253623188408,
+          "similarity": 0.5584870243974324
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/04-glossary.mdx",
+          "framework": "nextjs",
+          "headingPath": "Next.js Glossary > M > Metadata",
+          "score": 0.021978021978021976,
+          "similarity": 0.5529854132835466
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/04-functions/generate-metadata.mdx",
+          "framework": "nextjs",
+          "headingPath": "generateMetadata > Reference > Metadata Fields",
+          "score": 0.021634615384615384,
+          "similarity": 0.5923354449172209
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 0.8,
+      "topSimilarity": 0.5923354449172209,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 39
+      },
+      "costUsd": 0.00008159999999999999,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q007",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "How do I read a cookie inside a server component?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/04-functions/cookies.mdx"
+      ],
+      "searchedQuestion": "How do I read a cookie inside a server component?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/04-functions/cookies.mdx",
+          "framework": "nextjs",
+          "headingPath": "cookies",
+          "score": 0.024085750315258513,
+          "similarity": 0.6833397557341919
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/04-functions/cookies.mdx",
+          "framework": "nextjs",
+          "headingPath": "cookies > Understanding Cookie Behavior in Server Components",
+          "score": 0.023448773448773448,
+          "similarity": 0.6244499683380127
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/authentication-with-cache-components.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement authentication with Cache Components > Step 1: Read the current user",
+          "score": 0.022098214285714284,
+          "similarity": 0.557299306151211
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/01-getting-started/07-mutating-data.mdx",
+          "framework": "nextjs",
+          "headingPath": "Mutating Data > Examples > Cookies",
+          "score": 0.021748135874067938,
+          "similarity": 0.5798854827880859
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/04-functions/after.mdx",
+          "framework": "nextjs",
+          "headingPath": "after > Examples > With request APIs",
+          "score": 0.021354616048317517,
+          "similarity": 0.543873873718151
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6833397557341919,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.00008290000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q008",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "How do I build a simple JSON API endpoint with the App Router?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/03-file-conventions/route.mdx",
+        "nextjs/01-app/01-getting-started/15-route-handlers.mdx"
+      ],
+      "searchedQuestion": "How do I build a simple JSON API endpoint with the App Router in Next.js?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/backend-for-frontend.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to use Next.js as a backend for your frontend",
+          "score": 0.024069737184491284,
+          "similarity": 0.5543239612272945
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/01-metadata/manifest.mdx",
+          "framework": "nextjs",
+          "headingPath": "manifest.json > Static Manifest file",
+          "score": 0.019399460188933872,
+          "similarity": 0.4903240057729501
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/03-api-reference/04-functions/next-response.mdx",
+          "framework": "nextjs",
+          "headingPath": "NextResponse > json()",
+          "score": 0.01639344262295082,
+          "similarity": 0.6361967894014828
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/route.mdx",
+          "framework": "nextjs",
+          "headingPath": "route.js",
+          "score": 0.016129032258064516,
+          "similarity": 0.5606624222196592
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/backend-for-frontend.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to use Next.js as a backend for your frontend > Public Endpoints",
+          "score": 0.015625,
+          "similarity": 0.5375785667425843
+        }
+      ],
+      "hitRank": 4,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6361967894014828,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 626,
+        "rewriteOutputTokens": 54
+      },
+      "costUsd": 0.0000896,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q009",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "How do I catch errors in one part of the app so the whole page doesn't crash?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/03-file-conventions/error.mdx",
+        "nextjs/01-app/01-getting-started/10-error-handling.mdx"
+      ],
+      "searchedQuestion": "How do I catch errors in one part of the app so the whole page doesn't crash?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/01-getting-started/10-error-handling.mdx",
+          "framework": "nextjs",
+          "headingPath": "Error Handling > Handling uncaught exceptions > Nested error boundaries",
+          "score": 0.02445795875198308,
+          "similarity": 0.5773481818852642
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/01-getting-started/10-error-handling.mdx",
+          "framework": "nextjs",
+          "headingPath": "Error Handling > Handling uncaught exceptions > Nested error boundaries",
+          "score": 0.02337540906965872,
+          "similarity": 0.5729717870014591
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/03-api-reference/04-functions/catchError.mdx",
+          "framework": "nextjs",
+          "headingPath": "catchError > Examples > Basic usage",
+          "score": 0.015873015873015872,
+          "similarity": 0.5672833919525186
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/error.mdx",
+          "framework": "nextjs",
+          "headingPath": "error.js",
+          "score": 0.015625,
+          "similarity": 0.566729042931143
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/templates/error-boundaries.md",
+          "framework": "angular",
+          "headingPath": "Error boundaries with @boundary > Catching errors with @boundary and @error",
+          "score": 0.015384615384615385,
+          "similarity": 0.5613492204367185
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 0.8,
+      "topSimilarity": 0.5773481818852642,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 630,
+        "rewriteOutputTokens": 48
+      },
+      "costUsd": 0.000087,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q010",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "After a server action saves a new post, how do I make the posts list show it?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/04-functions/revalidatePath.mdx",
+        "nextjs/01-app/01-getting-started/07-mutating-data.mdx"
+      ],
+      "searchedQuestion": "After a server action saves a new post, how do I make the posts list show it in Next.js?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/04-functions/updateTag.mdx",
+          "framework": "nextjs",
+          "headingPath": "updateTag > Examples > Server Action with Read-Your-Own-Writes",
+          "score": 0.02445795875198308,
+          "similarity": 0.6259271839152554
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/redirecting.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to handle redirects in Next.js > redirect function",
+          "score": 0.020334507042253522,
+          "similarity": 0.5216589906797998
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/server-actions.mdx",
+          "framework": "nextjs",
+          "headingPath": "Server Actions and Mutations > A single response carries data and UI",
+          "score": 0.016129032258064516,
+          "similarity": 0.6174121727101799
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/01-getting-started/07-mutating-data.mdx",
+          "framework": "nextjs",
+          "headingPath": "Mutating Data > Examples > Revalidate data",
+          "score": 0.015873015873015872,
+          "similarity": 0.5960946616019008
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/04-functions/refresh.mdx",
+          "framework": "nextjs",
+          "headingPath": "refresh > Examples",
+          "score": 0.015625,
+          "similarity": 0.5891516735391328
+        }
+      ],
+      "hitRank": 4,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6259271839152554,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 626,
+        "rewriteOutputTokens": 54
+      },
+      "costUsd": 0.0000896,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q011",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "what's the best way to add optimized images?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/02-components/image.mdx",
+        "nextjs/01-app/01-getting-started/12-images.mdx"
+      ],
+      "searchedQuestion": "what's the best way to add optimized images?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/reference/errors/NG0913.md",
+          "framework": "angular",
+          "headingPath": "Runtime Performance Warnings > Ways to fix oversized images",
+          "score": 0.024329950559458757,
+          "similarity": 0.5045298488298016
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/image-optimization.md",
+          "framework": "angular",
+          "headingPath": "Getting started with NgOptimizedImage",
+          "score": 0.022614201718679332,
+          "similarity": 0.48392984175263976
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/04-glossary.mdx",
+          "framework": "nextjs",
+          "headingPath": "Next.js Glossary > I > Image Optimization",
+          "score": 0.02217174994592256,
+          "similarity": 0.4836142063140869
+        },
+        {
+          "rank": 4,
+          "source": "react-native/optimizing-flatlist-configuration.md",
+          "framework": "react-native",
+          "headingPath": "Optimizing FlatList Configuration > List items > Use cached optimized images",
+          "score": 0.02046783625730994,
+          "similarity": 0.46963515696735203
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/static-exports.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to create a static export of your Next.js application > Supported Features > Image Optimization",
+          "score": 0.016129032258064516,
+          "similarity": 0.502769246779956
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 0.4,
+      "topSimilarity": 0.5045298488298016,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 617,
+        "rewriteOutputTokens": 35
+      },
+      "costUsd": 0.0000792,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q012",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "How do I expose an environment variable to code running in the browser?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/02-guides/environment-variables.mdx"
+      ],
+      "searchedQuestion": "How do I expose an environment variable to code running in the browser?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/environment-variables.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to use environment variables in Next.js > Bundling Environment Variables for the Browser",
+          "score": 0.024085750315258513,
+          "similarity": 0.5953583057545124
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/environment-variables.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to use environment variables in Next.js > Bundling Environment Variables for the Browser > Runtime Environment Variables",
+          "score": 0.023821721311475412,
+          "similarity": 0.5849698112878058
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/self-hosting.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to self-host your Next.js application > Environment Variables",
+          "score": 0.023449131513647643,
+          "similarity": 0.580555031365757
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/04-glossary.mdx",
+          "framework": "nextjs",
+          "headingPath": "Next.js Glossary > E > Environment Variables",
+          "score": 0.02273787313432836,
+          "similarity": 0.5707669768423143
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/migrating/from-create-react-app.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to migrate from Create React App to Next.js > Migration Steps > Step 9: Migrate Environment Variables",
+          "score": 0.0216602646180111,
+          "similarity": 0.5348101736435471
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5953583057545124,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 623,
+        "rewriteOutputTokens": 41
+      },
+      "costUsd": 0.00008280000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q013",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": true,
+      "question": "Where do I put code that should run before a request completes, like auth redirects for many routes?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/03-api-reference/03-file-conventions/proxy.mdx",
+        "nextjs/01-app/01-getting-started/16-proxy.mdx"
+      ],
+      "searchedQuestion": "Where do I put code that should run before a request completes, like auth redirects for many routes, in Next.js?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/redirecting.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to handle redirects in Next.js > NextResponse.redirect in Proxy",
+          "score": 0.024329950559458757,
+          "similarity": 0.6611254412271217
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/03-file-conventions/proxy.mdx",
+          "framework": "nextjs",
+          "headingPath": "proxy.js",
+          "score": 0.023448773448773448,
+          "similarity": 0.6005270481109619
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/migrating/from-vite.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to migrate from Vite to Next.js > Why Switch? > Proxy",
+          "score": 0.0234375,
+          "similarity": 0.595931351184845
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/migrating/from-create-react-app.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to migrate from Create React App to Next.js > Why Switch? > Proxy",
+          "score": 0.02321603128054741,
+          "similarity": 0.5902777910232544
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/02-components/link.mdx",
+          "framework": "nextjs",
+          "headingPath": "Link Component > Examples > Prefetching links in Proxy",
+          "score": 0.021159420289855072,
+          "similarity": 0.5664120226870818
+        }
+      ],
+      "hitRank": 2,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6611254412271217,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 631,
+        "rewriteOutputTokens": 62
+      },
+      "costUsd": 0.0000941,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q014",
+      "frameworks": [
+        "nextjs",
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I set up Jest in a Next.js project?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/02-guides/testing/jest.mdx"
+      ],
+      "searchedQuestion": "How do I set up Jest in a Next.js project?",
+      "detectedFrameworks": [
+        "nextjs",
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/TestingFrameworks.md",
+          "framework": "jest",
+          "headingPath": "Testing Web Frameworks > Next.js",
+          "score": 0.024069737184491284,
+          "similarity": 0.7489875555038452
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/testing/jest.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to set up Jest with Next.js > Additional Resources",
+          "score": 0.02382133995037221,
+          "similarity": 0.7507749199867249
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/testing/jest.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to set up Jest with Next.js > Manual setup",
+          "score": 0.023561507936507936,
+          "similarity": 0.7464551480737254
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/testing/jest.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to set up Jest with Next.js > Quickstart",
+          "score": 0.023536299765807962,
+          "similarity": 0.7549578547477722
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/testing/jest.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to set up Jest with Next.js > Optional: Handling Absolute Imports and Module Path Aliases",
+          "score": 0.022770398481973434,
+          "similarity": 0.726166508381561
+        }
+      ],
+      "hitRank": 2,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.7549578547477722,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 47
+      },
+      "costUsd": 0.0000856,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q015",
+      "frameworks": [
+        "nextjs",
+        "jest"
+      ],
+      "answerable": true,
+      "question": "Are my .env files loaded when I run Jest tests in a Next.js app?",
+      "expectedSourcePaths": [
+        "nextjs/01-app/02-guides/testing/jest.mdx"
+      ],
+      "searchedQuestion": "Are .env files loaded when running Jest tests in a Next.js app?",
+      "detectedFrameworks": [
+        "nextjs",
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/environment-variables.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to use environment variables in Next.js > Test Environment Variables",
+          "score": 0.024329950559458757,
+          "similarity": 0.6772805663681706
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/testing/jest.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to set up Jest with Next.js > Manual setup",
+          "score": 0.024325753569539928,
+          "similarity": 0.6176699952188133
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/03-architecture/nextjs-compiler.mdx",
+          "framework": "nextjs",
+          "headingPath": "Next.js Compiler > Supported Features > Jest",
+          "score": 0.02393753200204813,
+          "similarity": 0.6056767106056257
+        },
+        {
+          "rank": 4,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --env=<environment>",
+          "score": 0.022068511198945984,
+          "similarity": 0.5621353294374346
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/environment-variables.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to use environment variables in Next.js",
+          "score": 0.021978021978021976,
+          "similarity": 0.5549728870391886
+        }
+      ],
+      "hitRank": 2,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6772805663681706,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 630,
+        "rewriteOutputTokens": 57
+      },
+      "costUsd": 0.0000915,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q016",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I mock a function and check what arguments it was called with?",
+      "expectedSourcePaths": [
+        "jest/MockFunctions.md",
+        "jest/ExpectAPI.md"
+      ],
+      "searchedQuestion": "How do I mock a function and check what arguments it was called with?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/MockFunctionAPI.md",
+          "framework": "jest",
+          "headingPath": "Mock Functions > Reference > mockFn.mock.calls",
+          "score": 0.024329950559458757,
+          "similarity": 0.6395984077214257
+        },
+        {
+          "rank": 2,
+          "source": "jest/MockFunctionAPI.md",
+          "framework": "jest",
+          "headingPath": "Mock Functions > Reference > mockFn.mock.lastCall",
+          "score": 0.024193548387096774,
+          "similarity": 0.6172343264361826
+        },
+        {
+          "rank": 3,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Matchers > .toHaveBeenCalledWith(arg1, arg2, ...)",
+          "score": 0.023448773448773448,
+          "similarity": 0.6133156283717642
+        },
+        {
+          "rank": 4,
+          "source": "jest/MockFunctions.md",
+          "framework": "jest",
+          "headingPath": "Mock Functions > Custom Matchers",
+          "score": 0.022617680826636052,
+          "similarity": 0.6023183227967227
+        },
+        {
+          "rank": 5,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Matchers > .toHaveBeenLastCalledWith(arg1, arg2, ...)",
+          "score": 0.02232905982905983,
+          "similarity": 0.6076247639320604
+        }
+      ],
+      "hitRank": 3,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6395984077214257,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 623,
+        "rewriteOutputTokens": 44
+      },
+      "costUsd": 0.00008430000000000002,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q017",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "how to mock a whole module like axios in jest",
+      "expectedSourcePaths": [
+        "jest/MockFunctions.md"
+      ],
+      "searchedQuestion": "how to mock a whole module like axios in jest",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Mock Modules > jest.mock(moduleName, factory, options)",
+          "score": 0.02370478983382209,
+          "similarity": 0.6121899619328974
+        },
+        {
+          "rank": 2,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Mock Modules > jest.requireMock(moduleName)",
+          "score": 0.023449131513647643,
+          "similarity": 0.6079260835559511
+        },
+        {
+          "rank": 3,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Mock Modules > jest.Mocked<Source>",
+          "score": 0.022843822843822845,
+          "similarity": 0.6051484887434705
+        },
+        {
+          "rank": 4,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Mock Modules > jest.mocked(source, options?)",
+          "score": 0.02266725352112676,
+          "similarity": 0.6108535528182983
+        },
+        {
+          "rank": 5,
+          "source": "jest/BypassingModuleMocks.md",
+          "framework": "jest",
+          "headingPath": "Bypassing module mocks",
+          "score": 0.022642390289449112,
+          "similarity": 0.5971089539327306
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6121899619328974,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 40
+      },
+      "costUsd": 0.00008190000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q018",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "What's the difference between toBe and toEqual?",
+      "expectedSourcePaths": [
+        "jest/UsingMatchers.md",
+        "jest/ExpectAPI.md"
+      ],
+      "searchedQuestion": "What's the difference between toBe and toEqual?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Matchers > .toEqual(value)",
+          "score": 0.024325753569539928,
+          "similarity": 0.5873245350911946
+        },
+        {
+          "rank": 2,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Matchers > .toBe(value)",
+          "score": 0.023856129190115,
+          "similarity": 0.6072570809432365
+        },
+        {
+          "rank": 3,
+          "source": "jest/UsingMatchers.md",
+          "framework": "jest",
+          "headingPath": "Using Matchers > Common Matchers",
+          "score": 0.0234375,
+          "similarity": 0.5403011054249267
+        },
+        {
+          "rank": 4,
+          "source": "jest/UsingMatchers.md",
+          "framework": "jest",
+          "headingPath": "Using Matchers > Numbers",
+          "score": 0.02321603128054741,
+          "similarity": 0.5237921788568612
+        },
+        {
+          "rank": 5,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Matchers > .toStrictEqual(value)",
+          "score": 0.022915269394142634,
+          "similarity": 0.5433412680036965
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6072570809432365,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.0000835,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q019",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I test an async function that returns a promise?",
+      "expectedSourcePaths": [
+        "jest/TestingAsyncCode.md"
+      ],
+      "searchedQuestion": "How do I test an async function that returns a promise?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/TutorialAsync.md",
+          "framework": "jest",
+          "headingPath": "An Async Example",
+          "score": 0.02459016393442623,
+          "similarity": 0.6904398614430357
+        },
+        {
+          "rank": 2,
+          "source": "jest/TestingAsyncCode.md",
+          "framework": "jest",
+          "headingPath": "Testing Asynchronous Code > Async/Await",
+          "score": 0.023809523809523808,
+          "similarity": 0.6187195777893066
+        },
+        {
+          "rank": 3,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Modifiers > .resolves",
+          "score": 0.022871376811594204,
+          "similarity": 0.6113688531925935
+        },
+        {
+          "rank": 4,
+          "source": "jest/TestingAsyncCode.md",
+          "framework": "jest",
+          "headingPath": "Testing Asynchronous Code > Promises",
+          "score": 0.02262253875157101,
+          "similarity": 0.6458459285405843
+        },
+        {
+          "rank": 5,
+          "source": "jest/GlobalAPI.md",
+          "framework": "jest",
+          "headingPath": "Globals > Reference > test(name, fn, timeout)",
+          "score": 0.022527472527472527,
+          "similarity": 0.6062122583389282
+        }
+      ],
+      "hitRank": 2,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6904398614430357,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 40
+      },
+      "costUsd": 0.00008190000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q020",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "I need to reset some state before every test in a file. How?",
+      "expectedSourcePaths": [
+        "jest/SetupAndTeardown.md"
+      ],
+      "searchedQuestion": "How do I reset some state before every test in a file?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/Configuration.md",
+          "framework": "jest",
+          "headingPath": "Configuring Jest > Reference > resetMocks [boolean]",
+          "score": 0.024065540194572452,
+          "similarity": 0.5564403533935547
+        },
+        {
+          "rank": 2,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --resetMocks",
+          "score": 0.02393753200204813,
+          "similarity": 0.5467696785926819
+        },
+        {
+          "rank": 3,
+          "source": "jest/Configuration.md",
+          "framework": "jest",
+          "headingPath": "Configuring Jest > Reference > resetModules [boolean]",
+          "score": 0.023581336696090797,
+          "similarity": 0.5414596796035767
+        },
+        {
+          "rank": 4,
+          "source": "jest/GlobalAPI.md",
+          "framework": "jest",
+          "headingPath": "Globals > Reference > beforeEach(fn, timeout)",
+          "score": 0.023435696144077582,
+          "similarity": 0.5807383906401173
+        },
+        {
+          "rank": 5,
+          "source": "jest/Configuration.md",
+          "framework": "jest",
+          "headingPath": "Configuring Jest > Reference > restoreMocks [boolean]",
+          "score": 0.021504320502749412,
+          "similarity": 0.5299837589263916
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5807383906401173,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 37
+      },
+      "costUsd": 0.0000806,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q021",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "My snapshot tests fail after an intentional UI change. How do I update the snapshots?",
+      "expectedSourcePaths": [
+        "jest/SnapshotTesting.md"
+      ],
+      "searchedQuestion": "How do I update Jest snapshot tests that fail after an intentional UI change?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/SnapshotTesting.md",
+          "framework": "jest",
+          "headingPath": "Snapshot Testing > Snapshot Testing with Jest > Updating Snapshots",
+          "score": 0.02445795875198308,
+          "similarity": 0.6881327834168909
+        },
+        {
+          "rank": 2,
+          "source": "jest/SnapshotTesting.md",
+          "framework": "jest",
+          "headingPath": "Snapshot Testing > Snapshot Testing with Jest > Interactive Snapshot Mode",
+          "score": 0.024065540194572452,
+          "similarity": 0.5828299522399902
+        },
+        {
+          "rank": 3,
+          "source": "jest/SnapshotTesting.md",
+          "framework": "jest",
+          "headingPath": "Snapshot Testing",
+          "score": 0.023581336696090797,
+          "similarity": 0.5574345588684082
+        },
+        {
+          "rank": 4,
+          "source": "jest/TutorialReactNative.md",
+          "framework": "jest",
+          "headingPath": "Testing React Native Apps > Snapshot Test",
+          "score": 0.023119392684610076,
+          "similarity": 0.5751633986928115
+        },
+        {
+          "rank": 5,
+          "source": "jest/SnapshotTesting.md",
+          "framework": "jest",
+          "headingPath": "Snapshot Testing > Snapshot Testing with Jest",
+          "score": 0.02266725352112676,
+          "similarity": 0.5679554600742195
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6881327834168909,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 633,
+        "rewriteOutputTokens": 51
+      },
+      "costUsd": 0.00008880000000000002,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q022",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I run only the tests whose name matches some text?",
+      "expectedSourcePaths": [
+        "jest/CLI.md"
+      ],
+      "searchedQuestion": "How do I run only the tests whose name matches some text?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --testNamePattern=<regex>",
+          "score": 0.02459016393442623,
+          "similarity": 0.624441899325962
+        },
+        {
+          "rank": 2,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Running from the command line",
+          "score": 0.023449131513647643,
+          "similarity": 0.49482479660658907
+        },
+        {
+          "rank": 3,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > jest <regexForTestFiles>",
+          "score": 0.022707979626485568,
+          "similarity": 0.5486343830009937
+        },
+        {
+          "rank": 4,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --runTestsByPath",
+          "score": 0.02228327228327228,
+          "similarity": 0.5183873463638301
+        },
+        {
+          "rank": 5,
+          "source": "jest/GlobalAPI.md",
+          "framework": "jest",
+          "headingPath": "Globals > Reference > test.only(name, fn, timeout)",
+          "score": 0.0220682302771855,
+          "similarity": 0.48663112441486955
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.624441899325962,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.0000831,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q023",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "how do i get a code coverage report",
+      "expectedSourcePaths": [
+        "jest/CLI.md",
+        "jest/Configuration.md"
+      ],
+      "searchedQuestion": "how do i get a code coverage report",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/testing/code-coverage.md",
+          "framework": "angular",
+          "headingPath": "Code coverage > Generating a report",
+          "score": 0.024329950559458757,
+          "similarity": 0.6313150588306691
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/testing/overview.md",
+          "framework": "angular",
+          "headingPath": "Unit testing > Code coverage",
+          "score": 0.024193548387096774,
+          "similarity": 0.6305420243093983
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/testing/code-coverage.md",
+          "framework": "angular",
+          "headingPath": "Code coverage",
+          "score": 0.024069737184491284,
+          "similarity": 0.6020800112438291
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/testing/code-coverage.md",
+          "framework": "angular",
+          "headingPath": "Code coverage > Advanced configuration",
+          "score": 0.023317307692307693,
+          "similarity": 0.5879524245318902
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/testing/karma.md",
+          "framework": "angular",
+          "headingPath": "Testing with Karma and Jasmine > Code coverage enforcement",
+          "score": 0.02296037296037296,
+          "similarity": 0.574767342237555
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 0,
+      "topSimilarity": 0.6313150588306691,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 615,
+        "rewriteOutputTokens": 33
+      },
+      "costUsd": 0.000078,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q024",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "Can I write my Jest tests in TypeScript?",
+      "expectedSourcePaths": [
+        "jest/GettingStarted.md"
+      ],
+      "searchedQuestion": "Can I write my Jest tests in TypeScript?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/GlobalAPI.md",
+          "framework": "jest",
+          "headingPath": "Globals > TypeScript Usage",
+          "score": 0.024193548387096774,
+          "similarity": 0.6482846140861557
+        },
+        {
+          "rank": 2,
+          "source": "jest/GlobalAPI.md",
+          "framework": "jest",
+          "headingPath": "Globals",
+          "score": 0.0234375,
+          "similarity": 0.6306122165553452
+        },
+        {
+          "rank": 3,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect",
+          "score": 0.023122094445803768,
+          "similarity": 0.6098866099186783
+        },
+        {
+          "rank": 4,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object",
+          "score": 0.022843822843822845,
+          "similarity": 0.6152283365956469
+        },
+        {
+          "rank": 5,
+          "source": "jest/GettingStarted.md",
+          "framework": "jest",
+          "headingPath": "Getting Started > Using with bundlers > Using TypeScript",
+          "score": 0.022643442622950823,
+          "similarity": 0.6489484728636178
+        }
+      ],
+      "hitRank": 5,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6489484728636178,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.0000837,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q025",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I watch calls to an object's method without replacing what it does?",
+      "expectedSourcePaths": [
+        "jest/JestObjectAPI.md"
+      ],
+      "searchedQuestion": "How do I watch calls to an object's method without replacing what it does?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks > The 4 ways to create an ES6 class mock > Automatic mock",
+          "score": 0.02222222222222222,
+          "similarity": 0.4449100030931834
+        },
+        {
+          "rank": 2,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks > Keeping track of usage (spying on the mock)",
+          "score": 0.021967626655455118,
+          "similarity": 0.4564347539207192
+        },
+        {
+          "rank": 3,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Methods",
+          "score": 0.020854949159576676,
+          "similarity": 0.4019590794456296
+        },
+        {
+          "rank": 4,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Mock Functions > jest.spyOn(object, methodName)",
+          "score": 0.01639344262295082,
+          "similarity": 0.5215714444134933
+        },
+        {
+          "rank": 5,
+          "source": "jest/JestObjectAPI.md",
+          "framework": "jest",
+          "headingPath": "The Jest Object > Mock Functions > jest.spyOn(object, methodName, accessType?)",
+          "score": 0.016129032258064516,
+          "similarity": 0.49004921257789213
+        }
+      ],
+      "hitRank": 3,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5215714444134933,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 625,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.000084,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q026",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I mock an ES6 class that my module imports?",
+      "expectedSourcePaths": [
+        "jest/Es6ClassMocks.md"
+      ],
+      "searchedQuestion": "How do I mock an ES6 class that my module imports?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks",
+          "score": 0.02459016393442623,
+          "similarity": 0.679009141744819
+        },
+        {
+          "rank": 2,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks > An ES6 Class Example",
+          "score": 0.02370478983382209,
+          "similarity": 0.663864711753412
+        },
+        {
+          "rank": 3,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks > The 4 ways to create an ES6 class mock > Calling jest.mock() with the module factory parameter",
+          "score": 0.023689516129032258,
+          "similarity": 0.6539895328277082
+        },
+        {
+          "rank": 4,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks > Keeping track of usage (spying on the mock)",
+          "score": 0.023685515873015872,
+          "similarity": 0.6543611873115174
+        },
+        {
+          "rank": 5,
+          "source": "jest/Es6ClassMocks.md",
+          "framework": "jest",
+          "headingPath": "ES6 Class Mocks > Complete example",
+          "score": 0.022843822843822845,
+          "similarity": 0.6414498473077933
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.679009141744819,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.0000837,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q027",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": true,
+      "question": "My tests need document and window. How do I give them a browser-like environment?",
+      "expectedSourcePaths": [
+        "jest/Configuration.md",
+        "jest/TestEnvironment.md"
+      ],
+      "searchedQuestion": "How do I give Jest tests a browser-like environment that provides document and window?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/TestEnvironment.md",
+          "framework": "jest",
+          "headingPath": "Test Environment",
+          "score": 0.02459016393442623,
+          "similarity": 0.6293231061302826
+        },
+        {
+          "rank": 2,
+          "source": "jest/Configuration.md",
+          "framework": "jest",
+          "headingPath": "Configuring Jest > Reference > testEnvironment [node | jsdom | string]",
+          "score": 0.023561507936507936,
+          "similarity": 0.6117841089513532
+        },
+        {
+          "rank": 3,
+          "source": "jest/TutorialjQuery.md",
+          "framework": "jest",
+          "headingPath": "DOM Manipulation",
+          "score": 0.023271889400921657,
+          "similarity": 0.6209132404496137
+        },
+        {
+          "rank": 4,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --env=<environment>",
+          "score": 0.02061482820976492,
+          "similarity": 0.5656001049995557
+        },
+        {
+          "rank": 5,
+          "source": "jest/Puppeteer.md",
+          "framework": "jest",
+          "headingPath": "Using with puppeteer > Custom example without jest-puppeteer preset",
+          "score": 0.019904604659695468,
+          "similarity": 0.5403095644804765
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6293231061302826,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 626,
+        "rewriteOutputTokens": 51
+      },
+      "costUsd": 0.0000881,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q028",
+      "frameworks": [
+        "react-native",
+        "jest"
+      ],
+      "answerable": true,
+      "question": "How do I set up Jest snapshot tests for React Native components?",
+      "expectedSourcePaths": [
+        "jest/TutorialReactNative.md",
+        "react-native/testing-overview.md"
+      ],
+      "searchedQuestion": "How do I set up Jest snapshot tests for React Native components?",
+      "detectedFrameworks": [
+        "jest",
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/TutorialReactNative.md",
+          "framework": "jest",
+          "headingPath": "Testing React Native Apps > Snapshot Test",
+          "score": 0.02420594262295082,
+          "similarity": 0.7609849883300052
+        },
+        {
+          "rank": 2,
+          "source": "jest/TutorialReactNative.md",
+          "framework": "jest",
+          "headingPath": "Testing React Native Apps",
+          "score": 0.023809523809523808,
+          "similarity": 0.689467471210211
+        },
+        {
+          "rank": 3,
+          "source": "jest/TutorialReactNative.md",
+          "framework": "jest",
+          "headingPath": "Testing React Native Apps > Snapshot Test",
+          "score": 0.023591718825228696,
+          "similarity": 0.7236826090434324
+        },
+        {
+          "rank": 4,
+          "source": "jest/SnapshotTesting.md",
+          "framework": "jest",
+          "headingPath": "Snapshot Testing > Frequently Asked Questions > Does snapshot testing only work with React components?",
+          "score": 0.023348236462990564,
+          "similarity": 0.6344584604774999
+        },
+        {
+          "rank": 5,
+          "source": "react-native/testing-overview.md",
+          "framework": "react-native",
+          "headingPath": "Testing > Component Tests > Testing Rendered Output",
+          "score": 0.023317307692307693,
+          "similarity": 0.6859286240296748
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.7609849883300052,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 625,
+        "rewriteOutputTokens": 50
+      },
+      "costUsd": 0.0000875,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q029",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I handle the Android back button?",
+      "expectedSourcePaths": [
+        "react-native/backhandler.md"
+      ],
+      "searchedQuestion": "How do I handle the Android back button?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/backhandler.md",
+          "framework": "react-native",
+          "headingPath": "BackHandler > Usage with React Navigation",
+          "score": 0.024193548387096774,
+          "similarity": 0.6511835275669707
+        },
+        {
+          "rank": 2,
+          "source": "react-native/integration-with-android-fragment.md",
+          "framework": "react-native",
+          "headingPath": "Integration with an Android Fragment > 3. Make your host Activity implement DefaultHardwareBackBtnHandler",
+          "score": 0.023821721311475412,
+          "similarity": 0.6461034628091282
+        },
+        {
+          "rank": 3,
+          "source": "react-native/integration-with-android-fragment.md",
+          "framework": "react-native",
+          "headingPath": "Integration with an Android Fragment > 3. Make your host Activity implement DefaultHardwareBackBtnHandler",
+          "score": 0.023746383799421407,
+          "similarity": 0.6577395608735654
+        },
+        {
+          "rank": 4,
+          "source": "react-native/backhandler.md",
+          "framework": "react-native",
+          "headingPath": "BackHandler",
+          "score": 0.023565323565323565,
+          "similarity": 0.6476710262690797
+        },
+        {
+          "rank": 5,
+          "source": "react-native/components-and-apis.md",
+          "framework": "react-native",
+          "headingPath": "Core Components and APIs > Android Components and APIs",
+          "score": 0.022642390289449112,
+          "similarity": 0.548946878502332
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6577395608735654,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 616,
+        "rewriteOutputTokens": 38
+      },
+      "costUsd": 0.0000806,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q030",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "Whats the best way to render a really long scrolling list?",
+      "expectedSourcePaths": [
+        "react-native/flatlist.md",
+        "react-native/using-a-listview.md",
+        "react-native/optimizing-flatlist-configuration.md"
+      ],
+      "searchedQuestion": "What's the best way to render a really long scrolling list?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/scrollview.md",
+          "framework": "react-native",
+          "headingPath": "ScrollView",
+          "score": 0.023821721311475412,
+          "similarity": 0.5500158563270443
+        },
+        {
+          "rank": 2,
+          "source": "react-native/virtualizedlist.md",
+          "framework": "react-native",
+          "headingPath": "VirtualizedList",
+          "score": 0.023685515873015872,
+          "similarity": 0.5536431340191968
+        },
+        {
+          "rank": 3,
+          "source": "react-native/sectionlist.md",
+          "framework": "react-native",
+          "headingPath": "SectionList > Example",
+          "score": 0.023536299765807962,
+          "similarity": 0.5571729012933851
+        },
+        {
+          "rank": 4,
+          "source": "react-native/components-and-apis.md",
+          "framework": "react-native",
+          "headingPath": "Core Components and APIs > List Views",
+          "score": 0.02332112332112332,
+          "similarity": 0.5395522921610316
+        },
+        {
+          "rank": 5,
+          "source": "react-native/using-a-listview.md",
+          "framework": "react-native",
+          "headingPath": "Using List Views",
+          "score": 0.02321603128054741,
+          "similarity": 0.5345108827657044
+        }
+      ],
+      "hitRank": 5,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5571729012933851,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 39
+      },
+      "costUsd": 0.00008170000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q031",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How can I tell if the phone is in dark mode?",
+      "expectedSourcePaths": [
+        "react-native/usecolorscheme.md",
+        "react-native/appearance.md"
+      ],
+      "searchedQuestion": "How can I tell if the phone is in dark mode?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/appearance.md",
+          "framework": "react-native",
+          "headingPath": "Appearance",
+          "score": 0.024193548387096774,
+          "similarity": 0.5426855410746072
+        },
+        {
+          "rank": 2,
+          "source": "react-native/usecolorscheme.md",
+          "framework": "react-native",
+          "headingPath": "useColorScheme > Return values",
+          "score": 0.023225957049486462,
+          "similarity": 0.5342593511497598
+        },
+        {
+          "rank": 3,
+          "source": "react-native/accessibilityinfo.md",
+          "framework": "react-native",
+          "headingPath": "AccessibilityInfo > Reference > Methods > isDarkerSystemColorsEnabled() iOS",
+          "score": 0.02306010928961749,
+          "similarity": 0.6056418418884321
+        },
+        {
+          "rank": 4,
+          "source": "react-native/colors.md",
+          "framework": "react-native",
+          "headingPath": "Color Reference > Color APIs",
+          "score": 0.022429261559696344,
+          "similarity": 0.4709012193024893
+        },
+        {
+          "rank": 5,
+          "source": "react-native/dynamiccolorios.md",
+          "framework": "react-native",
+          "headingPath": "DynamicColorIOS",
+          "score": 0.020854949159576676,
+          "similarity": 0.42519631535985036
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6056418418884321,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.0000836,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q032",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "The keyboard covers my text input on iOS, how do I fix that?",
+      "expectedSourcePaths": [
+        "react-native/keyboardavoidingview.md"
+      ],
+      "searchedQuestion": "The keyboard covers my text input on iOS, how do I fix that?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/inputaccessoryview.md",
+          "framework": "react-native",
+          "headingPath": "🗑️ InputAccessoryView",
+          "score": 0.02382133995037221,
+          "similarity": 0.5783488563659533
+        },
+        {
+          "rank": 2,
+          "source": "react-native/inputaccessoryview.md",
+          "framework": "react-native",
+          "headingPath": "🗑️ InputAccessoryView",
+          "score": 0.0234375,
+          "similarity": 0.5726070488148649
+        },
+        {
+          "rank": 3,
+          "source": "react-native/improvingux.md",
+          "framework": "react-native",
+          "headingPath": "Improving User Experience > Manage layout when keyboard is visible",
+          "score": 0.023335702440180052,
+          "similarity": 0.5728235412555571
+        },
+        {
+          "rank": 4,
+          "source": "react-native/textinput.md",
+          "framework": "react-native",
+          "headingPath": "TextInput > Reference > Props > enablesReturnKeyAutomatically iOS",
+          "score": 0.023088023088023088,
+          "similarity": 0.5719950027477735
+        },
+        {
+          "rank": 5,
+          "source": "react-native/improvingux.md",
+          "framework": "react-native",
+          "headingPath": "Improving User Experience > Manage layout when keyboard is visible",
+          "score": 0.022737556561085975,
+          "similarity": 0.5725797924304297
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5783488563659533,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 627,
+        "rewriteOutputTokens": 49
+      },
+      "costUsd": 0.0000872,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q033",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I run different code on iOS and Android?",
+      "expectedSourcePaths": [
+        "react-native/platform-specific-code.md",
+        "react-native/platform.md"
+      ],
+      "searchedQuestion": "How do I run different code on iOS and Android?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/platform-specific-code.md",
+          "framework": "react-native",
+          "headingPath": "Platform-Specific Code > Platform module",
+          "score": 0.024085750315258513,
+          "similarity": 0.60379351309654
+        },
+        {
+          "rank": 2,
+          "source": "react-native/the-new-architecture/native-modules-custom-events.md",
+          "framework": "react-native",
+          "headingPath": "Emitting Events in Native Modules > Step 5: Run Your App",
+          "score": 0.023197115384615385,
+          "similarity": 0.5499899059540099
+        },
+        {
+          "rank": 3,
+          "source": "react-native/fabric-native-components.md",
+          "framework": "react-native",
+          "headingPath": "Fabric Native Components Introduction > Native Components > 4. Run your App using the WebView Component",
+          "score": 0.022989889263360617,
+          "similarity": 0.5247838467617217
+        },
+        {
+          "rank": 4,
+          "source": "react-native/platform-specific-code.md",
+          "framework": "react-native",
+          "headingPath": "Platform-Specific Code > Platform-specific extensions",
+          "score": 0.022795698924731184,
+          "similarity": 0.5950543525782624
+        },
+        {
+          "rank": 5,
+          "source": "react-native/turbo-native-modules-ios.md",
+          "framework": "react-native",
+          "headingPath": "Turbo Native Modules: iOS > Build and run your code on a Simulator",
+          "score": 0.02069672131147541,
+          "similarity": 0.4741892531997419
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.60379351309654,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 41
+      },
+      "costUsd": 0.00008240000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q034",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I make an HTTP request to my backend?",
+      "expectedSourcePaths": [
+        "react-native/network.md"
+      ],
+      "searchedQuestion": "How do I make an HTTP request to my backend?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/http/making-requests.md",
+          "framework": "angular",
+          "headingPath": "Making HTTP requests",
+          "score": 0.024325753569539928,
+          "similarity": 0.5633060932159424
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/http/making-requests.md",
+          "framework": "angular",
+          "headingPath": "Making HTTP requests > Fetching JSON data",
+          "score": 0.023225957049486462,
+          "similarity": 0.5548592209815979
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/http/making-requests.md",
+          "framework": "angular",
+          "headingPath": "Making HTTP requests > Advanced fetch options",
+          "score": 0.022770398481973434,
+          "similarity": 0.5025297403335571
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/http/overview.md",
+          "framework": "angular",
+          "headingPath": "Understanding communication with backend services using HTTP > What's next",
+          "score": 0.022722556547001452,
+          "similarity": 0.6015257418610379
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/http/overview.md",
+          "framework": "angular",
+          "headingPath": "Understanding communication with backend services using HTTP > HTTP client service features",
+          "score": 0.022527472527472527,
+          "similarity": 0.530275285243988
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 0,
+      "topSimilarity": 0.6015257418610379,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 38
+      },
+      "costUsd": 0.000081,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q035",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I get the screen width so my layout updates when it rotates?",
+      "expectedSourcePaths": [
+        "react-native/usewindowdimensions.md",
+        "react-native/dimensions.md"
+      ],
+      "searchedQuestion": "How do I get the screen width so my layout updates when it rotates?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/usewindowdimensions.md",
+          "framework": "react-native",
+          "headingPath": "useWindowDimensions",
+          "score": 0.02459016393442623,
+          "similarity": 0.605642914772038
+        },
+        {
+          "rank": 2,
+          "source": "react-native/dimensions.md",
+          "framework": "react-native",
+          "headingPath": "Dimensions",
+          "score": 0.024193548387096774,
+          "similarity": 0.5790341245552468
+        },
+        {
+          "rank": 3,
+          "source": "react-native/usewindowdimensions.md",
+          "framework": "react-native",
+          "headingPath": "useWindowDimensions > Properties > width",
+          "score": 0.023335702440180052,
+          "similarity": 0.566626745469557
+        },
+        {
+          "rank": 4,
+          "source": "react-native/dimensions.md",
+          "framework": "react-native",
+          "headingPath": "Dimensions > Reference > Methods > get()",
+          "score": 0.022095959595959596,
+          "similarity": 0.5148988655269832
+        },
+        {
+          "rank": 5,
+          "source": "react-native/layoutevent.md",
+          "framework": "react-native",
+          "headingPath": "LayoutEvent Object Type > Keys and values > width",
+          "score": 0.0220682302771855,
+          "similarity": 0.5052237209544357
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.605642914772038,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 625,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.000084,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q036",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I show a native alert with OK and Cancel buttons?",
+      "expectedSourcePaths": [
+        "react-native/alert.md"
+      ],
+      "searchedQuestion": "How do I show a native alert with OK and Cancel buttons in React Native?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/alert.md",
+          "framework": "react-native",
+          "headingPath": "Alert > Example",
+          "score": 0.02445795875198308,
+          "similarity": 0.6831237455458993
+        },
+        {
+          "rank": 2,
+          "source": "react-native/alert.md",
+          "framework": "react-native",
+          "headingPath": "Alert > Android",
+          "score": 0.024325753569539928,
+          "similarity": 0.6254986151755693
+        },
+        {
+          "rank": 3,
+          "source": "react-native/alert.md",
+          "framework": "react-native",
+          "headingPath": "Alert",
+          "score": 0.023809523809523808,
+          "similarity": 0.6200653910636902
+        },
+        {
+          "rank": 4,
+          "source": "react-native/actionsheetios.md",
+          "framework": "react-native",
+          "headingPath": "ActionSheetIOS > Example",
+          "score": 0.022518382352941176,
+          "similarity": 0.5123854875564575
+        },
+        {
+          "rank": 5,
+          "source": "react-native/modal.md",
+          "framework": "react-native",
+          "headingPath": "Modal > Example",
+          "score": 0.02163561076604555,
+          "similarity": 0.5037821531295776
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6831237455458993,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 625,
+        "rewriteOutputTokens": 51
+      },
+      "costUsd": 0.000088,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q037",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I open a website in the phone's browser from my app?",
+      "expectedSourcePaths": [
+        "react-native/linking.md"
+      ],
+      "searchedQuestion": "How do I open a website in the phone's browser from my app?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/linking.md",
+          "framework": "react-native",
+          "headingPath": "Linking > Built-in URL Schemes",
+          "score": 0.024325753569539928,
+          "similarity": 0.577670983463912
+        },
+        {
+          "rank": 2,
+          "source": "react-native/linking.md",
+          "framework": "react-native",
+          "headingPath": "Linking > Example > Open Links and Deep Links (Universal Links)",
+          "score": 0.023561507936507936,
+          "similarity": 0.5601363682868813
+        },
+        {
+          "rank": 3,
+          "source": "react-native/linking.md",
+          "framework": "react-native",
+          "headingPath": "Linking > Example > Open Links and Deep Links (Universal Links)",
+          "score": 0.023076923076923078,
+          "similarity": 0.5575899051901673
+        },
+        {
+          "rank": 4,
+          "source": "react-native/linking.md",
+          "framework": "react-native",
+          "headingPath": "Linking",
+          "score": 0.022989889263360617,
+          "similarity": 0.47670070757570016
+        },
+        {
+          "rank": 5,
+          "source": "react-native/linking.md",
+          "framework": "react-native",
+          "headingPath": "Linking > Reference > Methods > openURL()",
+          "score": 0.022722556547001452,
+          "similarity": 0.5925878992781529
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5925878992781529,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 44
+      },
+      "costUsd": 0.0000842,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q038",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "What should I use for a button that changes style while it's pressed?",
+      "expectedSourcePaths": [
+        "react-native/pressable.md"
+      ],
+      "searchedQuestion": "What should I use for a button that changes style while it's pressed?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/handling-touches.md",
+          "framework": "react-native",
+          "headingPath": "Handling Touches > Displaying a basic button",
+          "score": 0.022689474934663816,
+          "similarity": 0.5213615894317627
+        },
+        {
+          "rank": 2,
+          "source": "react-native/handling-touches.md",
+          "framework": "react-native",
+          "headingPath": "Handling Touches > Touchables",
+          "score": 0.020449699554177168,
+          "similarity": 0.5028190612792969
+        },
+        {
+          "rank": 3,
+          "source": "react-native/pressable.md",
+          "framework": "react-native",
+          "headingPath": "Pressable > Props > style",
+          "score": 0.01639344262295082,
+          "similarity": 0.6362104415893555
+        },
+        {
+          "rank": 4,
+          "source": "react-native/pressable.md",
+          "framework": "react-native",
+          "headingPath": "Pressable > Example",
+          "score": 0.016129032258064516,
+          "similarity": 0.571492075920105
+        },
+        {
+          "rank": 5,
+          "source": "react-native/button.md",
+          "framework": "react-native",
+          "headingPath": "Button",
+          "score": 0.015873015873015872,
+          "similarity": 0.5467723608016968
+        }
+      ],
+      "hitRank": 3,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6362104415893555,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 623,
+        "rewriteOutputTokens": 41
+      },
+      "costUsd": 0.00008280000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q039",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "why do my views stack vertically by default instead of side by side?",
+      "expectedSourcePaths": [
+        "react-native/flexbox.md"
+      ],
+      "searchedQuestion": "In React Native, why do my views stack vertically by default instead of side by side?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/flexbox.md",
+          "framework": "react-native",
+          "headingPath": "Layout with Flexbox",
+          "score": 0.023435696144077582,
+          "similarity": 0.5951044559478802
+        },
+        {
+          "rank": 2,
+          "source": "react-native/height-and-width.md",
+          "framework": "react-native",
+          "headingPath": "Height and Width > Flex Dimensions",
+          "score": 0.020535714285714286,
+          "similarity": 0.5477407517742214
+        },
+        {
+          "rank": 3,
+          "source": "react-native/tutorial.md",
+          "framework": "react-native",
+          "headingPath": "Learn the Basics > What's going on here?",
+          "score": 0.016129032258064516,
+          "similarity": 0.5765820397983776
+        },
+        {
+          "rank": 4,
+          "source": "react-native/flatlist.md",
+          "framework": "react-native",
+          "headingPath": "FlatList > Reference > Props > horizontal",
+          "score": 0.015873015873015872,
+          "similarity": 0.5731885262373552
+        },
+        {
+          "rank": 5,
+          "source": "react-native/flexbox.md",
+          "framework": "react-native",
+          "headingPath": "Layout with Flexbox > Flex",
+          "score": 0.015625,
+          "similarity": 0.5704802786731388
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5951044559478802,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 623,
+        "rewriteOutputTokens": 213
+      },
+      "costUsd": 0.0001688,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q040",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "What is Hermes and do I need to enable it?",
+      "expectedSourcePaths": [
+        "react-native/hermes.md"
+      ],
+      "searchedQuestion": "What is Hermes and do I need to enable it?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/hermes.md",
+          "framework": "react-native",
+          "headingPath": "Using Hermes",
+          "score": 0.023565323565323565,
+          "similarity": 0.3718869166441616
+        },
+        {
+          "rank": 2,
+          "source": "react-native/react-native-gradle-plugin.md",
+          "framework": "react-native",
+          "headingPath": "React Native Gradle Plugin > Configuring the plugin > hermesCommand",
+          "score": 0.023200757575757576,
+          "similarity": 0.3337157865251379
+        },
+        {
+          "rank": 3,
+          "source": "react-native/hermes.md",
+          "framework": "react-native",
+          "headingPath": "Using Hermes > Confirming Hermes is in use",
+          "score": 0.022885789014821273,
+          "similarity": 0.3937335908412961
+        },
+        {
+          "rank": 4,
+          "source": "react-native/optimizing-javascript-loading.md",
+          "framework": "react-native",
+          "headingPath": "Optimizing JavaScript loading > Recommended: Use Hermes",
+          "score": 0.022847301951779565,
+          "similarity": 0.3260397716736936
+        },
+        {
+          "rank": 5,
+          "source": "react-native/react-native-gradle-plugin.md",
+          "framework": "react-native",
+          "headingPath": "React Native Gradle Plugin > What is the plugin doing under the hood?",
+          "score": 0.02273787313432836,
+          "similarity": 0.2846719409427656
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.3937335908412961,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 197
+      },
+      "costUsd": 0.0001605,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q041",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I generate a signed release build for the Google Play Store?",
+      "expectedSourcePaths": [
+        "react-native/signed-apk-android.md"
+      ],
+      "searchedQuestion": "How do I generate a signed release build for the Google Play Store?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/signed-apk-android.md",
+          "framework": "react-native",
+          "headingPath": "Publishing to Google Play Store > Generating the release AAB",
+          "score": 0.024325753569539928,
+          "similarity": 0.6675756772630121
+        },
+        {
+          "rank": 2,
+          "source": "react-native/signed-apk-android.md",
+          "framework": "react-native",
+          "headingPath": "Publishing to Google Play Store > Adding signing config to your app's Gradle config",
+          "score": 0.023969200198708396,
+          "similarity": 0.6877479963152419
+        },
+        {
+          "rank": 3,
+          "source": "react-native/running-on-device.md",
+          "framework": "react-native",
+          "headingPath": "Running On Device > Building your app for production",
+          "score": 0.023685515873015872,
+          "similarity": 0.6655045548382148
+        },
+        {
+          "rank": 4,
+          "source": "react-native/signed-apk-android.md",
+          "framework": "react-native",
+          "headingPath": "Publishing to Google Play Store > Testing the release build of your app",
+          "score": 0.023561507936507936,
+          "similarity": 0.6619457006454468
+        },
+        {
+          "rank": 5,
+          "source": "react-native/signed-apk-android.md",
+          "framework": "react-native",
+          "headingPath": "Publishing to Google Play Store > Migrating old Android React Native apps to use App Signing by Google Play",
+          "score": 0.02321603128054741,
+          "similarity": 0.6184944369203568
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6877479963152419,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 624,
+        "rewriteOutputTokens": 48
+      },
+      "costUsd": 0.0000864,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q042",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I fade a view in with an animation?",
+      "expectedSourcePaths": [
+        "react-native/animations.md",
+        "react-native/animated.md"
+      ],
+      "searchedQuestion": "How do I fade a view in with an animation?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/animated.md",
+          "framework": "react-native",
+          "headingPath": "Animated > Example",
+          "score": 0.024193548387096774,
+          "similarity": 0.5736159936418548
+        },
+        {
+          "rank": 2,
+          "source": "react-native/animations.md",
+          "framework": "react-native",
+          "headingPath": "Animations > Animated API",
+          "score": 0.023809523809523808,
+          "similarity": 0.5368649959564209
+        },
+        {
+          "rank": 3,
+          "source": "react-native/animations.md",
+          "framework": "react-native",
+          "headingPath": "Animations > Animated API",
+          "score": 0.023746383799421407,
+          "similarity": 0.6032435894012451
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/animations/css.md",
+          "framework": "angular",
+          "headingPath": "Animating your Application with CSS > Transition and Triggers > Animate entering and leaving a view",
+          "score": 0.02296037296037296,
+          "similarity": 0.4632802903652191
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/view-transitions.mdx",
+          "framework": "nextjs",
+          "headingPath": "Designing view transitions > Example > Step 2: Animate loading states with Suspense reveals",
+          "score": 0.022843822843822845,
+          "similarity": 0.45599955320358276
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 0.6,
+      "topSimilarity": 0.6032435894012451,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 618,
+        "rewriteOutputTokens": 36
+      },
+      "costUsd": 0.00007980000000000002,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q043",
+      "frameworks": [
+        "react-native"
+      ],
+      "answerable": true,
+      "question": "How do I open the debugger for my React Native app?",
+      "expectedSourcePaths": [
+        "react-native/react-native-devtools.md",
+        "react-native/debugging.md"
+      ],
+      "searchedQuestion": "How do I open the debugger for my React Native app?",
+      "detectedFrameworks": [
+        "react-native"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "react-native/debugging.md",
+          "framework": "react-native",
+          "headingPath": "Debugging Basics > Opening DevTools",
+          "score": 0.02445795875198308,
+          "similarity": 0.7382993258059439
+        },
+        {
+          "rank": 2,
+          "source": "react-native/debugging-native-code.md",
+          "framework": "react-native",
+          "headingPath": "Debugging Native Code > Debugging in a Native IDE",
+          "score": 0.02296037296037296,
+          "similarity": 0.6920057718750386
+        },
+        {
+          "rank": 3,
+          "source": "react-native/other-debugging-methods.md",
+          "framework": "react-native",
+          "headingPath": "Other Debugging Methods",
+          "score": 0.022569444444444444,
+          "similarity": 0.695417684043509
+        },
+        {
+          "rank": 4,
+          "source": "react-native/debugging.md",
+          "framework": "react-native",
+          "headingPath": "Debugging Basics > Opening the Dev Menu",
+          "score": 0.016129032258064516,
+          "similarity": 0.7010244966774629
+        },
+        {
+          "rank": 5,
+          "source": "react-native/react-native-devtools.md",
+          "framework": "react-native",
+          "headingPath": "React Native DevTools > Core features > Sources & breakpoints",
+          "score": 0.015873015873015872,
+          "similarity": 0.6956660928925232
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.7382993258059439,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.000083,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q044",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I convert an RxJS observable into a signal?",
+      "expectedSourcePaths": [
+        "angular/ecosystem/rxjs-interop/signals-interop.md"
+      ],
+      "searchedQuestion": "How do I convert an RxJS observable into a signal in Angular?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/ecosystem/rxjs-interop/signals-interop.md",
+          "framework": "angular",
+          "headingPath": "RxJS interop with Angular signals > Create a signal from an RxJS Observable with toSignal > Error and Completion",
+          "score": 0.024193548387096774,
+          "similarity": 0.6937504982575405
+        },
+        {
+          "rank": 2,
+          "source": "angular/ecosystem/rxjs-interop/signals-interop.md",
+          "framework": "angular",
+          "headingPath": "RxJS interop with Angular signals > Create an RxJS Observable from a signal with toObservable",
+          "score": 0.023746383799421407,
+          "similarity": 0.6967114156404599
+        },
+        {
+          "rank": 3,
+          "source": "angular/ecosystem/rxjs-interop/signals-interop.md",
+          "framework": "angular",
+          "headingPath": "RxJS interop with Angular signals > Create a signal from an RxJS Observable with toSignal",
+          "score": 0.023565323565323565,
+          "similarity": 0.6757147102696097
+        },
+        {
+          "rank": 4,
+          "source": "angular/ecosystem/rxjs-interop/signals-interop.md",
+          "framework": "angular",
+          "headingPath": "RxJS interop with Angular signals > Create a signal from an RxJS Observable with toSignal > Initial values",
+          "score": 0.0234375,
+          "similarity": 0.6217767901952767
+        },
+        {
+          "rank": 5,
+          "source": "angular/ecosystem/rxjs-interop/signals-interop.md",
+          "framework": "angular",
+          "headingPath": "RxJS interop with Angular signals > Create a signal from an RxJS Observable with toSignal > manualCleanup",
+          "score": 0.02296037296037296,
+          "similarity": 0.6189894988561871
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6967114156404599,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 47
+      },
+      "costUsd": 0.00008570000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q045",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I make a value that's derived from other signals?",
+      "expectedSourcePaths": [
+        "angular/guide/signals/overview.md"
+      ],
+      "searchedQuestion": "How do I make a value that's derived from other signals?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/signals/overview.md",
+          "framework": "angular",
+          "headingPath": "Angular Signals > What are signals? > Computed signals",
+          "score": 0.02382133995037221,
+          "similarity": 0.5211444211688302
+        },
+        {
+          "rank": 2,
+          "source": "angular/reference/errors/NG0600.md",
+          "framework": "angular",
+          "headingPath": "Signal write in a disallowed context > Writing to signals is not allowed in a computed",
+          "score": 0.023581336696090797,
+          "similarity": 0.49777778943380024
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/signals/overview.md",
+          "framework": "angular",
+          "headingPath": "Angular Signals > What are signals? > Computed signals",
+          "score": 0.0234375,
+          "similarity": 0.4986082315444982
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/signals/linked-signal.md",
+          "framework": "angular",
+          "headingPath": "Dependent state with linkedSignal > Customizing the set operation",
+          "score": 0.02128482972136223,
+          "similarity": 0.47740149497986173
+        },
+        {
+          "rank": 5,
+          "source": "angular/reference/extended-diagnostics/NG8109.md",
+          "framework": "angular",
+          "headingPath": "Signals must be invoked in template interpolations. > What's wrong with that?",
+          "score": 0.020200148257968866,
+          "similarity": 0.4328962822494683
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5211444211688302,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 41
+      },
+      "costUsd": 0.0000825,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q046",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I run some code whenever a signal changes, like saving to localStorage?",
+      "expectedSourcePaths": [
+        "angular/guide/signals/effect.md"
+      ],
+      "searchedQuestion": "How do I run some code whenever a signal changes, like saving to localStorage?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/signals/linked-signal.md",
+          "framework": "angular",
+          "headingPath": "Dependent state with linkedSignal",
+          "score": 0.02262253875157101,
+          "similarity": 0.4365827479015151
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/signals/effect.md",
+          "framework": "angular",
+          "headingPath": "Effects",
+          "score": 0.02202101497876146,
+          "similarity": 0.3831825027953093
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/signals/overview.md",
+          "framework": "angular",
+          "headingPath": "Angular Signals > Reactive contexts > Reading without tracking dependencies",
+          "score": 0.0218698175787728,
+          "similarity": 0.4043038728418282
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/signals/linked-signal.md",
+          "framework": "angular",
+          "headingPath": "Dependent state with linkedSignal",
+          "score": 0.01639344262295082,
+          "similarity": 0.43765462749167194
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/signals/effect.md",
+          "framework": "angular",
+          "headingPath": "Effects > Use cases for effects",
+          "score": 0.015873015873015872,
+          "similarity": 0.43610119819641113
+        }
+      ],
+      "hitRank": 2,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.43765462749167194,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 629,
+        "rewriteOutputTokens": 50
+      },
+      "costUsd": 0.00008790000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q047",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I lazy load a page component with the router?",
+      "expectedSourcePaths": [
+        "angular/guide/routing/loading-strategies.md",
+        "angular/guide/routing/define-routes.md"
+      ],
+      "searchedQuestion": "How do I lazy load a page component with the router?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/lazy-loading.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to lazy load Client Components and libraries > Examples > Adding a custom loading component",
+          "score": 0.023821721311475412,
+          "similarity": 0.5580397775125808
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/lazy-loading.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to lazy load Client Components and libraries > next/dynamic",
+          "score": 0.022861881070836296,
+          "similarity": 0.5500036418433656
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/routing/loading-strategies.md",
+          "framework": "angular",
+          "headingPath": "Route Loading Strategies > Should I use an eager or a lazy route?",
+          "score": 0.022051282051282053,
+          "similarity": 0.5572998191535591
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/streaming.mdx",
+          "framework": "nextjs",
+          "headingPath": "Streaming > How the App Router delivers a page",
+          "score": 0.02102564102564103,
+          "similarity": 0.5247989296913147
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/optimizing-the-static-shell.mdx",
+          "framework": "nextjs",
+          "headingPath": "Optimizing the static shell",
+          "score": 0.020300751879699246,
+          "similarity": 0.5240325927734375
+        }
+      ],
+      "hitRank": 3,
+      "frameworkAccuracy": 0.2,
+      "topSimilarity": 0.5580397775125808,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 37
+      },
+      "costUsd": 0.0000804,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q048",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How can I stop users who aren't logged in from opening a route?",
+      "expectedSourcePaths": [
+        "angular/guide/routing/route-guards.md"
+      ],
+      "searchedQuestion": "How can I stop users who aren't logged in from opening a route?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/02-guides/authentication.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement authentication in Next.js > Authorization > Route Handlers",
+          "score": 0.02202101497876146,
+          "similarity": 0.5243632793426514
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/04-functions/unauthorized.mdx",
+          "framework": "nextjs",
+          "headingPath": "unauthorized > Examples > Fetching data with Route Handlers",
+          "score": 0.01639344262295082,
+          "similarity": 0.5656608602010701
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/routing/testing.md",
+          "framework": "angular",
+          "headingPath": "Testing routing and navigation > Testing scenarios > Route guards",
+          "score": 0.016129032258064516,
+          "similarity": 0.5625927112941328
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/03-api-reference/04-functions/forbidden.mdx",
+          "framework": "nextjs",
+          "headingPath": "forbidden > Examples > Role-based route protection",
+          "score": 0.015873015873015872,
+          "similarity": 0.5623787809127209
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/authentication.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to implement authentication in Next.js > Authorization > Optimistic checks with Proxy (Optional)",
+          "score": 0.015625,
+          "similarity": 0.5588334132631564
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 0.2,
+      "topSimilarity": 0.5656608602010701,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 624,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.00008340000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q049",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I attach an auth token to every HTTP request?",
+      "expectedSourcePaths": [
+        "angular/guide/http/interceptors.md"
+      ],
+      "searchedQuestion": "How do I attach an auth token to every HTTP request?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/http/testing.md",
+          "framework": "angular",
+          "headingPath": "Test requests > Testing an Interceptor",
+          "score": 0.023746383799421407,
+          "similarity": 0.5503229766891622
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/http/testing.md",
+          "framework": "angular",
+          "headingPath": "Test requests > Testing an Interceptor",
+          "score": 0.022770398481973434,
+          "similarity": 0.4653371274471316
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/security.md",
+          "framework": "angular",
+          "headingPath": "Security > HTTP-level vulnerabilities > HttpClient XSRF/CSRF security",
+          "score": 0.021897007042253523,
+          "similarity": 0.45588180685747903
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/http/interceptors.md",
+          "framework": "angular",
+          "headingPath": "Interceptors > Dependency injection in interceptors",
+          "score": 0.016129032258064516,
+          "similarity": 0.5408357977867165
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/http/interceptors.md",
+          "framework": "angular",
+          "headingPath": "Interceptors > Request and response metadata > Setting context tokens when making a request",
+          "score": 0.015873015873015872,
+          "similarity": 0.5207319259643591
+        }
+      ],
+      "hitRank": 4,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5503229766891622,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 40
+      },
+      "costUsd": 0.0000822,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q050",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I set up HttpClient in a standalone app?",
+      "expectedSourcePaths": [
+        "angular/guide/http/setup.md"
+      ],
+      "searchedQuestion": "How do I set up HttpClient in a standalone Angular app?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/http/setup.md",
+          "framework": "angular",
+          "headingPath": "Setting up HttpClient",
+          "score": 0.02459016393442623,
+          "similarity": 0.6847317438997965
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/http/setup.md",
+          "framework": "angular",
+          "headingPath": "Setting up HttpClient > Providing HttpClient through dependency injection",
+          "score": 0.023171285779191277,
+          "similarity": 0.6448196172714233
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/http/overview.md",
+          "framework": "angular",
+          "headingPath": "Understanding communication with backend services using HTTP > What's next",
+          "score": 0.021504320502749412,
+          "similarity": 0.559230403877211
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/http/setup.md",
+          "framework": "angular",
+          "headingPath": "Setting up HttpClient > HttpClientModule-based configuration",
+          "score": 0.015873015873015872,
+          "similarity": 0.6037070155143738
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/http/setup.md",
+          "framework": "angular",
+          "headingPath": "Setting up HttpClient > Configuring features of HttpClient",
+          "score": 0.015625,
+          "similarity": 0.6034515263707366
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6847317438997965,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 46
+      },
+      "costUsd": 0.0000852,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q051",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I loop over a list in a template with the new control flow?",
+      "expectedSourcePaths": [
+        "angular/guide/templates/control-flow.md"
+      ],
+      "searchedQuestion": "How do I loop over a list in a template with the new control flow?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/templates/control-flow.md",
+          "framework": "angular",
+          "headingPath": "Control flow",
+          "score": 0.021578029642545772,
+          "similarity": 0.4046152304685665
+        },
+        {
+          "rank": 2,
+          "source": "angular/reference/migrations/control-flow.md",
+          "framework": "angular",
+          "headingPath": "Migration to Control Flow syntax",
+          "score": 0.02101723413198823,
+          "similarity": 0.3847886347266757
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/templates/control-flow.md",
+          "framework": "angular",
+          "headingPath": "Control flow > Repeat content with the @for block > Contextual variables in @for blocks",
+          "score": 0.01639344262295082,
+          "similarity": 0.5641675071916032
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/templates/control-flow.md",
+          "framework": "angular",
+          "headingPath": "Control flow > Repeat content with the @for block",
+          "score": 0.016129032258064516,
+          "similarity": 0.5513886809349217
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/templates/control-flow.md",
+          "framework": "angular",
+          "headingPath": "Control flow > Repeat content with the @for block > Providing a fallback for @for blocks with the @empty block",
+          "score": 0.015873015873015872,
+          "similarity": 0.5242230325011091
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5641675071916032,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 623,
+        "rewriteOutputTokens": 226
+      },
+      "costUsd": 0.0001753,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q052",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "Can I delay loading a heavy component until it scrolls into view?",
+      "expectedSourcePaths": [
+        "angular/guide/templates/defer.md"
+      ],
+      "searchedQuestion": "Can I delay loading a heavy component until it scrolls into view?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/templates/defer.md",
+          "framework": "angular",
+          "headingPath": "Deferred loading with @defer > Best practices for deferring views > Avoid layout shifts",
+          "score": 0.023435696144077582,
+          "similarity": 0.5961048247751709
+        },
+        {
+          "rank": 2,
+          "source": "angular/best-practices/performance/overview.md",
+          "framework": "angular",
+          "headingPath": "Performance > Loading performance",
+          "score": 0.022294372294372294,
+          "similarity": 0.5438164148440123
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/templates/defer.md",
+          "framework": "angular",
+          "headingPath": "Deferred loading with @defer",
+          "score": 0.021713729308666017,
+          "similarity": 0.5441004037857095
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/incremental-hydration.md",
+          "framework": "angular",
+          "headingPath": "Incremental Hydration > Controlling hydration of content with triggers > hydrate on",
+          "score": 0.02,
+          "similarity": 0.5174391248894781
+        },
+        {
+          "rank": 5,
+          "source": "react-native/optimizing-javascript-loading.md",
+          "framework": "react-native",
+          "headingPath": "Optimizing JavaScript loading > Recommended: Lazy-load large components",
+          "score": 0.016129032258064516,
+          "similarity": 0.55784380435944
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 0.8,
+      "topSimilarity": 0.5961048247751709,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 626,
+        "rewriteOutputTokens": 44
+      },
+      "costUsd": 0.0000846,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q053",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I make a component input required?",
+      "expectedSourcePaths": [
+        "angular/guide/components/inputs.md"
+      ],
+      "searchedQuestion": "How do I make a component input required?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/components/inputs.md",
+          "framework": "angular",
+          "headingPath": "Accepting data with input properties > Required inputs",
+          "score": 0.024329950559458757,
+          "similarity": 0.6205565189651868
+        },
+        {
+          "rank": 2,
+          "source": "angular/reference/errors/NG0950.md",
+          "framework": "angular",
+          "headingPath": "Required input is accessed before a value is set.",
+          "score": 0.02321603128054741,
+          "similarity": 0.5351058479954286
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/forms/reactive-forms.md",
+          "framework": "angular",
+          "headingPath": "Reactive forms > Validating form input",
+          "score": 0.022305253623188408,
+          "similarity": 0.5195782912154591
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/forms/form-validation.md",
+          "framework": "angular",
+          "headingPath": "Validating form input > Validating input in reactive forms > Built-in validator functions",
+          "score": 0.021504320502749412,
+          "similarity": 0.5240292520488238
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/forms/signals/field-metadata.md",
+          "framework": "angular",
+          "headingPath": "Field metadata > You have already been using metadata",
+          "score": 0.016129032258064516,
+          "similarity": 0.5580847360416055
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6205565189651868,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 614,
+        "rewriteOutputTokens": 32
+      },
+      "costUsd": 0.00007740000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q054",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How does a child component send an event up to its parent?",
+      "expectedSourcePaths": [
+        "angular/guide/components/outputs.md"
+      ],
+      "searchedQuestion": "How does a child component send an event up to its parent?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/components/outputs.md",
+          "framework": "angular",
+          "headingPath": "Custom events with outputs > Emitting event data",
+          "score": 0.023150199379707578,
+          "similarity": 0.45577238368309714
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/routing/lifecycle-and-events.md",
+          "framework": "angular",
+          "headingPath": "Router Lifecycle and Events > All router events > Activation events",
+          "score": 0.021183734298488396,
+          "similarity": 0.3720173648600986
+        },
+        {
+          "rank": 3,
+          "source": "angular/best-practices/runtime-performance/skipping-subtrees.md",
+          "framework": "angular",
+          "headingPath": "Skipping component subtrees > New inputs to component with OnPush",
+          "score": 0.020011169024571854,
+          "similarity": 0.37088489532470703
+        },
+        {
+          "rank": 4,
+          "source": "angular/best-practices/runtime-performance/skipping-subtrees.md",
+          "framework": "angular",
+          "headingPath": "Skipping component subtrees > An event is handled by a descendant of a component with OnPush",
+          "score": 0.016129032258064516,
+          "similarity": 0.44455885887145996
+        },
+        {
+          "rank": 5,
+          "source": "react-native/the-new-architecture/native-modules-custom-events.md",
+          "framework": "react-native",
+          "headingPath": "Emitting Events in Native Modules > Step 3: Update the App code",
+          "score": 0.015873015873015872,
+          "similarity": 0.41558783240173547
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 0.8,
+      "topSimilarity": 0.45577238368309714,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 37
+      },
+      "costUsd": 0.0000804,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q055",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I make a service a singleton available everywhere?",
+      "expectedSourcePaths": [
+        "angular/guide/di/creating-and-using-services.md"
+      ],
+      "searchedQuestion": "How do I make a service a singleton available everywhere?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/di/hierarchical-dependency-injection.md",
+          "framework": "angular",
+          "headingPath": "Hierarchical injectors > Example: ElementInjector use cases",
+          "score": 0.024069737184491284,
+          "similarity": 0.4855232808929597
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/di/defining-dependency-providers.md",
+          "framework": "angular",
+          "headingPath": "Defining dependency providers > Where can you specify providers?",
+          "score": 0.023561507936507936,
+          "similarity": 0.47078883647919034
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/di/creating-and-using-services.md",
+          "framework": "angular",
+          "headingPath": "Creating and using services > How services become available",
+          "score": 0.023481973434535106,
+          "similarity": 0.502174168954741
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/di/overview.md",
+          "framework": "angular",
+          "headingPath": "Dependency injection in Angular > What are services?",
+          "score": 0.02273787313432836,
+          "similarity": 0.4572558079514397
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/di/hierarchical-dependency-injection.md",
+          "framework": "angular",
+          "headingPath": "Hierarchical injectors > Example: ElementInjector use cases > Scenario: multiple edit sessions",
+          "score": 0.021963562753036438,
+          "similarity": 0.4622199788355802
+        }
+      ],
+      "hitRank": 3,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.502174168954741,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.0000831,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q056",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I mark a reactive form field as required?",
+      "expectedSourcePaths": [
+        "angular/guide/forms/form-validation.md"
+      ],
+      "searchedQuestion": "How do I mark a reactive form field as required?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/forms/reactive-forms.md",
+          "framework": "angular",
+          "headingPath": "Reactive forms > Validating form input",
+          "score": 0.023481973434535106,
+          "similarity": 0.629262466110661
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/forms/signals/form-logic.md",
+          "framework": "angular",
+          "headingPath": "Adding form logic > Associate data with a field using metadata()",
+          "score": 0.022767857142857142,
+          "similarity": 0.6090121450725839
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/forms/signals/cross-field-logic.md",
+          "framework": "angular",
+          "headingPath": "Cross-field logic > Cross-field validation patterns > Conditional requirements",
+          "score": 0.022642390289449112,
+          "similarity": 0.5753112182206652
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/forms/template-driven-forms.md",
+          "framework": "angular",
+          "headingPath": "Building a template-driven form > Track control states > Create visual feedback for states",
+          "score": 0.021330883853847724,
+          "similarity": 0.5561795234680176
+        },
+        {
+          "rank": 5,
+          "source": "angular/introduction/essentials/signal-forms.md",
+          "framework": "angular",
+          "headingPath": "Forms with signals > Validation and state",
+          "score": 0.02102564102564103,
+          "similarity": 0.5430548735791634
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.629262466110661,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 619,
+        "rewriteOutputTokens": 40
+      },
+      "costUsd": 0.00008190000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q057",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I run my app without zone.js?",
+      "expectedSourcePaths": [
+        "angular/guide/zoneless.md"
+      ],
+      "searchedQuestion": "How do I run my Angular app without zone.js?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/introduction/installation.md",
+          "framework": "angular",
+          "headingPath": "Installation > Play Online",
+          "score": 0.02222222222222222,
+          "similarity": 0.516338377217152
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/zoneless.md",
+          "framework": "angular",
+          "headingPath": "Angular without ZoneJS (Zoneless) > Testing and Debugging > Using Zoneless in TestBed",
+          "score": 0.022168568920105356,
+          "similarity": 0.5231500267982483
+        },
+        {
+          "rank": 3,
+          "source": "angular/reference/errors/NG0506.md",
+          "framework": "angular",
+          "headingPath": "Application remains unstable > Applications that use zone.js",
+          "score": 0.021028951486697964,
+          "similarity": 0.5148192201500901
+        },
+        {
+          "rank": 4,
+          "source": "angular/reference/errors/NG0506.md",
+          "framework": "angular",
+          "headingPath": "Application remains unstable > Applications that use zone.js > Running code after an application becomes stable",
+          "score": 0.020645645645645645,
+          "similarity": 0.507899284362793
+        },
+        {
+          "rank": 5,
+          "source": "angular/best-practices/runtime-performance/zone-pollution.md",
+          "framework": "angular",
+          "headingPath": "Resolving zone pollution",
+          "score": 0.020182648401826486,
+          "similarity": 0.5027790069580078
+        }
+      ],
+      "hitRank": 2,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5231500267982483,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 617,
+        "rewriteOutputTokens": 41
+      },
+      "costUsd": 0.0000822,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q058",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": true,
+      "question": "How do I enable hydration for server-side rendering?",
+      "expectedSourcePaths": [
+        "angular/guide/hydration.md"
+      ],
+      "searchedQuestion": "How do I enable hydration for server-side rendering?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/hydration.md",
+          "framework": "angular",
+          "headingPath": "Hydration > How do you enable hydration in Angular",
+          "score": 0.023856129190115,
+          "similarity": 0.6540607420169876
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/hydration.md",
+          "framework": "angular",
+          "headingPath": "Hydration > What is hydration",
+          "score": 0.023685515873015872,
+          "similarity": 0.5921184840167044
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/templates/defer.md",
+          "framework": "angular",
+          "headingPath": "Deferred loading with @defer > How does @defer work with server-side rendering (SSR) and static-site generation (SSG)?",
+          "score": 0.02332112332112332,
+          "similarity": 0.5841180682182353
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/incremental-hydration.md",
+          "framework": "angular",
+          "headingPath": "Incremental Hydration > How do you enable incremental hydration in Angular?",
+          "score": 0.022989889263360617,
+          "similarity": 0.5793832195172786
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/performance/overview.md",
+          "framework": "angular",
+          "headingPath": "Server-side & hybrid rendering",
+          "score": 0.021739130434782608,
+          "similarity": 0.5743275455930161
+        }
+      ],
+      "hitRank": 1,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6540607420169876,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 39
+      },
+      "costUsd": 0.00008159999999999999,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q059",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I write a loader function in Remix?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I write a loader function in Remix?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/signals/resource.md",
+          "framework": "angular",
+          "headingPath": "Async reactivity with resources > Resource loaders",
+          "score": 0.023856129190115,
+          "similarity": 0.4260172159692306
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/signals/resource.md",
+          "framework": "angular",
+          "headingPath": "Async reactivity with resources",
+          "score": 0.022617680826636052,
+          "similarity": 0.4028822423745546
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/image-optimization.md",
+          "framework": "angular",
+          "headingPath": "Getting started with NgOptimizedImage > Configuring an image loader for NgOptimizedImage > Example custom loader",
+          "score": 0.02104247104247104,
+          "similarity": 0.3949773907661467
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/image-optimization.md",
+          "framework": "angular",
+          "headingPath": "Getting started with NgOptimizedImage > Configuring an image loader for NgOptimizedImage",
+          "score": 0.02101723413198823,
+          "similarity": 0.37849608787918165
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/image-optimization.md",
+          "framework": "angular",
+          "headingPath": "Getting started with NgOptimizedImage > Configuring an image loader for NgOptimizedImage > Custom Loaders",
+          "score": 0.020562770562770564,
+          "similarity": 0.3800779807614083
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.4260172159692306,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 618,
+        "rewriteOutputTokens": 36
+      },
+      "costUsd": 0.00007980000000000002,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q060",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I define a store with Pinia in Vue 3?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I define a store with Pinia in Vue 3?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/05-config/01-next-config-js/cacheHandlers.mdx",
+          "framework": "nextjs",
+          "headingPath": "cacheHandlers",
+          "score": 0.022843822843822845,
+          "similarity": 0.3216640161476132
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/di/debugging-and-troubleshooting-di.md",
+          "framework": "angular",
+          "headingPath": "Debugging and troubleshooting dependency injection > Common pitfalls and solutions > providers vs viewProviders confusion",
+          "score": 0.01639344262295082,
+          "similarity": 0.3526246513203416
+        },
+        {
+          "rank": 3,
+          "source": "react-native/turbo-native-modules.md",
+          "framework": "react-native",
+          "headingPath": "Native Modules: Introduction > Native Modules > Native Persistent Storage > 3. Write Application Code using the Turbo Native Module",
+          "score": 0.016129032258064516,
+          "similarity": 0.33739992007017205
+        },
+        {
+          "rank": 4,
+          "source": "react-native/settings.md",
+          "framework": "react-native",
+          "headingPath": "Settings > Example",
+          "score": 0.015873015873015872,
+          "similarity": 0.32765311979214085
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/di/defining-dependency-providers.md",
+          "framework": "angular",
+          "headingPath": "Defining dependency providers > Understanding manual provider configuration",
+          "score": 0.015625,
+          "similarity": 0.32449255439683533
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.3526246513203416,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 623,
+        "rewriteOutputTokens": 41
+      },
+      "costUsd": 0.00008280000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q061",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I create a form action in SvelteKit?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I create a form action in SvelteKit?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/02-components/form.mdx",
+          "framework": "nextjs",
+          "headingPath": "Form Component > Examples > Mutations with Server Actions",
+          "score": 0.023856129190115,
+          "similarity": 0.6317516345829757
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/02-guides/forms.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to create forms with Server Actions > Nested form elements",
+          "score": 0.023821721311475412,
+          "similarity": 0.6063547369030372
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/forms.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to create forms with Server Actions > How it works",
+          "score": 0.023015873015873014,
+          "similarity": 0.6148459911346479
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/forms.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to create forms with Server Actions",
+          "score": 0.022557269752220666,
+          "similarity": 0.5801264739187328
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/forms.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to create forms with Server Actions > Pending states",
+          "score": 0.022058823529411763,
+          "similarity": 0.5844007482767561
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.6317516345829757,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 38
+      },
+      "costUsd": 0.000081,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q062",
+      "frameworks": [
+        "nextjs"
+      ],
+      "answerable": false,
+      "question": "What does the useServerCache hook in Next.js do?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "What does the useServerCache hook in Next.js do?",
+      "detectedFrameworks": [
+        "nextjs"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/03-api-reference/01-directives/index.mdx",
+          "framework": "nextjs",
+          "headingPath": "Directives",
+          "score": 0.01639344262295082,
+          "similarity": 0.6695749360576322
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/01-directives/use-cache-remote.mdx",
+          "framework": "nextjs",
+          "headingPath": "use cache: remote",
+          "score": 0.016129032258064516,
+          "similarity": 0.6578155755996704
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/03-api-reference/01-directives/use-cache.mdx",
+          "framework": "nextjs",
+          "headingPath": "use cache > Constraints > Runtime caching considerations",
+          "score": 0.015873015873015872,
+          "similarity": 0.6452326774597168
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/04-glossary.mdx",
+          "framework": "nextjs",
+          "headingPath": "Next.js Glossary > U > \"use cache\" Directive",
+          "score": 0.015625,
+          "similarity": 0.6345170140266418
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/client-side-data-fetching/swr.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to fetch client-side data with SWR > Cache server-provided data with Cache Components",
+          "score": 0.015384615384615385,
+          "similarity": 0.6335670729617531
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.6695749360576322,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 45
+      },
+      "costUsd": 0.0000847,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q063",
+      "frameworks": [
+        "angular"
+      ],
+      "answerable": false,
+      "question": "How do I use Angular's @computedInput decorator?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I use Angular's @computedInput decorator?",
+      "detectedFrameworks": [
+        "angular"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/best-practices/style-guide.md",
+          "framework": "angular",
+          "headingPath": "Angular coding style guide > Components and directives > Use readonly for properties that shouldn't change",
+          "score": 0.021249510379945165,
+          "similarity": 0.46898555755615234
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/components/inputs.md",
+          "framework": "angular",
+          "headingPath": "Accepting data with input properties > Reading inputs",
+          "score": 0.01639344262295082,
+          "similarity": 0.5424119830131531
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/components/inputs.md",
+          "framework": "angular",
+          "headingPath": "Accepting data with input properties > Declaring inputs with the @Input decorator",
+          "score": 0.016129032258064516,
+          "similarity": 0.5170493434100961
+        },
+        {
+          "rank": 4,
+          "source": "angular/introduction/essentials/signals.md",
+          "framework": "angular",
+          "headingPath": "Signals > Computed expressions",
+          "score": 0.015873015873015872,
+          "similarity": 0.5067475430074319
+        },
+        {
+          "rank": 5,
+          "source": "angular/guide/components/inputs.md",
+          "framework": "angular",
+          "headingPath": "Accepting data with input properties > Declaring inputs with the @Input decorator > Inputs with getters and setters",
+          "score": 0.015625,
+          "similarity": 0.5048570627144536
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5424119830131531,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 622,
+        "rewriteOutputTokens": 43
+      },
+      "costUsd": 0.0000837,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q064",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I write a Django REST framework serializer?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I write a Django REST framework serializer?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/CodeTransformation.md",
+          "framework": "jest",
+          "headingPath": "Code Transformation > Writing custom transformers",
+          "score": 0.0220682302771855,
+          "similarity": 0.34416434168815613
+        },
+        {
+          "rank": 2,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Serializable properties > SERIALIZABLE_PROPERTIES",
+          "score": 0.01639344262295082,
+          "similarity": 0.4008231520162141
+        },
+        {
+          "rank": 3,
+          "source": "jest/Configuration.md",
+          "framework": "jest",
+          "headingPath": "Configuring Jest > Reference > snapshotSerializers [array<string>]",
+          "score": 0.016129032258064516,
+          "similarity": 0.39960432052612305
+        },
+        {
+          "rank": 4,
+          "source": "jest/ExpectAPI.md",
+          "framework": "jest",
+          "headingPath": "Expect > Extend Utilities > expect.addSnapshotSerializer(serializer)",
+          "score": 0.015873015873015872,
+          "similarity": 0.39510391412927026
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/03-api-reference/05-config/01-next-config-js/cacheHandlers.mdx",
+          "framework": "nextjs",
+          "headingPath": "cacheHandlers > Examples > External storage pattern",
+          "score": 0.015625,
+          "similarity": 0.39231395721435547
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.4008231520162141,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 620,
+        "rewriteOutputTokens": 38
+      },
+      "costUsd": 0.000081,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q065",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I combine useReducer and useContext for global state in React?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I combine useReducer and useContext for global state in React?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "nextjs/01-app/01-getting-started/05-server-and-client-components.mdx",
+          "framework": "nextjs",
+          "headingPath": "Server and Client Components > Examples > Context providers",
+          "score": 0.022871376811594204,
+          "similarity": 0.4104863053850125
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/02-components/link.mdx",
+          "framework": "nextjs",
+          "headingPath": "Link Component > Examples > Blocking navigation",
+          "score": 0.021776814734561216,
+          "similarity": 0.37773494455038836
+        },
+        {
+          "rank": 3,
+          "source": "nextjs/01-app/02-guides/preventing-flash-before-hydration.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to prevent flash before hydration > Syncing with React state",
+          "score": 0.02109440267335004,
+          "similarity": 0.34842821052242634
+        },
+        {
+          "rank": 4,
+          "source": "nextjs/01-app/02-guides/single-page-applications.mdx",
+          "framework": "nextjs",
+          "headingPath": "How to build single-page applications with Next.js > Build common SPA patterns > Using React's use within a Context Provider",
+          "score": 0.01639344262295082,
+          "similarity": 0.4535982418297151
+        },
+        {
+          "rank": 5,
+          "source": "nextjs/01-app/02-guides/streaming.mdx",
+          "framework": "nextjs",
+          "headingPath": "Streaming > Streaming data to the client > Sharing a promise across the tree",
+          "score": 0.016129032258064516,
+          "similarity": 0.4509859949938064
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.4535982418297151,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 624,
+        "rewriteOutputTokens": 42
+      },
+      "costUsd": 0.00008340000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q066",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I stub HTTP requests in Mocha with Sinon?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I stub HTTP requests in Mocha with Sinon?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/guide/testing/components-scenarios.md",
+          "framework": "angular",
+          "headingPath": "Component testing scenarios > Component with async service > Testing by providing a stubbed implementation of a service.",
+          "score": 0.02445795875198308,
+          "similarity": 0.4846861651352752
+        },
+        {
+          "rank": 2,
+          "source": "angular/guide/http/testing.md",
+          "framework": "angular",
+          "headingPath": "Test requests",
+          "score": 0.022451963241436924,
+          "similarity": 0.4536101818084717
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/testing/services.md",
+          "framework": "angular",
+          "headingPath": "Testing services > Testing HTTP services",
+          "score": 0.021532091097308487,
+          "similarity": 0.41265564636323804
+        },
+        {
+          "rank": 4,
+          "source": "angular/guide/http/testing.md",
+          "framework": "angular",
+          "headingPath": "Test requests > Expecting and answering requests",
+          "score": 0.016129032258064516,
+          "similarity": 0.47695600849127906
+        },
+        {
+          "rank": 5,
+          "source": "jest/MockFunctions.md",
+          "framework": "jest",
+          "headingPath": "Mock Functions > Mocking Modules",
+          "score": 0.015625,
+          "similarity": 0.4456361564614688
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.4846861651352752,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 627,
+        "rewriteOutputTokens": 45
+      },
+      "costUsd": 0.0000852,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q067",
+      "frameworks": [],
+      "answerable": false,
+      "question": "How do I set up hot reload for Flutter web?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I set up hot reload for Flutter web?",
+      "detectedFrameworks": [],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "angular/tools/cli/build-system-migration.md",
+          "framework": "angular",
+          "headingPath": "Angular application build system > Starting the development server",
+          "score": 0.02273787313432836,
+          "similarity": 0.506626740295492
+        },
+        {
+          "rank": 2,
+          "source": "nextjs/01-app/03-api-reference/06-cli/next.mdx",
+          "framework": "nextjs",
+          "headingPath": "next CLI > Reference > next dev options",
+          "score": 0.021730462519936204,
+          "similarity": 0.5102881053347684
+        },
+        {
+          "rank": 3,
+          "source": "angular/guide/templates/defer.md",
+          "framework": "angular",
+          "headingPath": "Deferred loading with @defer > Compatibility between @defer blocks and Hot Module Reload (HMR)",
+          "score": 0.0216602646180111,
+          "similarity": 0.4940923150832841
+        },
+        {
+          "rank": 4,
+          "source": "react-native/devsettings.md",
+          "framework": "react-native",
+          "headingPath": "DevSettings > Reference > Methods > reload()",
+          "score": 0.01639344262295082,
+          "similarity": 0.5418231052703594
+        },
+        {
+          "rank": 5,
+          "source": "react-native/running-on-device.md",
+          "framework": "react-native",
+          "headingPath": "Running On Device > Building your app for production > Method 1: Using adb reverse (recommended)",
+          "score": 0.016129032258064516,
+          "similarity": 0.5412858451179173
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": null,
+      "topSimilarity": 0.5418231052703594,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 621,
+        "rewriteOutputTokens": 39
+      },
+      "costUsd": 0.00008159999999999999,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    },
+    {
+      "id": "q068",
+      "frameworks": [
+        "jest"
+      ],
+      "answerable": false,
+      "question": "How do I run Jest tests on a remote device farm with the jest-cloud plugin?",
+      "expectedSourcePaths": [],
+      "searchedQuestion": "How do I run Jest tests on a remote device farm with the jest-cloud plugin?",
+      "detectedFrameworks": [
+        "jest"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "source": "jest/GettingStarted.md",
+          "framework": "jest",
+          "headingPath": "Getting Started > Running from command line",
+          "score": 0.022379032258064514,
+          "similarity": 0.5348523141311691
+        },
+        {
+          "rank": 2,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --selectProjects <project1> ... <projectN>",
+          "score": 0.02181818181818182,
+          "similarity": 0.5022367688033078
+        },
+        {
+          "rank": 3,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --runInBand",
+          "score": 0.020562770562770564,
+          "similarity": 0.4842295935290818
+        },
+        {
+          "rank": 4,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Reference > --ci",
+          "score": 0.020455386893743058,
+          "similarity": 0.489194273948673
+        },
+        {
+          "rank": 5,
+          "source": "jest/CLI.md",
+          "framework": "jest",
+          "headingPath": "Jest CLI Options > Running from the command line",
+          "score": 0.020092460881934567,
+          "similarity": 0.4871495060413791
+        }
+      ],
+      "hitRank": null,
+      "frameworkAccuracy": 1,
+      "topSimilarity": 0.5348523141311691,
+      "answered": null,
+      "outcome": null,
+      "answer": null,
+      "citations": [],
+      "mustMentionScore": null,
+      "mustMentionDetail": null,
+      "faithfulness": null,
+      "claims": null,
+      "ttftMs": null,
+      "totalMs": null,
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "rewriteInputTokens": 633,
+        "rewriteOutputTokens": 54
+      },
+      "costUsd": 0.00009030000000000001,
+      "judgeCostUsd": 0,
+      "error": false,
+      "errorMessage": null
+    }
+  ]
+}
