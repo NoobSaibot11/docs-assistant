@@ -13,6 +13,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: CI,
   retries: CI ? 1 : 0,
+  // The local dev server compiles each page on first request (slowly, with WASM SWC).
+  timeout: CI ? 30_000 : 90_000,
   reporter: CI ? [["list"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: `http://localhost:${PORT}`,

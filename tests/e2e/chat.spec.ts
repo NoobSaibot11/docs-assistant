@@ -58,6 +58,7 @@ const ANSWER: ChatEvent[] = [
       rewriteOutputTokens: 1,
     },
     topSimilarity: 0.6,
+    queryId: "query-1",
   },
 ];
 
@@ -76,9 +77,17 @@ async function fakeChat(page: Page, handler: (route: Route) => Promise<void>) {
 const answerWith = (events: ChatEvent[]) => (route: Route) =>
   route.fulfill({ status: 200, contentType: "application/x-ndjson", body: ndjson(events) });
 
+/**
+ * Types and sends a question. Typing before React hydrates does nothing (the Send button stays
+ * disabled), which happens on a cold dev server, so retry until the button reacts.
+ */
 async function ask(page: Page, question: string) {
   const box = page.getByRole("textbox", { name: "Ask a question about the docs" });
-  await box.fill(question);
+  const send = page.getByRole("button", { name: "Send" });
+  await expect(async () => {
+    await box.fill(question);
+    await expect(send).toBeEnabled({ timeout: 1_000 });
+  }).toPass({ timeout: 60_000 });
   await box.press("Enter");
 }
 
@@ -192,4 +201,34 @@ test("shows the not-found answer without sources", async ({ page }) => {
   await ask(page, "How do I write a Remix loader?");
   await expect(page.getByText("I couldn't find this in the docs.")).toBeVisible();
   await expect(page.getByRole("region", { name: "Sources" })).toHaveCount(0);
+});
+
+test("sends thumbs up/down feedback for an answer", async ({ page }) => {
+  await fakeChat(page, answerWith(ANSWER));
+  const feedback: unknown[] = [];
+  await page.route("**/api/feedback", async (route) => {
+    feedback.push(route.request().postDataJSON());
+    await route.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' });
+  });
+  await page.goto("/");
+
+  await ask(page, "How do I revalidate fetched data every 60 seconds?");
+  const helpful = page.getByRole("button", { name: "Helpful", exact: true });
+  await helpful.click();
+  await expect(helpful).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("Thanks for the feedback.")).toBeVisible();
+
+  await page.getByRole("button", { name: "Not helpful" }).click();
+  await expect(helpful).toHaveAttribute("aria-pressed", "false");
+  expect(feedback).toEqual([
+    { queryId: "query-1", rating: "up" },
+    { queryId: "query-1", rating: "down" },
+  ]);
+});
+
+test("shows the stats page", async ({ page }) => {
+  await page.goto("/stats");
+  await expect(page.getByRole("heading", { name: "Stats" })).toBeVisible();
+  await expect(page.getByText("Time to first token")).toBeVisible();
+  await expect(page.getByRole("link", { name: "← Back to chat" })).toHaveAttribute("href", "/");
 });

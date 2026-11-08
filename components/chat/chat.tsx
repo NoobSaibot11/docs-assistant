@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import { FrameworkFilter } from "@/components/chat/framework-filter";
@@ -15,14 +16,22 @@ const EXAMPLES = [
 ];
 
 export function Chat() {
-  const { turns, busy, ask, retry, stop, clear } = useChat();
+  const { turns, busy, ask, retry, stop, clear, rate } = useChat();
   const [filter, setFilter] = useState<Filter>("all");
   const send = (question: string) => ask(question, filter);
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4">
       <header className="sticky top-0 z-10 -mx-4 flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90">
-        <h1 className="text-lg font-semibold tracking-tight">Docs Assistant</h1>
+        <div className="flex items-baseline gap-3">
+          <h1 className="text-lg font-semibold tracking-tight">Docs Assistant</h1>
+          <Link
+            href="/stats"
+            className="text-xs text-zinc-500 hover:text-zinc-900 hover:underline dark:hover:text-zinc-100"
+          >
+            Stats
+          </Link>
+        </div>
         <div className="flex min-w-0 items-center gap-2">
           <FrameworkFilter value={filter} onChange={setFilter} />
           {turns.length > 0 && (
@@ -60,7 +69,7 @@ export function Chat() {
             </ul>
           </section>
         ) : (
-          <MessageList turns={turns} onRetry={retry} />
+          <MessageList turns={turns} onRetry={retry} onRate={(id, r) => void rate(id, r)} />
         )}
       </main>
 
