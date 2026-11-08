@@ -39,3 +39,14 @@ export const RETRIEVAL = {
    */
   efSearch: 100,
 } as const;
+
+export const CHAT = {
+  /** Earlier turns (user + assistant messages) sent with a question; older ones are dropped. */
+  historyMessages: 6,
+  maxQuestionChars: 2_000,
+  /** Long assistant turns in history are cut to this many characters before the rewrite call. */
+  maxHistoryMessageChars: 4_000,
+  /** Answer budget, including adaptive thinking. Generous so answers aren't cut off mid-code. */
+  answerMaxTokens: 8_192,
+  rewriteMaxTokens: 1_024,
+} as const;

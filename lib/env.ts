@@ -39,6 +39,9 @@ export const envSchema = z.object({
   CLAUDE_MODEL: z.string().min(1).default("claude-sonnet-5-5"),
   CLAUDE_FAST_MODEL: z.string().min(1).default("claude-haiku-5-5"),
   VOYAGE_MODEL: z.string().min(1).default("voyage-4"),
+  // Thinking depth for the answer model. Sonnet 5.5 can't turn thinking off; "low" keeps
+  // time-to-first-token short for docs Q&A. Tune with the eval set.
+  CLAUDE_EFFORT: z.enum(["low", "medium", "high", "xhigh", "max"]).default("low"),
 
   // Optional client-side throttle for Voyage. Without a payment method on file, Voyage allows
   // 3 requests and 10K tokens per minute; set VOYAGE_RPM=3 and VOYAGE_TPM=10000 to stay under it.

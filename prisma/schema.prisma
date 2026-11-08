@@ -66,17 +66,20 @@ model Message {
 }
 
 model QueryLog {
-  id              String   @id @default(cuid())
-  question        String
-  retrievalMode   String // "vector" | "keyword" | "hybrid"
-  frameworks      String[] // selected by the user or detected
-  topChunkIds     String[]
-  topScore        Float
-  answered        Boolean // false when the "not found" path was taken
-  ttftMs          Int // time to first token
-  totalMs         Int
-  inputTokens     Int
-  outputTokens    Int
-  cacheReadTokens Int
-  createdAt       DateTime @default(now())
+  id                  String   @id @default(cuid())
+  question            String
+  retrievalMode       String // "vector" | "keyword" | "hybrid"
+  frameworks          String[] // selected by the user or detected
+  topChunkIds         String[]
+  topScore            Float
+  answered            Boolean // false when the "not found" path was taken
+  outcome             String   @default("answered") // "answered" | "not_found" | "aborted" | "error"
+  ttftMs              Int? // time to first token; null when no text was sent (abort or error first)
+  totalMs             Int
+  inputTokens         Int // answer model (CLAUDE_MODEL)
+  outputTokens        Int
+  cacheReadTokens     Int
+  rewriteInputTokens  Int      @default(0) // rewrite/tagging model (CLAUDE_FAST_MODEL)
+  rewriteOutputTokens Int      @default(0)
+  createdAt           DateTime @default(now())
 }
