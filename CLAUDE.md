@@ -25,12 +25,14 @@ Jest docs. Full spec in `SPEC.md`; build plan is phased (see "Build plan" there)
 
 ```bash
 pnpm dev               # Next dev server (needs the db: docker compose up -d db)
+pnpm dev:webpack       # same, with webpack + WASM SWC (use on this machine; see Chat UI notes)
 pnpm typecheck         # tsc --noEmit
 pnpm lint              # eslint
 pnpm format            # prettier --write
 pnpm test              # vitest run: unit + integration (integration needs TEST_DATABASE_URL)
 pnpm test:unit         # unit tests only (no database)
 pnpm test:integration  # real Postgres; creates + migrates the test db automatically
+pnpm test:e2e          # Playwright smoke tests (fakes /api/chat; starts its own server on :3100)
 pnpm ingest            # fetch, chunk, embed, store (needs VOYAGE_API_KEY)
 pnpm ingest --framework jest --dry-run   # chunk only: counts, est. tokens, removed JSX
 pnpm run search "question" --mode hybrid --framework jest   # top chunks with scores (`run` is required: `pnpm search` is pnpm's registry search)
@@ -121,3 +123,24 @@ curl -N -X POST localhost:3001/api/chat -H 'content-type: application/json' -d '
 - Every request writes one `QueryLog` row (`outcome`: answered | not_found | aborted | error).
 - On this machine, Windows Application Control blocks Next's native SWC binary, so `pnpm build`
   fails locally; build in Docker (`docker compose build app`) or CI instead.
+
+## Chat UI (Phase 4)
+
+- `app/page.tsx` renders `components/chat/chat.tsx` (client). State lives in `use-chat.ts`:
+  turns of question → answer, streamed via `readChatEvents` (`lib/chat/read-stream.ts`), with
+  text deltas applied once per animation frame. Stop aborts the fetch; Retry resends the last
+  turn's exact request; history = completed turns only.
+- `StreamingMarkdown` = react-markdown + remark-gfm + `remarkCitations` + rehype-highlight
+  (only the languages registered there). `skipHtml` is on: never render model HTML. Only absolute
+  http(s) links stay clickable (chunks contain repo-relative links like `ManualMocks.md`).
+- Citation markers: `lib/citations/remark-citations.ts` turns `[n]` in prose (not code or link
+  text) into `<sup data-citation>`, rendered by `CitationMarker` with a portal popover. Keep it
+  consistent with `citedNumbers` in `parse.ts`. Tailwind's preflight gives `sup` `line-height: 0`,
+  so the marker button needs an explicit line height (otherwise it has zero height).
+- Popover excerpts are plain text (`lib/citations/excerpt.ts`), made on the server in `toSources`.
+- Styles for answer Markdown and highlight.js tokens are hand-written in `app/globals.css`.
+- E2E tests fake `/api/chat` with `page.route` and NDJSON fixtures; no keys or database needed.
+  Next 16 allows only one `next dev` per project directory, so stop other dev servers first.
+- `next dev` writes `AGENTS.md`; it's committed so the tree stays clean.
+- On this machine Windows Application Control blocks Next's native SWC binary: `pnpm dev` and
+  `pnpm build` fail locally. Use `pnpm dev:webpack`, and build in Docker or CI.

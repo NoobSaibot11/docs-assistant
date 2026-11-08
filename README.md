@@ -3,7 +3,7 @@
 Ask questions about the official **React Native, Next.js, Angular and Jest** docs and get a
 streamed, Markdown answer that cites the exact doc sections it used.
 
-> Work in progress: Phases 1–3 (ingestion, retrieval, chat API) are done. See [SPEC.md](SPEC.md) for the full plan.
+> Work in progress: Phases 1–4 (ingestion, retrieval, chat API, chat UI) are done. See [SPEC.md](SPEC.md) for the full plan.
 
 ## Run it
 
@@ -30,7 +30,8 @@ pnpm db:deploy
 pnpm dev
 ```
 
-Checks: `pnpm typecheck`, `pnpm lint`, `pnpm format:check`, `pnpm test`.
+Checks: `pnpm typecheck`, `pnpm lint`, `pnpm format:check`, `pnpm test`, `pnpm test:e2e`
+(Playwright; run `pnpm exec playwright install chromium` once).
 
 ## Ingestion
 
@@ -66,6 +67,14 @@ pnpm run search "How do I revalidate data every 60 seconds?" --mode hybrid --fra
 ```
 
 (`pnpm run search`, not `pnpm search`, which is pnpm's own registry search.)
+
+## Chat UI
+
+Open http://localhost:3000 and ask a question. Answers stream in as Markdown with highlighted
+code blocks (with a copy button). Each [n] marker opens the cited section's title, heading path
+and excerpt with a link to the official docs, and a Sources list follows each answer. The filter
+limits a question to one framework; with **All**, frameworks are detected from the question.
+Stop cancels an answer mid-stream (and the Claude request behind it); Retry resends it.
 
 ## Chat API
 
