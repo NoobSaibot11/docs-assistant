@@ -100,6 +100,19 @@ curl -N -X POST http://localhost:3000/api/chat   -H 'content-type: application/j
    Every request is logged to `QueryLog` (latency, tokens, top score, outcome). Closing the
    connection aborts the Claude request.
 
+## Evaluation
+
+About 70 hand-written questions (`eval/questions.json`, 15 per framework plus 10 the docs don't
+cover) are run through the real pipeline in each retrieval mode and scored for retrieval
+(hit@5, MRR, framework accuracy), answers (must-mention facts, faithfulness graded claim by claim
+by a stronger Claude model, refusal accuracy), latency and cost. See [eval/README.md](eval/README.md).
+
+<!-- eval-results:start -->
+
+_No eval run yet._
+
+<!-- eval-results:end -->
+
 ## Stack
 
 Next.js (App Router) + TypeScript, PostgreSQL 16 + pgvector, Prisma 7, Claude API, Voyage AI
