@@ -4,11 +4,7 @@ Ask questions about the official **React Native, Next.js, Angular and Jest** doc
 streamed Markdown answer that cites the exact doc sections it used, or says plainly that the docs
 don't cover it.
 
-<!-- live-demo:start -->
-
-**Live demo:** coming soon.
-
-<!-- live-demo:end -->
+It runs locally with Docker and your own API keys: see [Run it locally](#run-it-locally).
 
 ![Asking a question: the answer streams in with numbered citations that open the source section](docs/demo.gif)
 
@@ -136,8 +132,10 @@ What the eval changed (retrieval-only runs and a threshold sweep, then the full 
   under Sonnet's 512-token caching minimum, and the per-question context is never reused: two
   identical requests showed 0 tokens written to or read from the cache. Padding the prompt to
   make caching apply would cost more than it saves.
-- **Public-demo safety.** Questions are limited per visitor per hour and per day (counted from
-  QueryLog; visitor IPs are stored only as a salted hash), and the model's HTML is never rendered.
+- **Safe to host if you want to.** It's built to run locally, but optional limits
+  (`RATE_LIMIT_PER_HOUR`, `DAILY_QUESTION_LIMIT`, off by default) cap questions per visitor and
+  per day, counted from QueryLog with visitor IPs stored only as a salted hash. The model's HTML is
+  never rendered.
 
 ## Run it locally
 

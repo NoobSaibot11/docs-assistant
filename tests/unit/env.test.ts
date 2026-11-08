@@ -13,6 +13,7 @@ describe("parseEnv", () => {
     expect(env.RETRIEVAL_MODE).toBe("vector");
     expect(env.HYBRID_KEYWORD_WEIGHT).toBe(0.1);
     expect(env.RERANK_MODEL).toBe("rerank-3");
+    expect(env).toMatchObject({ RATE_LIMIT_PER_HOUR: 0, DAILY_QUESTION_LIMIT: 0 });
     expect(env.NOT_FOUND_THRESHOLD).toBe(0.4);
     expect(env.INGEST_FRAMEWORKS).toEqual([...FRAMEWORK_IDS]);
     expect(env.ANTHROPIC_API_KEY).toBeUndefined();

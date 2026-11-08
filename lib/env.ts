@@ -71,9 +71,10 @@ export const envSchema = z.object({
 
   INGEST_FRAMEWORKS: ingestFrameworks,
 
-  // Public-demo limits (0 = off): questions per visitor per hour, and per day overall.
-  RATE_LIMIT_PER_HOUR: z.coerce.number().int().min(0).default(20),
-  DAILY_QUESTION_LIMIT: z.coerce.number().int().min(0).default(300),
+  // Limits for a publicly hosted copy (0 = off, the default for local use): questions per
+  // visitor per hour, and per day overall. E.g. 20 and 300 for a public demo.
+  RATE_LIMIT_PER_HOUR: z.coerce.number().int().min(0).default(0),
+  DAILY_QUESTION_LIMIT: z.coerce.number().int().min(0).default(0),
   // Salt for hashing visitor IPs; set a random value in production.
   RATE_LIMIT_SALT: z.preprocess(emptyToUndefined, z.string().min(1).default("docs-assistant")),
   // Vector beat hybrid on the eval set (see README "Evaluation"); hybrid stays available.
