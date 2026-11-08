@@ -13,6 +13,8 @@ import { search } from "@/lib/retrieval/search";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Long answers stream for up to ~20 s; leave headroom on serverless hosts (Vercel).
+export const maxDuration = 60;
 
 let deps: ChatDeps | undefined;
 
