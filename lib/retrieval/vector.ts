@@ -28,10 +28,13 @@ export async function vectorSearch(
   const vector = toVectorLiteral(embedding);
   const limit = options.limit ?? RETRIEVAL.topK;
 
-  const rows = await db.$transaction(async (tx) => {
-    await tx.$queryRaw`SELECT set_config('hnsw.ef_search', ${String(RETRIEVAL.efSearch)}, true)`;
-    await tx.$queryRaw`SELECT set_config('hnsw.iterative_scan', 'relaxed_order', true)`;
-    return tx.$queryRaw<ResultRow[]>`
+  // A batch (not interactive) transaction: the three statements run in order on one connection
+  // inside one transaction, without the interactive API's 2 s start timeout, which concurrent
+  // requests on a cold pool can exceed.
+  const [, , rows] = await db.$transaction([
+    db.$queryRaw`SELECT set_config('hnsw.ef_search', ${String(RETRIEVAL.efSearch)}, true)`,
+    db.$queryRaw`SELECT set_config('hnsw.iterative_scan', 'relaxed_order', true)`,
+    db.$queryRaw<ResultRow[]>`
       WITH nearest AS MATERIALIZED (
         SELECT c.id, c.embedding <=> ${vector}::vector AS distance
         FROM "Chunk" c
@@ -45,8 +48,8 @@ export async function vectorSearch(
       FROM nearest n
       JOIN "Chunk" c ON c.id = n.id
       JOIN "Document" d ON d.id = c."documentId"
-      ORDER BY n.distance, c.id`;
-  });
+      ORDER BY n.distance, c.id`,
+  ]);
 
   return toSearchResults(rows);
 }
