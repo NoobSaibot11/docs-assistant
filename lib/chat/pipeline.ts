@@ -1,5 +1,6 @@
 import "server-only";
 
+import { markdownExcerpt } from "@/lib/citations/excerpt";
 import { buildCitations } from "@/lib/citations/parse";
 import {
   encodeEvent,
@@ -49,10 +50,7 @@ export function toSources(results: readonly SearchResult[]): Source[] {
     title: r.title,
     headingPath: r.headingPath,
     url: r.url,
-    excerpt:
-      r.content.length > EXCERPT_CHARS
-        ? `${r.content.slice(0, EXCERPT_CHARS).trimEnd()}…`
-        : r.content,
+    excerpt: markdownExcerpt(r.content, EXCERPT_CHARS),
   }));
 }
 

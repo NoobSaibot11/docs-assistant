@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { markdownExcerpt } from "@/lib/citations/excerpt";
 import { buildCitations, citedNumbers, maskCode } from "@/lib/citations/parse";
 
 describe("citedNumbers", () => {
@@ -64,5 +65,36 @@ describe("buildCitations", () => {
   it("returns nothing when there are no sources or markers", () => {
     expect(buildCitations("No citations here.", sources)).toEqual([]);
     expect(buildCitations("Stray [1].", [])).toEqual([]);
+  });
+});
+
+describe("markdownExcerpt", () => {
+  it("strips links, images, code marks, emphasis, headings and fences", () => {
+    const md = [
+      "## Examples",
+      "",
+      "- [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce)",
+      "- ![Diagram](/img/isr.png) **Bold** and `revalidate`",
+      "",
+      "```ts",
+      "export const revalidate = 60",
+      "```",
+      "> A note",
+    ].join("\n");
+    expect(markdownExcerpt(md, 500)).toBe(
+      "Examples\n- Next.js Commerce\n- Diagram Bold and revalidate\nexport const revalidate = 60\nA note",
+    );
+  });
+
+  it("drops the chunker's overlap marker and leaves snake_case alone", () => {
+    expect(markdownExcerpt("…continued text with my_var_name", 100)).toBe(
+      "continued text with my_var_name",
+    );
+  });
+
+  it("truncates at a word boundary with an ellipsis", () => {
+    const text = "alpha beta gamma delta epsilon";
+    expect(markdownExcerpt(text, 20)).toBe("alpha beta gamma…");
+    expect(markdownExcerpt(text, 100)).toBe(text);
   });
 });
