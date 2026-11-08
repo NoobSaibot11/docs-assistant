@@ -3,7 +3,7 @@
 Ask questions about the official **React Native, Next.js, Angular and Jest** docs and get a
 streamed, Markdown answer that cites the exact doc sections it used.
 
-> Work in progress: Phases 1–2 (ingestion, retrieval) are done. See [SPEC.md](SPEC.md) for the full plan.
+> Work in progress: Phases 1–3 (ingestion, retrieval, chat API) are done. See [SPEC.md](SPEC.md) for the full plan.
 
 ## Run it
 
@@ -66,6 +66,30 @@ pnpm run search "How do I revalidate data every 60 seconds?" --mode hybrid --fra
 ```
 
 (`pnpm run search`, not `pnpm search`, which is pnpm's own registry search.)
+
+## Chat API
+
+`POST /api/chat` takes `{ question, history?, frameworks? }` and streams NDJSON:
+
+```bash
+curl -N -X POST http://localhost:3000/api/chat   -H 'content-type: application/json'   -d '{"question":"How do I revalidate fetched data every 60 seconds?"}'
+```
+
+```text
+{"type":"meta","question":"…","frameworks":["nextjs"],"frameworksSource":"detected","sources":[{"n":1,…}]}
+{"type":"text","text":"Set "}
+{"type":"text","text":"`next: { revalidate: 60 }` [1] …"}
+{"type":"done","answered":true,"outcome":"answered","citations":[{"n":1,"chunkId":"…","url":"…"}],"usage":{…},"topSimilarity":0.54}
+```
+
+1. With history, a fast Claude model (`claude-haiku-5-5`) rewrites the question to stand alone
+   and tags its frameworks (unless the request sets `frameworks`).
+2. Hybrid retrieval picks the top 5 chunks. If the best cosine similarity is under
+   `NOT_FOUND_THRESHOLD`, the answer is "I couldn't find this in the docs." and Claude isn't called.
+3. Otherwise `claude-sonnet-5-5` answers from the numbered chunks only, citing them as [1]–[5].
+4. The final event maps each cited marker to its chunk and docs URL and reports token usage.
+   Every request is logged to `QueryLog` (latency, tokens, top score, outcome). Closing the
+   connection aborts the Claude request.
 
 ## Stack
 

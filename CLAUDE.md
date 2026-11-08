@@ -38,6 +38,7 @@ pnpm db:migrate        # prisma migrate dev (create + apply a migration)
 pnpm db:deploy         # prisma migrate deploy (apply only)
 pnpm db:generate       # regenerate the Prisma client into generated/prisma
 docker compose up      # db + app (app runs migrate deploy, then next start)
+curl -N -X POST localhost:3001/api/chat -H 'content-type: application/json' -d '{"question":"How do I mock timers?"}'
 ```
 
 ## Stack notes (verified Nov 2026)
@@ -99,3 +100,24 @@ docker compose up      # db + app (app runs migrate deploy, then next start)
   ANDing every word of a natural-language question matches almost nothing.
 - Tests use `tests/helpers/fake-embedder.ts` (hashed bag-of-words, so similar text gets similar
   vectors) and `tests/helpers/test-db.ts` (fixture sources, test db URL).
+
+## Chat API (Phase 3)
+
+- `POST /api/chat` (`app/api/chat/route.ts`) is a thin wrapper: Zod-validates the body, builds
+  the real clients once, and returns `runChat()` from `lib/chat/pipeline.ts`. Route files may only
+  export handlers and route config (no test hooks); tests use `vi.resetModules()` instead.
+- Wire format lives in `lib/chat/protocol.ts` (shared with the UI): NDJSON events
+  `meta → text* → done`, or `error` last on failure. No error event after a user abort.
+- Pipeline dependencies (`rewriter`, `search`, `answerModel`, `logQuery`) are interfaces, so unit
+  tests use plain fakes. The route test mocks only `getAnthropic` and `createVoyageQueryEmbedder`.
+- Rewrite + framework tagging uses `CLAUDE_FAST_MODEL` with structured output (`messages.parse` +
+  `zodOutputFormat`); any failure falls back to the original question and all frameworks. It's
+  skipped when the user picked a framework and there's no history.
+- The answer uses `CLAUDE_MODEL` via `client.beta.messages.stream` with `CLAUDE_EFFORT` and the
+  `fallbacks: "default"` refusal fallback (beta `server-side-fallback-2026-07-01`). Don't send
+  `thinking: {type: "disabled"}`, `budget_tokens` or sampling params: Sonnet 5.5 rejects them.
+- "Not found" = `topSimilarity < NOT_FOUND_THRESHOLD` (no Claude call), or the answer starts with
+  `NOT_FOUND_ANSWER`. Citations are only markers that appear in the answer outside code.
+- Every request writes one `QueryLog` row (`outcome`: answered | not_found | aborted | error).
+- On this machine, Windows Application Control blocks Next's native SWC binary, so `pnpm build`
+  fails locally; build in Docker (`docker compose build app`) or CI instead.
