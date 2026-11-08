@@ -18,5 +18,16 @@ export default defineConfig([
   },
   // Must stay last: turns off rules that conflict with Prettier.
   prettier,
-  globalIgnores([".next/**", "out/**", "build/**", "coverage/**", "generated/**", "next-env.d.ts"]),
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "coverage/**",
+    "generated/**",
+    "next-env.d.ts",
+    // Downloaded docs and Angular example code (pnpm ingest), and Playwright output.
+    ".cache/**",
+    "test-results/**",
+    "playwright-report/**",
+  ]),
 ]);

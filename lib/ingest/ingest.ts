@@ -5,6 +5,7 @@ import { CHUNKER_VERSION, EMBEDDING } from "@/lib/config";
 import { chunkDocument, documentTitle, type DocChunk } from "@/lib/ingest/chunker";
 import { embeddingInput, type Embedder } from "@/lib/ingest/embed";
 import { mapWithConcurrency, type DocFileProvider } from "@/lib/ingest/fetch-source";
+import { resolveIncludes } from "@/lib/ingest/includes";
 import { cleanDocument } from "@/lib/ingest/mdx-clean";
 import {
   deleteDocuments,
@@ -49,6 +50,11 @@ export interface IngestStats {
   mdFallbacks: number;
   jsx: Record<string, number>;
   docsCodeRefs: number;
+  /** MDX partials and example code files inlined into pages. */
+  partialsInlined: number;
+  codeExamplesInlined: number;
+  /** Includes that couldn't be read (left out of the page). */
+  missingIncludes: string[];
 }
 
 interface PreparedDoc {
@@ -56,7 +62,10 @@ interface PreparedDoc {
   chunks: DocChunk[];
 }
 
-/** Hash of the raw file plus the chunker version: a chunker change re-embeds everything. */
+/**
+ * Hash of the page as chunked (with partials and example code inlined) plus the chunker version:
+ * a chunker change re-embeds everything, and pages without includes hash exactly as before.
+ */
 export function contentHash(raw: string): string {
   return createHash("sha256").update(`chunker:${CHUNKER_VERSION}\n${raw}`).digest("hex");
 }
@@ -92,6 +101,9 @@ export async function ingestSource(
     mdFallbacks: 0,
     jsx: {},
     docsCodeRefs: 0,
+    partialsInlined: 0,
+    codeExamplesInlined: 0,
+    missingIncludes: [],
   };
 
   const files = await deps.provider.listFiles(source);
@@ -101,9 +113,20 @@ export async function ingestSource(
   const existing = new Map(
     (await listDocuments(deps.db, source.framework)).map((d) => [d.sourcePath, d]),
   );
-  const raws = await mapWithConcurrency(files, options.concurrency ?? 8, (file) =>
-    deps.provider.readFile(source, file),
-  );
+  const raws = await mapWithConcurrency(files, options.concurrency ?? 8, async (file) => {
+    const { text, stats: inlined } = await resolveIncludes(
+      file,
+      await deps.provider.readFile(source, file),
+      {
+        readDocFile: (p) => deps.provider.readFile(source, p),
+        readRepoFile: (p) => deps.provider.readRepoFile(source, p),
+      },
+    );
+    stats.partialsInlined += inlined.partials;
+    stats.codeExamplesInlined += inlined.codeExamples;
+    stats.missingIncludes.push(...inlined.missing.map((m) => `${file} → ${m}`));
+    return text;
+  });
 
   const pending: PreparedDoc[] = [];
   for (const [i, sourcePath] of files.entries()) {

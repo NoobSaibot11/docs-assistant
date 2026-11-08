@@ -10,6 +10,15 @@ export interface DocFileProvider {
   /** Paths relative to the source's rootPath, sorted. */
   listFiles(source: SourceConfig): Promise<string[]>;
   readFile(source: SourceConfig, filePath: string): Promise<string>;
+  /** A file by its path from the repository root (e.g. Angular example code outside rootPath). */
+  readRepoFile(source: SourceConfig, repoPath: string): Promise<string>;
+}
+
+/** Rejects absolute paths and `..` segments, so an include can't escape the repo or cache. */
+export function assertSafeRelativePath(filePath: string): void {
+  if (filePath.startsWith("/") || filePath.split("/").some((part) => part === "..")) {
+    throw new Error(`Unsafe include path: ${filePath}`);
+  }
 }
 
 const MARKDOWN_FILE = /\.mdx?$/;
@@ -63,20 +72,34 @@ export function createGitHubProvider(options: GitHubProviderOptions): DocFilePro
       return paths.filter((p) => isIncludedDoc(source, p)).sort();
     },
 
-    async readFile(source, filePath) {
-      const cached = path.join(cacheRoot(source), filePath);
-      try {
-        return await readFile(cached, "utf8");
-      } catch {
-        // Not cached yet.
-      }
-      const url = `https://raw.githubusercontent.com/${source.repo}/${source.ref}/${source.rootPath}/${filePath}`;
-      const content = await (await fetchWithRetry(fetchImpl, url)).text();
-      await mkdir(path.dirname(cached), { recursive: true });
-      await writeFile(cached, content);
-      return content;
+    readFile(source, filePath) {
+      assertSafeRelativePath(filePath);
+      return cachedDownload(
+        path.join(cacheRoot(source), filePath),
+        `https://raw.githubusercontent.com/${source.repo}/${source.ref}/${source.rootPath}/${filePath}`,
+      );
+    },
+
+    readRepoFile(source, repoPath) {
+      assertSafeRelativePath(repoPath);
+      return cachedDownload(
+        path.join(cacheRoot(source), "__repo__", repoPath),
+        `https://raw.githubusercontent.com/${source.repo}/${source.ref}/${repoPath}`,
+      );
     },
   };
+
+  async function cachedDownload(cached: string, url: string): Promise<string> {
+    try {
+      return await readFile(cached, "utf8");
+    } catch {
+      // Not cached yet.
+    }
+    const content = await (await fetchWithRetry(fetchImpl, url)).text();
+    await mkdir(path.dirname(cached), { recursive: true });
+    await writeFile(cached, content);
+    return content;
+  }
 }
 
 /** Reads `<rootDir>/<framework>/<path>`; used by integration tests with tests/fixtures. */
@@ -93,7 +116,13 @@ export function createLocalProvider(rootDir: string): DocFileProvider {
         .sort();
     },
     readFile(source, filePath) {
+      assertSafeRelativePath(filePath);
       return readFile(path.join(rootDir, source.framework, filePath), "utf8");
+    },
+    /** Repo files for fixtures live in `<rootDir>/<framework>/__repo__/`. */
+    readRepoFile(source, repoPath) {
+      assertSafeRelativePath(repoPath);
+      return readFile(path.join(rootDir, source.framework, "__repo__", repoPath), "utf8");
     },
   };
 }

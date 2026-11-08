@@ -105,6 +105,7 @@ function printSummary(results: IngestStats[], dryRun: boolean, ms: number): void
       "est. tokens": r.estimatedTokens,
       "billed tokens": r.billedTokens,
       "md fallbacks": r.mdFallbacks,
+      inlined: r.partialsInlined + r.codeExamplesInlined,
     })),
   );
 
@@ -114,6 +115,15 @@ function printSummary(results: IngestStats[], dryRun: boolean, ms: number): void
       console.log(
         `${r.framework} JSX components removed: ${jsx.map(([n, c]) => `${n}×${c}`).join(", ")}`,
       );
+    }
+    if (r.partialsInlined + r.codeExamplesInlined > 0) {
+      console.log(
+        `${r.framework} inlined: ${r.partialsInlined} MDX partials, ${r.codeExamplesInlined} code examples`,
+      );
+    }
+    if (r.missingIncludes.length > 0) {
+      console.log(`${r.framework} includes that couldn't be read (${r.missingIncludes.length}):`);
+      for (const m of r.missingIncludes.slice(0, 20)) console.log(`  ${m}`);
     }
     if (r.docsCodeRefs > 0)
       console.log(`${r.framework} <docs-code path> embeds not inlined: ${r.docsCodeRefs}`);
