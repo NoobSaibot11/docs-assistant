@@ -10,6 +10,7 @@ import { createDbClient } from "@/lib/db";
 import { createLocalProvider } from "@/lib/ingest/fetch-source";
 import { ingestSource } from "@/lib/ingest/ingest";
 import { NOT_FOUND_ANSWER } from "@/lib/llm/prompts";
+import { hashClient } from "@/lib/chat/rate-limit";
 import { readEvents } from "@/tests/helpers/chat";
 import { createFakeEmbedder } from "@/tests/helpers/fake-embedder";
 import { FIXTURES, FIXTURE_SOURCES, testDatabaseUrl } from "@/tests/helpers/test-db";
@@ -86,10 +87,25 @@ async function loadRoute(env: Record<string, string | undefined>): Promise<Route
   return import("@/app/api/chat/route");
 }
 
-function post(body: unknown, raw?: string): Request {
+/** A minimal QueryLog row, for filling up rate limits. */
+const LOG_ROW = {
+  question: "earlier question",
+  retrievalMode: "vector",
+  frameworks: [],
+  topChunkIds: [],
+  topScore: 0.5,
+  answered: true,
+  outcome: "answered",
+  totalMs: 1000,
+  inputTokens: 0,
+  outputTokens: 0,
+  cacheReadTokens: 0,
+};
+
+function post(body: unknown, raw?: string, ip = "203.0.113.9"): Request {
   return new Request("http://localhost/api/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-forwarded-for": ip },
     body: raw ?? JSON.stringify(body),
   });
 }
@@ -114,6 +130,9 @@ describe("POST /api/chat (real route + Postgres, mocked Claude and Voyage)", () 
       RETRIEVAL_MODE: "hybrid",
       // The fake bag-of-words embedder gives lower similarities than Voyage does.
       NOT_FOUND_THRESHOLD: "0.2",
+      RATE_LIMIT_PER_HOUR: "3",
+      DAILY_QUESTION_LIMIT: "100",
+      RATE_LIMIT_SALT: "test-salt",
     });
   });
 
@@ -166,6 +185,9 @@ describe("POST /api/chat (real route + Postgres, mocked Claude and Voyage)", () 
     });
     expect(log?.topChunkIds[0]).toBe(meta.sources[0]?.chunkId);
     expect(log?.ttftMs).not.toBeNull();
+    // done is sent after the row is written, and points at it (for feedback).
+    expect(done.queryId).toBe(log?.id);
+    expect(log?.clientHash).toBe(hashClient("203.0.113.9", "test-salt"));
   });
 
   it("applies the framework filter", async () => {
@@ -203,6 +225,32 @@ describe("POST /api/chat (real route + Postgres, mocked Claude and Voyage)", () 
     expect(response.status).toBe(400);
     expect(await response.json()).toMatchObject({ error });
     expect(await db.queryLog.count()).toBe(0);
+  });
+
+  it("limits questions per visitor per hour", async () => {
+    const clientHash = hashClient("198.51.100.4", "test-salt");
+    await db.queryLog.createMany({
+      data: Array.from({ length: 3 }, () => ({ ...LOG_ROW, clientHash })),
+    });
+
+    const limited = await route.POST(post({ question: "One more?" }, undefined, "198.51.100.4"));
+    expect(limited.status).toBe(429);
+    expect(Number(limited.headers.get("retry-after"))).toBeGreaterThan(0);
+    expect(await limited.json()).toMatchObject({ error: expect.stringContaining("last hour") });
+
+    // Another visitor isn't affected.
+    const other = await route.POST(
+      post({ question: "zebracorn quuxify" }, undefined, "198.51.100.5"),
+    );
+    expect(other.status).toBe(200);
+    await readEvents(other.body!);
+  });
+
+  it("stops at the daily limit for everyone", async () => {
+    await db.queryLog.createMany({ data: Array.from({ length: 100 }, () => LOG_ROW) });
+    const response = await route.POST(post({ question: "Q?" }, undefined, "192.0.2.1"));
+    expect(response.status).toBe(429);
+    expect(await response.json()).toMatchObject({ error: expect.stringContaining("daily") });
   });
 
   it("returns 503 when an API key is missing", async () => {

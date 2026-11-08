@@ -1,6 +1,7 @@
 import { runChat, type ChatDeps } from "@/lib/chat/pipeline";
 import { ChatRequestSchema, NDJSON_CONTENT_TYPE } from "@/lib/chat/protocol";
 import { createQueryLogger } from "@/lib/chat/query-log";
+import { checkRateLimit, clientIp, hashClient } from "@/lib/chat/rate-limit";
 import { getDb } from "@/lib/db";
 import { getEnv, requireKey } from "@/lib/env";
 import { createClaudeAnswerModel } from "@/lib/llm/answer";
@@ -83,7 +84,20 @@ export async function POST(request: Request): Promise<Response> {
     );
   }
 
-  return new Response(runChat(chatDeps, parsed.data, request.signal), {
+  const env = getEnv();
+  const clientHash = hashClient(clientIp(request.headers), env.RATE_LIMIT_SALT);
+  const limit = await checkRateLimit(getDb(), clientHash, {
+    perClientPerHour: env.RATE_LIMIT_PER_HOUR,
+    perDay: env.DAILY_QUESTION_LIMIT,
+  });
+  if (!limit.ok) {
+    return Response.json(
+      { error: limit.message },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
+    );
+  }
+
+  return new Response(runChat(chatDeps, parsed.data, request.signal, { clientHash }), {
     headers: {
       "Content-Type": NDJSON_CONTENT_TYPE,
       "Cache-Control": "no-cache, no-transform",
