@@ -1,4 +1,4 @@
-import { FRAMEWORK_IDS, type FrameworkId } from "@/lib/frameworks";
+import { FRAMEWORK_IDS, FRAMEWORK_NAMES } from "@/lib/frameworks";
 import type { SearchResult } from "@/lib/retrieval/types";
 
 /**
@@ -6,13 +6,6 @@ import type { SearchResult } from "@/lib/retrieval/types";
  * path, and the answer model is told to reply with it, so both cases can be detected.
  */
 export const NOT_FOUND_ANSWER = "I couldn't find this in the docs.";
-
-export const FRAMEWORK_NAMES: Record<FrameworkId, string> = {
-  "react-native": "React Native",
-  nextjs: "Next.js",
-  angular: "Angular",
-  jest: "Jest",
-};
 
 /**
  * Answer prompt. Kept free of per-request values so it can be cached later (Phase 6); the
