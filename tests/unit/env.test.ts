@@ -12,6 +12,7 @@ describe("parseEnv", () => {
     expect(env.ANSWER_EFFORT).toBe("low");
     expect(env.RETRIEVAL_MODE).toBe("vector");
     expect(env.HYBRID_KEYWORD_WEIGHT).toBe(0.1);
+    expect(env.RERANK_MODEL).toBe("rerank-3");
     expect(env.NOT_FOUND_THRESHOLD).toBe(0.4);
     expect(env.INGEST_FRAMEWORKS).toEqual([...FRAMEWORK_IDS]);
     expect(env.ANTHROPIC_API_KEY).toBeUndefined();
@@ -37,6 +38,12 @@ describe("parseEnv", () => {
     });
     expect(parseEnv({ ...base, VOYAGE_RPM: "", VOYAGE_TPM: "" }).VOYAGE_RPM).toBeUndefined();
     expect(() => parseEnv({ ...base, VOYAGE_RPM: "0" })).toThrow("VOYAGE_RPM");
+  });
+
+  it("turns the reranker off with RERANK_MODEL=none", () => {
+    expect(parseEnv({ ...base, RERANK_MODEL: "none" }).RERANK_MODEL).toBeUndefined();
+    expect(parseEnv({ ...base, RERANK_MODEL: "" }).RERANK_MODEL).toBe("rerank-3");
+    expect(parseEnv({ ...base, RERANK_MODEL: "rerank-3-lite" }).RERANK_MODEL).toBe("rerank-3-lite");
   });
 
   it("coerces the threshold to a number", () => {

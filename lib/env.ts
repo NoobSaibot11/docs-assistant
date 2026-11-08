@@ -39,6 +39,16 @@ export const envSchema = z.object({
   CLAUDE_MODEL: z.string().min(1).default("claude-sonnet-5-5"),
   CLAUDE_FAST_MODEL: z.string().min(1).default("claude-haiku-5-5"),
   VOYAGE_MODEL: z.string().min(1).default("voyage-4"),
+  // Voyage reranker: retrieve RETRIEVAL.candidates, rerank, keep topK. Lifted hit@5 from 93% to
+  // 98% in the eval. "none" turns it off.
+  RERANK_MODEL: z.preprocess(
+    emptyToUndefined,
+    z
+      .string()
+      .min(1)
+      .default("rerank-3")
+      .transform((v) => (v === "none" ? undefined : v)),
+  ),
   // Thinking depth for the answer model. Sonnet 5.5 can't turn thinking off; "low" keeps
   // time-to-first-token short for docs Q&A. Tune with the eval set. (Not CLAUDE_EFFORT: Claude
   // Code sets that in its own environment, and dotenv never overrides a variable already set.)

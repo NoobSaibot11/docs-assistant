@@ -7,6 +7,7 @@ import { createClaudeAnswerModel } from "@/lib/llm/answer";
 import { getAnthropic } from "@/lib/llm/client";
 import { createClaudeQueryRewriter } from "@/lib/llm/rewrite-query";
 import { createVoyageQueryEmbedder } from "@/lib/retrieval/query-embedder";
+import { createVoyageReranker } from "@/lib/retrieval/rerank";
 import { search } from "@/lib/retrieval/search";
 
 export const runtime = "nodejs";
@@ -24,6 +25,9 @@ function getDeps(): ChatDeps {
     apiKey: requireKey("VOYAGE_API_KEY"),
     model: env.VOYAGE_MODEL,
   });
+  const reranker = env.RERANK_MODEL
+    ? createVoyageReranker({ apiKey: requireKey("VOYAGE_API_KEY"), model: env.RERANK_MODEL })
+    : undefined;
   const onError = (error: unknown) => console.error("[api/chat]", error);
   deps = {
     rewriter: createClaudeQueryRewriter({
@@ -33,7 +37,7 @@ function getDeps(): ChatDeps {
     }),
     search: (request) =>
       search(
-        { db, embedder: queryEmbedder },
+        { db, embedder: queryEmbedder, reranker },
         { ...request, keywordWeight: env.HYBRID_KEYWORD_WEIGHT },
       ),
     answerModel: createClaudeAnswerModel({

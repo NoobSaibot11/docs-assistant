@@ -30,6 +30,7 @@ import { createClaudeAnswerModel } from "@/lib/llm/answer";
 import { getAnthropic } from "@/lib/llm/client";
 import { createClaudeQueryRewriter } from "@/lib/llm/rewrite-query";
 import { createVoyageQueryEmbedder } from "@/lib/retrieval/query-embedder";
+import { createVoyageReranker } from "@/lib/retrieval/rerank";
 import { search } from "@/lib/retrieval/search";
 
 const USAGE = `Usage: pnpm eval [options]
@@ -102,6 +103,10 @@ async function main(): Promise<void> {
     { file: path.resolve(EVAL.embeddingCacheFile), model: env.VOYAGE_MODEL },
   );
 
+  const reranker = env.RERANK_MODEL
+    ? createVoyageReranker({ apiKey: requireKey("VOYAGE_API_KEY"), model: env.RERANK_MODEL })
+    : undefined;
+
   const deps: EvalDeps = {
     rewriter: createClaudeQueryRewriter({
       client: anthropic,
@@ -109,7 +114,7 @@ async function main(): Promise<void> {
       onError: (e) => console.warn("rewrite failed:", e),
     }),
     search: (request) =>
-      search({ db, embedder }, { ...request, keywordWeight: env.HYBRID_KEYWORD_WEIGHT }),
+      search({ db, embedder, reranker }, { ...request, keywordWeight: env.HYBRID_KEYWORD_WEIGHT }),
     answerModel: createClaudeAnswerModel({
       client: anthropic,
       model: env.CLAUDE_MODEL,
@@ -152,6 +157,7 @@ async function main(): Promise<void> {
           rewrite: env.CLAUDE_FAST_MODEL,
           judge: useJudge ? env.CLAUDE_JUDGE_MODEL : null,
           embedding: env.VOYAGE_MODEL,
+          rerank: env.RERANK_MODEL ?? null,
         },
         effort: env.ANSWER_EFFORT,
         questionsFile: values.file,
@@ -188,7 +194,14 @@ async function writeResults(input: {
   keywordWeight: number;
 }): Promise<string> {
   const date = new Date().toISOString().slice(0, 10);
-  const name = [date, input.mode, input.retrievalOnly ? "retrieval" : null, input.label]
+  // The reranker is part of the name so runs with and without it don't overwrite each other.
+  const name = [
+    date,
+    input.mode,
+    input.models["rerank"] ?? null,
+    input.retrievalOnly ? "retrieval" : null,
+    input.label,
+  ]
     .filter(Boolean)
     .join("-");
   const file = path.join(EVAL.resultsDir, `${name}.json`);

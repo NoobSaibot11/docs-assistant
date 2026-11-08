@@ -18,6 +18,7 @@ import {
   type RetrievalMode,
 } from "@/lib/frameworks";
 import { createVoyageQueryEmbedder } from "@/lib/retrieval/query-embedder";
+import { createVoyageReranker } from "@/lib/retrieval/rerank";
 import { search } from "@/lib/retrieval/search";
 import type { SearchResult } from "@/lib/retrieval/types";
 
@@ -59,7 +60,13 @@ async function main(): Promise<void> {
   try {
     const started = Date.now();
     const response = await search(
-      { db, embedder },
+      {
+        db,
+        embedder,
+        reranker: env.RERANK_MODEL
+          ? createVoyageReranker({ apiKey: requireKey("VOYAGE_API_KEY"), model: env.RERANK_MODEL })
+          : undefined,
+      },
       { question, mode, frameworks, limit, keywordWeight: env.HYBRID_KEYWORD_WEIGHT },
     );
     printResults(response.results, mode, frameworks);

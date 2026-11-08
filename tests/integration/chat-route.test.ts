@@ -64,6 +64,17 @@ vi.mock("@/lib/retrieval/query-embedder", async () => {
   return { createVoyageQueryEmbedder: () => fake().embedder };
 });
 
+/** The reranker is on by default (RERANK_MODEL=rerank-3); this fake keeps the vector order. */
+const reranker = vi.hoisted(() => ({ calls: [] as { candidates: number; topK: number }[] }));
+vi.mock("@/lib/retrieval/rerank", () => ({
+  createVoyageReranker: () => ({
+    rerank: async (_q: string, results: { rank: number }[], topK: number) => {
+      reranker.calls.push({ candidates: results.length, topK });
+      return results.slice(0, topK).map((r, i) => ({ ...r, rank: i + 1 }));
+    },
+  }),
+}));
+
 type RouteModule = typeof RouteModuleType;
 
 async function loadRoute(env: Record<string, string | undefined>): Promise<RouteModule> {
@@ -109,6 +120,7 @@ describe("POST /api/chat (real route + Postgres, mocked Claude and Voyage)", () 
   beforeEach(async () => {
     await db.queryLog.deleteMany();
     claude.answerCalls = 0;
+    reranker.calls.length = 0;
   });
 
   afterAll(async () => {
@@ -123,6 +135,9 @@ describe("POST /api/chat (real route + Postgres, mocked Claude and Voyage)", () 
     expect(response.headers.get("content-type")).toBe("application/x-ndjson; charset=utf-8");
     const events = await readEvents(response.body!);
 
+    // Retrieval fetched candidates for the reranker, which kept the top 5.
+    expect(reranker.calls).toEqual([{ candidates: expect.any(Number) as number, topK: 5 }]);
+    expect(reranker.calls[0]!.candidates).toBeGreaterThan(5);
     expect(events.map((e) => e.type)).toEqual(["meta", "text", "text", "text", "done"]);
     const meta = events[0] as Extract<ChatEvent, { type: "meta" }>;
     expect(meta.frameworksSource).toBe("all");

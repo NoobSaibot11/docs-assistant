@@ -80,14 +80,20 @@ async function loadResults(): Promise<ResultsFile[]> {
   return out;
 }
 
-/** The newest full (answers included) run per mode. */
+/** "vector", or "vector + rerank-3" for runs with a reranker. */
+const variant = (r: ResultsFile) =>
+  r.meta.models["rerank"] ? `${r.meta.mode} + ${r.meta.models["rerank"]}` : r.meta.mode;
+
+/** The newest full (answers included) run per mode and reranker, in mode order. */
 function latestPerMode(results: ResultsFile[]): ResultsFile[] {
-  return RETRIEVAL_MODES.flatMap((mode) => {
-    const runs = results
-      .filter((r) => r.meta.mode === mode && !r.meta.retrievalOnly)
-      .sort((a, b) => b.meta.createdAt.localeCompare(a.meta.createdAt));
-    return runs[0] ? [runs[0]] : [];
-  });
+  const newestFirst = results
+    .filter((r) => !r.meta.retrievalOnly)
+    .sort((a, b) => b.meta.createdAt.localeCompare(a.meta.createdAt));
+  const latest = new Map<string, ResultsFile>();
+  for (const run of newestFirst) if (!latest.has(variant(run))) latest.set(variant(run), run);
+  const order = (r: ResultsFile) =>
+    RETRIEVAL_MODES.indexOf(r.meta.mode) * 2 + (r.meta.models["rerank"] ? 1 : 0);
+  return [...latest.values()].sort((a, b) => order(a) - order(b));
 }
 
 function renderTables(runs: ResultsFile[]): string {
@@ -100,19 +106,21 @@ function renderTables(runs: ResultsFile[]): string {
     "",
     "| Mode | Hit@5 | MRR | Framework acc. | Must-mention | Faithfulness | Refusal acc. | TTFT p50 | TTFT p95 | Cost / question |",
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ...runs.map(
-      ({ meta, summary: s }) =>
-        `| ${meta.mode} | ${pct(s.hitRateAt5)} | ${dec(s.mrr)} | ${pct(s.frameworkAccuracy)} | ${pct(s.mustMentionRate)} | ` +
-        `${pct(s.faithfulness)} | ${pct(s.refusalAccuracy)} | ${ms(s.ttftP50Ms)} | ${ms(s.ttftP95Ms)} | ${usd(s.costPerQuestionUsd)} |`,
-    ),
+    ...runs.map((run) => {
+      const s = run.summary;
+      return (
+        `| ${variant(run)} | ${pct(s.hitRateAt5)} | ${dec(s.mrr)} | ${pct(s.frameworkAccuracy)} | ${pct(s.mustMentionRate)} | ` +
+        `${pct(s.faithfulness)} | ${pct(s.refusalAccuracy)} | ${ms(s.ttftP50Ms)} | ${ms(s.ttftP95Ms)} | ${usd(s.costPerQuestionUsd)} |`
+      );
+    }),
     "",
     "Hit@5 by framework:",
     "",
     `| Mode | ${FRAMEWORK_IDS.map((f) => FRAMEWORK_NAMES[f]).join(" | ")} |`,
     `| --- | ${FRAMEWORK_IDS.map(() => "---").join(" | ")} |`,
     ...runs.map(
-      ({ meta, byFramework }) =>
-        `| ${meta.mode} | ${FRAMEWORK_IDS.map((f) => pct(byFramework[f]?.hitRateAt5 ?? null)).join(" | ")} |`,
+      (run) =>
+        `| ${variant(run)} | ${FRAMEWORK_IDS.map((f) => pct(run.byFramework[f]?.hitRateAt5 ?? null)).join(" | ")} |`,
     ),
   ];
   return lines.join("\n");
