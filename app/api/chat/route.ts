@@ -35,7 +35,7 @@ function getDeps(): ChatDeps {
     answerModel: createClaudeAnswerModel({
       client: anthropic,
       model: env.CLAUDE_MODEL,
-      effort: env.CLAUDE_EFFORT,
+      effort: env.ANSWER_EFFORT,
     }),
     logQuery: createQueryLogger(db),
     mode: env.RETRIEVAL_MODE,

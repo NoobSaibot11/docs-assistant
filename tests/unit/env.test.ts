@@ -9,7 +9,7 @@ describe("parseEnv", () => {
   it("applies defaults when only DATABASE_URL is set", () => {
     const env = parseEnv(base);
     expect(env.CLAUDE_MODEL).toBe("claude-sonnet-5-5");
-    expect(env.CLAUDE_EFFORT).toBe("low");
+    expect(env.ANSWER_EFFORT).toBe("low");
     expect(env.RETRIEVAL_MODE).toBe("hybrid");
     expect(env.NOT_FOUND_THRESHOLD).toBe(0.35);
     expect(env.INGEST_FRAMEWORKS).toEqual([...FRAMEWORK_IDS]);
@@ -47,7 +47,7 @@ describe("parseEnv", () => {
     [{ DATABASE_URL: "mysql://localhost/db" }, "DATABASE_URL"],
     [{ ...base, INGEST_FRAMEWORKS: "nextjs,remix" }, "INGEST_FRAMEWORKS"],
     [{ ...base, RETRIEVAL_MODE: "semantic" }, "RETRIEVAL_MODE"],
-    [{ ...base, CLAUDE_EFFORT: "extreme" }, "CLAUDE_EFFORT"],
+    [{ ...base, ANSWER_EFFORT: "extreme" }, "ANSWER_EFFORT"],
     [{ ...base, NOT_FOUND_THRESHOLD: "1.5" }, "NOT_FOUND_THRESHOLD"],
   ])("rejects invalid input %#", (source, badKey) => {
     expect(() => parseEnv(source)).toThrow(badKey);
